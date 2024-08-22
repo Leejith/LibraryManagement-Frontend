@@ -3,15 +3,18 @@ import '../../Assets/Styles/StaffLogin.css'
 
 function StaffLogin() {
   return (
-    <div>StaffLogin
-    <form className=''>
-        <h1>Staff Login</h1>
-        <input type='email' placeholder='Enter E-mail'/>
-        <input type='password' placeholder='Enter Password'/><br/>
-        Forget Password<br/>
-        <button>Login</button>
-        <button>Register</button>
-      </form>
+    <div className='login'>
+      <div className='staff'>
+        <h1 >STAFF LOGIN</h1>
+        <input type='email' placeholder='Enter E-mail' class='email'/>
+        <input type='password' placeholder='Enter Password' class='password'/>
+        <button type='button' class="button">login</button>
+        <p>don't have a account ? <a href="#">Register now</a></p>
+         
+      </div>
+      <div class='image'>
+        <img src="" alt="" class="img" /> 
+      </div>
     </div>
   )
 }
