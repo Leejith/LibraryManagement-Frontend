@@ -3,15 +3,17 @@ import '../../Assets/Styles/StudenLogin.css';
 
 function StudentLogin() {
   return (
-    <div>
-        <form className='log'>
+    <div className='main'>
+        <div className='log'>
+        <form >
         <h1>Student Login</h1>
-        <p>E-mail :</p> <input type='email' placeholder='Enter E-mail'/>
-        <p>Password :</p><input type='password' placeholder='Enter Password'/><br/>
-        Forget Password<br/>
+        <input type='email' placeholder='Enter E-mail' id='mail'/><br/>
+        <input type='password' placeholder='Enter Password' id='pass'/><br/>
+        <p id='fpass'>Forget Password</p><br/>
         <button>Login</button>
         <button>Register</button>
         </form>
+        </div>
     </div>
   )
 }
