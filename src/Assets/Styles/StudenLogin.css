@@ -1,3 +1,10 @@
+.main{
+    /* display: flex; */
+}
 .log{
-    color: aqua;
+    background-color: bisque;
+    position: relative;
+    left: 40%;
+    width: 400px;
+    align-items: center;
 }
