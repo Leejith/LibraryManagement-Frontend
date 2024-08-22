@@ -6,5 +6,19 @@
     position: relative;
     left: 40%;
     width: 400px;
-    align-items: center;
+    /* align-items: center; */
+}
+#mail{
+    padding: 10px 10px;
+    border-radius: 30px;
+    width: 400px;
+}
+#pass{
+    padding: 10px 10px;
+    border-radius: 30px;
+    width: 400px;
+}
+#fpass{
+    color: blue;
+    
 }
