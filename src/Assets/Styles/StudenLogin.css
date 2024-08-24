@@ -1,28 +1,87 @@
-.main{
-    align-items: center;
-    width: 1000px;
-    height: 600px;
-    background-color: aqua;
+
+.body{
+    width: 100vw;
+    height: 100vh;
+
 }
-.log{
-    background-color: bisque;
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     position: relative;
-    left: 40%;
-    width: 500px;
-    align-items: center;
+    top: 10vh;
+    width: 70vw;
+    height: 70vh;
+    /* background-color: aqua; */
+    padding: 0;
+    overflow: hidden;
+    border: solid 4px black;
+    border-radius: 30px;
+}
+#log{
+    background-color: aqua;
+    height: 100%;
+    width: 100vw;
+    text-align: center;
+    border-top-right-radius: 20px ;
+    border-end-end-radius: 20px ;
+}
+#col1 img{
+    /* background-image: url(../Images/loginslide.jpeg); */
+    border-radius: 15px 0px 0px 15px;
+    height: 100%;
+    width: 100%;
 }
 #mail{
-    padding: 10px 10px;
+    position: relative;
+    top: 70px;
+    height: 60px;
+    width: 25vw;
+    padding: 10px;
     border-radius: 30px;
-    width: 400px;
+    font-size: large;
+    font-weight: 500;
+    outline: none;
+    border: none;
 }
 #pass{
-    padding: 10px 10px;
+    position: relative;
+    top: 90px;
+    height: 60px;
+    width: 25vw;
+    padding: 10px;
     border-radius: 30px;
-    width: 400px;
+    font-size: large;
+    font-weight: 500;
+    outline: none;
+    border: none;
 }
 #fpass{
     color: blue;
+    position: relative;
+    top: 140px;
     
 }
+.btn{
+    background-color: blue;
+    position: relative;
+    top: 120px;
+    /* margin-left: 80px; */
+    height: 60px;
+    width: 355px;
+    padding: 10px;
+    border-radius: 30px;
+    font-size: x-large;
+    font-weight: 800;
+    letter-spacing: 2px;
+    outline: none;
+    border: none;
+}
+#log h1{
+    font-weight: bolder;
+    position: relative;
+    top: 20px;
+}
+
+
 
