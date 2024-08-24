@@ -12,6 +12,9 @@ function StudentLogin() {
         <button type="button" class="btn btn-success">Login</button>
         <button>Register</button>
         </div>
+        <div className='image'>
+            <img src='' alt='' className='img'/>
+        </div>
     </div>
   )
 }
