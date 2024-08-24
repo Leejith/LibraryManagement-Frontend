@@ -8,6 +8,7 @@
     border-radius: 15px;
     align-items: center;
     overflow: hidden;
+    display: grid;
 }
 .staff{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(12, 12, 12) 0px 0px 0px 3px;
@@ -16,10 +17,10 @@
     position:absolute;
     right: 0px;
     align-items: center;
-    background-color: rgb(215, 123, 123);
+    background-color: rgb(215, 123, 123); 
    
     
-}
+ }
 .staff h1{
     position: relative;
     text-align: center;
@@ -79,7 +80,7 @@
 .staff p a{
     color: rgb(3, 3, 105);
 }
-.image{
+.image1{
     background-image: url(../Images/loginslide.jpeg);
     background-repeat: no-repeat;
     width:100%;
