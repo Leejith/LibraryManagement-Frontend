@@ -1,11 +1,28 @@
 .main{
-    /* display: flex; */
+    align-items: center;
+    width: 1000px;
+    height: 600px;
+    background-color: aqua;
 }
 .log{
     background-color: bisque;
     position: relative;
     left: 40%;
-    width: 400px;
+    width: 500px;
     align-items: center;
+}
+#mail{
+    padding: 10px 10px;
+    border-radius: 30px;
+    width: 400px;
+}
+#pass{
+    padding: 10px 10px;
+    border-radius: 30px;
+    width: 400px;
+}
+#fpass{
+    color: blue;
+    
 }
 
