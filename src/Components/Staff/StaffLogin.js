@@ -12,7 +12,7 @@ function StaffLogin() {
         <p>don't have a account ? <a href="#">Register now</a></p>
          
       </div>
-      <div class='image'>
+      <div class='image1'>
         <img src="" alt="" class="img" /> 
       </div>
     </div>
