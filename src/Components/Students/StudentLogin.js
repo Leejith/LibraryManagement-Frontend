@@ -5,7 +5,7 @@ import img from'../../Assets/Images/loginslide.jpeg'
 function StudentLogin() {
   return (
     <div>
-    <div class="container">
+    <div class="container std-cont">
       <div class="col" id='col1'>
           <img src={img} alt='' className='img'/>
       </div>

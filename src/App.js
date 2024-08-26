@@ -7,6 +7,7 @@ import StaffLogin from './Components/Staff/StaffLogin';
 import StaffRegister from './Components/Staff/StaffRegister';
 import Navbar from './Components/common/Navbar';
 import AdminLogin from './Components/Admin/AdminLogin';
+import Login from './Components/common/Login';
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/StaffLogin'element={<StaffLogin/>}/>
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
         <Route path='/Adminlogin'element={<AdminLogin/>}/>
+        <Route path='/login'element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   )
