@@ -4,7 +4,7 @@
     height: 100vh;
 
 }
-.container{
+.std-cont  {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -13,11 +13,11 @@
     width: 70vw;
     height: 70vh;
     /* background-color: aqua; */
-    padding: 0;
+     padding: 0;
     overflow: hidden;
     border: solid 4px black;
     border-radius: 30px;
-}
+} 
 #log{
     background-color: aqua;
     height: 100%;
