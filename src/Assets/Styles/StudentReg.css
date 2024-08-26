@@ -1,0 +1,136 @@
+.register1{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(12, 12, 12) 0px 0px 0px 3px;
+    width: 1000px;
+    height: 600px;
+    position:absolute;
+    left: 15%;
+    top: 10%;
+    border-radius: 15px;
+    align-items: center;
+    overflow: hidden;
+}
+.form1{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(12, 12, 12) 0px 0px 0px 3px;
+    width: 500px;
+    height: 600px;
+    position:absolute;
+    right: 0px;
+    align-items: center;
+    background-color: rgb(123, 215, 207);
+}
+.form1 h1{
+    position: relative;
+    text-align: center;
+    top: 50px;
+    font-weight: bolder;
+}
+.reg-name1{
+    background-color: rgb(125, 203, 195);
+    position: relative;
+    top: 80px;
+    margin-left: 70px;
+    height: 40px;
+    width: 340px;
+    padding: 4px;
+    font-size: large;
+    font-weight: 400;
+    outline: none;
+    border: 1px solid;
+    border-bottom-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none
+}
+.reg-dep1{
+    background-color:rgb(125, 203, 195);;
+    position: relative;
+    top: 100px;
+    margin-left: 70px;
+    height: 40px;
+    width: 340px;
+    padding: 4px;
+    font-size: large;
+    font-weight: 400;
+    outline: none;
+    border: 1px solid;
+    border-bottom-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none
+}
+.reg-no1{
+    background-color:rgb(125, 203, 195);;
+    position: relative;
+    top: 120px;
+    margin-left: 70px;
+    height: 40px;
+    width: 340px;
+    padding: 4px;
+    font-size: large;
+    font-weight: 400;
+    outline: none;
+    border: 1px solid;
+    border-bottom-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none
+}
+.reg-email1{
+    background-color:rgb(125, 203, 195);;
+    position: relative;
+    top: 140px;
+    margin-left: 70px;
+    height: 40px;
+    width: 340px;
+    padding: 4px;
+    font-size: large;
+    font-weight: 400;
+    outline: none;
+    border: 1px solid;
+    border-bottom-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none
+    
+}
+
+.reg-password1{
+    background-color:rgb(125, 203, 195);
+    position: relative;
+    top: 160px;
+    margin-left: 70px;
+    height: 40px;
+    width: 340px;
+    padding: 4px;
+    font-size: large;
+    font-weight: 400;
+    outline: none;
+    border: 1px solid;
+    border-bottom-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none
+}
+.reg-btn1{
+    background-color: rgb(30, 80, 74);
+    position: relative;
+    top: 215px;
+    margin-left: 125px;
+    height: 60px;
+    width: 230px;
+    padding: 10px;
+    border-radius: 30px;
+    font-size: x-large;
+    font-weight: 800;
+    letter-spacing: 2px;
+    outline: none;
+    border: none;
+}
+
+.image0{
+    background-image: url(../Images/imageslide2.jpg);
+    background-repeat: no-repeat;
+    width:100%;
+    height:100%;
+    
+}
