@@ -5,7 +5,9 @@
     padding: 0px;
 
 }
+
 .container1{
+
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -13,12 +15,17 @@
     top: 10vh;
     width: 70vw;
     height: 70vh;
+
     margin: 0px;
     padding: 0px;
     overflow: hidden;
     border: solid 4px black;
     border-radius: 25px;
-}
+     padding: 0;
+    overflow: hidden;
+    border: solid 4px black;
+    border-radius: 30px;
+} 
 #log{
     background-color: aqua;
     height: 100%;

@@ -16,6 +16,7 @@ function StudentLogin() {
   return (
     <div>
     <div class="container container1">
+
       <div class="col" id='col1'>
           <img src={img} alt='' className='img'/>
       </div>
