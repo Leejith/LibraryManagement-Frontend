@@ -9,6 +9,8 @@ import Navbar from './Components/common/Navbar';
 import AdminLogin from './Components/Admin/AdminLogin';
 import Login from './Components/common/Login';
 import Home from './Components/common/Home';
+import StudentRegister from './Components/Students/StudentReg';
+import StudentReg from './Components/Students/StudentReg';
 
 
 
@@ -24,6 +26,7 @@ function App() {
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
         <Route path='/Adminlogin'element={<AdminLogin/>}/>
         <Route path='/login'element={<Login/>}/>
+        <Route path='/StudentReg'element={<StudentReg/>}/>
        
 
       </Routes>
