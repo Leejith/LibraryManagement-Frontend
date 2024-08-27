@@ -25,6 +25,8 @@ function App() {
         <Route path='/Adminlogin'element={<AdminLogin/>}/>
         <Route path='/login'element={<Login/>}/>
        
+        
+       
 
       </Routes>
     </BrowserRouter>
