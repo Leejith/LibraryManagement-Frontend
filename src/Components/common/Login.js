@@ -8,7 +8,7 @@ import admin from "../../Assets/Images/adminlogin.webp"
 
 function Login() {
   return (
-    <div class="container">
+    <div class="login-main">
        <div class="container login-container">
             <div class="row">
                 <div class="col-md ">
@@ -21,19 +21,19 @@ function Login() {
                       <h1 >LOGIN AS </h1>
                   
                   <div class="row selectlogin">
-                    <div class="col-md-6 sel">
+                    <div class="col-6 sel">
                       <div class="im">
                         <Link to={'/StudentLogin'}><img src={student} class="log-im " /></Link>
                         <h4>Student</h4>
                       </div>
                     </div>
-                    <div class="col-md-6 sel">
+                    <div class="col-6 sel">
                       <div class="im">
                         <Link to={'/StaffLogin'}><img src={teacher} class="log-im" /></Link>
                         <h4>Staff</h4>
                       </div>
                     </div>
-                    <div class="col-md sel">
+                    <div class="col sel">
                       <div class="im">
                         <Link to={'/AdminLogin'}><img src={admin} class="log-im" /></Link>
                         <h4>Admin</h4>

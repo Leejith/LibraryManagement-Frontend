@@ -8,6 +8,7 @@ import StaffRegister from './Components/Staff/StaffRegister';
 import Navbar from './Components/common/Navbar';
 import AdminLogin from './Components/Admin/AdminLogin';
 import Login from './Components/common/Login';
+import Home from './Components/common/Home';
 
 
 
@@ -16,12 +17,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='/home'element={<Home/>}/>
         <Route path='/StudentLogin'element={<StudentLogin/>}/>
-        <Route path='/nav'element={<Navbar/>}/>
+        {/* <Route path='/nav'element={<Navbar/>}/> */}
         <Route path='/StaffLogin'element={<StaffLogin/>}/>
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
         <Route path='/Adminlogin'element={<AdminLogin/>}/>
         <Route path='/login'element={<Login/>}/>
+       
+
       </Routes>
     </BrowserRouter>
   )
