@@ -1,111 +1,65 @@
 
-.body{
-    height: 100vh;
-    margin: 0px;
-    padding: 0px;
 
+.login-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 80%;
+    background-color: bisque;
+    display: grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr)) ;
 }
-
-.container1{
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-    top: 10vh;
-    width: 70vw;
-    height: 70vh;
-
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-    border: solid 4px black;
-    border-radius: 25px;
-     padding: 0;
-    overflow: hidden;
-    border: solid 4px black;
-    border-radius: 30px;
-} 
-#log{
-    background-color: aqua;
-    height: 100%;
-    width: 35vw;
-    text-align: center;
-    border-top-right-radius: 14px ;
-    border-end-end-radius: 14px ;
-}
-#col1 img{
-    border-radius: 11px 0px 0px 11px;
-    height: 100%;
+.box1 img{
     width: 100%;
+    height: 100%;
+    object-fit:cover ;
 }
-#col1{
-    width: 35vw;
-    height: 81vh;
-}
-#mail{
-    position: relative;
-    top: 70px;
-    height: 60px;
-    width: 25vw;
+.box2{
+    /* display: grid; */
     padding: 10px;
-    border-radius: 30px;
-    font-size: large;
-    font-weight: 500;
-    outline: none;
+    text-align: center;
+    background-color: rgb(138, 225, 7);
+    height: 100%;
+}
+.st-log-mail{
     border: none;
-}
-#pass{
+    height: 50px;
+    width: 100%;
+    border-radius: 40px;
     position: relative;
-    top: 90px;
-    height: 60px;
-    width: 25vw;
-    padding: 10px;
-    border-radius: 30px;
-    font-size: large;
-    font-weight: 500;
-    outline: none;
+    left: 0px;
+    top: 80px;
+    margin-bottom: 20px;
+
+}
+.st-log-pass{
     border: none;
-}
-#fpass{
-    color: blue;
+    height: 50px;
+    width: 100%;
+    border-radius: 40px;
     position: relative;
-    top: 140px;
-    
-}
-.btn{
-    background-color: blue;
-    position: relative;
+    left: 0px;
     top: 120px;
-    margin-top: 20px;
-    height: 60px;
-    width: 25vw;
-    padding: 10px;
-    border-radius: 30px;
-    font-size: x-large;
-    font-weight: 800;
-    letter-spacing: 2px;
-    outline: none;
+    margin-bottom: 20px;
+}
+.box2 button{
     border: none;
-}
-#log h1{
-    font-weight: bolder;
-    position: relative;
-    top: 20px;
-}
-.reg-btn1{
+    height: 50px;
+    width: 70%;
+    border-radius: 40px;
+    color: white;
     background-color: blue;
-    height: 40px;
-    width: 10vw;
-    padding: 10px;
-    margin-top: 23px;
-    border-radius: 30px;
-    font-size: large;
-    font-weight: 600;
-    letter-spacing: 2px;
-    outline: none;
-    border: none;
+    position: relative;
+    left: 10px;
+    top: 180px;
+    margin-bottom: 20px;
 }
+.box2 p{
+    font-weight: bold;
+    font-size: large;
+    position: relative;
+    left: 10px;
+    top: 220px;
 
-
-
+}
