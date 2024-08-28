@@ -5,23 +5,21 @@ import img from'../../Assets/Images/loginslide.jpeg'
 function StudentLogin() {
   return (
     <div>
-    <div class="container container1">
-
-      <div class="col" id='col1'>
-          <img src={img} alt='' className='img'/>
-      </div>
-         
-      <div class="col" id='log'>
-          <h1>Student Login</h1>
-          <input type='email' placeholder='Enter E-mail' id='mail'/><br/>
-          <input type='password' placeholder='Enter Password' id='pass'/><br/>
-          <button type="button" class="btn btn-success">Login</button>
-          <p id='fpass'>if dont have an account</p><br/>
-          
-      </div>
-      </div>
-    </div>
-
+        <div class="login-box">
+          {/* <div class="row"> */}
+            <div class="col box1">
+              <img src={img} alt=''/>
+            </div>
+            <div class="col box2">
+              <h1>Welcome Back</h1>
+              <input type='email' placeholder='enter E-mail' className='st-log-mail'/>
+              <input type='password' placeholder='enter password' className='st-log-pass'/>
+              <button>Login</button>
+              <p>don't have an account<a href=''>Register Now</a></p>
+            </div>
+          </div>
+        </div>
+    // </div>
   )
 }
 
