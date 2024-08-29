@@ -1,70 +1,65 @@
-.login{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(12, 12, 12) 0px 0px 0px 3px;
-    width: 1000px;
-    height: 600px;
-    position:absolute;
-    left: 15%;
-    top: 10%;
-    border-radius: 15px;
-    align-items: center;
-    overflow: hidden;
-    display: grid;
-}
-.staff{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(12, 12, 12) 0px 0px 0px 3px;
-    width: 500px;
-    height: 600px;
-    position:absolute;
-    right: 0px;
-    align-items: center;
-    background-color: rgb(215, 123, 123); 
-   
-    
- }
-.staff h1{
-    position: relative;
-    text-align: center;
-    top: 50px;
-    font-weight: bolder;
 
+.staff-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}   
+.staff-row{
+    box-shadow: solid 2px;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    padding: 0;
+    background-color: aqua;
 }
-.email{
-    position: relative;
-    top: 130px;
-    margin-left: 80px;
-    height: 60px;
-    width: 355px;
-    padding: 10px;
-    border-radius: 30px;
-    font-size: large;
-    font-weight: 500;
-    outline: none;
-    border: none;
+
+/* login content */
+
+.staff-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.staff-login{
+   align-items: center;
+}
+.sl-header{
+    margin-bottom: 10px;
+}
   
-    
-    
-}
-.password{
-    position: relative;
-    top: 150px;
-    margin-left: 80px;
-    height: 60px;
-    width: 355px;
+.sl-email{
+
+    height: 50px;
+    max-width: 50%;
     padding: 10px;
-    border-radius: 30px;
+    border-radius: 60px;
     font-size: large;
     font-weight: 500;
     outline: none;
     border: none;
 }
-.button{
-    background-color: blue;
-    position: relative;
-    top: 200px;
-    margin-left: 80px;
-    height: 60px;
-    width: 355px;
+
+.sl-email:hover{
+    border: none;
+    outline: none;
+}
+.sl-password{
+
+    height: 50px;
+    max-width: 50%;
     padding: 10px;
+    border-radius: 60px;
+    font-size: large;
+    font-weight: 500;
+    outline: none;
+    border: none;
+}
+
+.sl-button{
+    background-color: blue;
+    max-width: 50%;
     border-radius: 30px;
     font-size: x-large;
     font-weight: 800;
@@ -72,18 +67,6 @@
     outline: none;
     border: none;
 }
-.staff p{
-    position: relative;
-    top: 250px;
-    margin-left: 135px;
-}
-.staff p a{
-    color: rgb(3, 3, 105);
-}
-.image1{
-    background-image: url(../Images/loginslide.jpeg);
-    background-repeat: no-repeat;
-    width:100%;
-    height:100%;
-    
-}
+
+
+
