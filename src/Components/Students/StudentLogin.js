@@ -16,7 +16,7 @@ function StudentLogin() {
           <input type='email' placeholder='Enter E-mail' id='mail'/><br/>
           <input type='password' placeholder='Enter Password' id='pass'/><br/>
           <button type="button" class="btn btn-success">Login</button>
-          <p id='fpass'>if dont have an account<button type='button' class="reg-btn1" onClick={register}>REGISTER</button></p><br/>
+          <p id='fpass'>if dont have an account</p><br/>
           
       </div>
       </div>

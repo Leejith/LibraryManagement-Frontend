@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../Assets/Styles/StudentReg.css'
 
-function StaffRegister() {
+function StudentReg() {
   return (
     <div class="register1">
         <div class="form1">
@@ -16,8 +16,8 @@ function StaffRegister() {
         <div class='image0'>
         <img src="" alt="" class="img0" /> 
         </div>
-        </div>
+      </div>
   )
 }
 
-export default StaffRegister
+export default StudentReg
