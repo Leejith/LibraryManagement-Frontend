@@ -16,9 +16,7 @@ function Login() {
             
                 </div>
                 <div class="col-md login-first">
-                  
-                    
-                      <h1 >LOGIN AS </h1>
+                  <h1 >LOGIN AS </h1>
                   
                   <div class="row selectlogin">
                     <div class="col-6 sel">

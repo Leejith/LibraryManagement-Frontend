@@ -3,22 +3,70 @@
     margin: 0;
     box-sizing: border-box;
 }
-.main-home{
-    background-color: aqua;
-    width:100%;
-    height: 100vh;
 
+section{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.main-home h1{
-    font-size:6vw;
+
+/****home****/
+
+.home{
+    background-image: url(../Images/homebg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+.home h1{
+    font-size: 100px;
     font-weight: 700;
-    letter-spacing: 15px;
+    color: black;
+    position:relative;
+    right: 20rem;
+    bottom: 7rem;
+    letter-spacing: 10px;
+    
+    
 }
-.btn1{
-    height: 35%;
-    width: 35%;
-    border: none;
-    outline: none;
-    background-color: rgb(55, 76, 69);
-    border-radius: 30px;
+.home p{
+    color: black;
+    font-size: 18px;
+    position: relative;
+    right: 20rem;
+    bottom: 5rem;
+}
+.home .input-group{
+    width: 40%;
+    height: 45px;
+    position: relative;
+    right: 100px;
+}
+.ex-more{
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    border: 2px solid;
+}
+
+
+
+/* about us */
+
+.About{
+    background-color: rgb(200, 215, 215);             
+}
+.About h1{
+    font-weight: 800;
+    font-size: 50px;
+    color: black;
+}
+.About p{
+    color: black;
+    font-size: 17px;
 }
