@@ -5,8 +5,11 @@ import ABOUTUS from '../../Assets/Images/about us.jpg'
 
 function Home() {
   return (
-
-    <><section class="home">
+   
+    <>
+    
+    
+    <section class="home">
       <h1 class="text-center p-4">BOOKWORLD</h1>
       <p>Reading gives us someplace to go when we have to stay where we are,</p>
       <p>as turning pages and discovering new worlds allow us to get lost in the story</p>

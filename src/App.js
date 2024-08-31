@@ -20,7 +20,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/nav'element={<Navbar/>}/>
+        <Route path='/nav'element={[<Navbar/>,<Home/>]}/>
         <Route path='/home'element={<Home/>}/>
         <Route path='/StudentLogin'element={<StudentLogin/>}/>
         
