@@ -5,7 +5,7 @@ import img from "../../Assets/Images/loginslide.jpeg"
 function AdminLogin() {
   return (
     <div class="container ad-cont">
-      <div class="row g-0 ">
+      <div class="row g-0 ad-row">
         <div class="col-lg col1">
           <img src={img}alt="loading" class="img" /> 
         </div>
@@ -16,12 +16,10 @@ function AdminLogin() {
             <input type='password' placeholder='Enter Password' class=' form-control ad-password'/>
             <button type='button' class="ad-button">login</button>
           </form>
-            <p>don't have a account ? <a href="#">Register now</a></p>
+           <p>don't have a account ? <a href="#">Register now</a></p>
         </div>
       </div>
-    </div>
-  
-    
+    </div>  
   )
 }
 
