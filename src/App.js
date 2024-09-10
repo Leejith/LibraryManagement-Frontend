@@ -12,6 +12,8 @@ import Home from './Components/common/Home';
 import StudentRegister from './Components/Students/StudentReg';
 import StudentReg from './Components/Students/StudentReg';
 import AdminRegister from './Components/Admin/AdminRegister';
+import Footer from './Components/common/Footer';
+import Books from './Components/common/Books';
 
 
 
@@ -20,10 +22,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/nav'element={[<Navbar/>,<Home/>]}/>
+        <Route path='/nav'element={[<Navbar/>,<Home/>,<Footer/>]}/>
         <Route path='/home'element={<Home/>}/>
         <Route path='/StudentLogin'element={<StudentLogin/>}/>
-        
+        <Route path='/books'element={<Books/>}/>
+        <Route path='/footer'element={<Footer/>}/>
         <Route path='/StaffLogin'element={<StaffLogin/>}/>
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
         <Route path='/Adminlogin'element={<AdminLogin/>}/>

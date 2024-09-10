@@ -1,0 +1,18 @@
+.books-con{
+    background-color: aqua;
+}
+
+.card{
+    width: 18rem;
+    
+}
+.card-row{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-around;
+    
+    
+}
+.Books{
+    font-weight: 700;
+}
