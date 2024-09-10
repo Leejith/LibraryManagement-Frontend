@@ -1,28 +1,39 @@
 import React from 'react'
 import "../../Assets/Styles/Home.css"
 import ABOUTUS from '../../Assets/Images/about us.jpg'
+import home from '../../Assets/Images/home.png'
 
 
 function Home() {
   return (
    
-    <>
-    
-    
-    <section class="home">
-      <h1 class="text-center p-4">BOOKWORLD</h1>
-      <p>Reading gives us someplace to go when we have to stay where we are,</p>
-      <p>as turning pages and discovering new worlds allow us to get lost in the story</p>
-      <p>and find ourselves within it</p>
-      <div class="input-group m-2">
-        <button class="btn ex-more">explore more</button>
+  <><section class="home">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-7 col-md-7 col-12 py-lg-5 p-5 order-1">
+            <h1 class="display-1 anime">BOOKWORLD</h1>
+            <p class="my-lg-5 my-sm-3 anime">Reading gives us someplace to go when we have to stay where we are,
+            as turning pages and discovering new worlds allow us to get lost in the story
+            and find ourselves within it</p>
+            <div class="input-group m-2">
+              <button class="btn ex-more anime anime-btn">explore more</button>
+            </div>
+            </div>
+          <div class="col-lg-5 col-md-5 col-12 my-sm-1   order-sm-2">
+          <img src={home} class="img-fluid "/>
+
+          </div>
+        </div>
       </div>
+      
+
     </section>
+    
     
     
    {/* about  */}
     
-    <section class="About">
+    <section id="About">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12 p-5">
@@ -41,6 +52,7 @@ function Home() {
           </div>
         </div>
       </div>
+      
 
     </section></>
    
