@@ -14,6 +14,7 @@ import StudentReg from './Components/Students/StudentReg';
 import AdminRegister from './Components/Admin/AdminRegister';
 import Footer from './Components/common/Footer';
 import Books from './Components/common/Books';
+import StProf from './Components/Students/StProf';
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path='/Adminreg'element={<AdminRegister/>}/>
         <Route path='/login'element={<Login/>}/>
         <Route path='/StudentReg'element={<StudentReg/>}/>
+        <Route path='/StProf'element={<StProf/>}/>
        
         
        
