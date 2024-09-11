@@ -1,0 +1,28 @@
+.cat-nav{
+    height: 60px;
+    background-color:rgb(117, 161, 147);
+}
+.cat-drop{
+    display: grid;
+    
+}
+.cat-button{
+    background-color:rgb(117, 161, 147);
+    color: black;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: .5s ;
+    border:2px solid;
+}
+.cat-button:hover{
+    background-color: rgb(58, 97, 84);
+    color: white;
+}
+.cat-button:active{
+    background-color: rgb(65, 118, 100);
+    color: white;
+}
