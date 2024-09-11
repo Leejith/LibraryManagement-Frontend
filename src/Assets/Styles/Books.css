@@ -1,18 +1,80 @@
 .books-con{
-    background-color: aqua;
+    background-color: rgb(168, 192, 184);
+    height: 100%;
+    display:grid ;
+    place-items:center;
+  
+}
+.books-con h1{
+    font-weight: 700;
+    font-size: 50px;
+    letter-spacing: 2px;
+    color: black;
+}
+
+.books-con img{
+    width: 150px;
+    max-height: 200px;
+    overflow: hidden;
 }
 
 .card{
-    width: 18rem;
+    width: 250px;
+    max-height:350px;
+    background-color: rgb(168, 192, 184);
+    border: none;
+    box-shadow: 15px 20px 20px rgba(0,0,0,.3),
+                inset 4px 4px 10px rgb(114, 152, 140);
+    border-radius: 10px;  
+    overflow: hidden;
+    justify-content: center;  
+    align-items: center;
+    margin: 20px 60px;  
+    transition: .2s;      
+             
+   
+}
+.card:hover{
+    box-shadow:inset 4px 4px 10px rgba(0,0,0,.3),
+         -4px -4px 10px rgb(114, 152, 140);
+    transition: .2s;
+}
+
+.card-title{
     
 }
-.card-row{
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-content: space-around;
-    
-    
+
+
+.login-button{
+    background-color: rgb(119, 177, 158);
+    color: black;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 1s ;
+    border:2px solid
 }
-.Books{
-    font-weight: 700;
+.login-button:hover{
+    background-color: rgb(65, 118, 100);
+    color: white;
+} 
+
+
+.more-button{
+    background-color: rgb(119, 177, 158);
+    color: black;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: .5s ;
+    border:2px solid;
+    margin: 20px;
+}
+.more-button:hover{
+    background-color: rgb(65, 118, 100);
+    color: white;
 }

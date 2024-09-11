@@ -22,7 +22,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/nav'element={[<Navbar/>,<Home/>,<Footer/>]}/>
+        <Route path='/nav'element={[<Navbar/>,<Home/>,<Books/>,<Footer/>]}/>
         <Route path='/home'element={<Home/>}/>
         <Route path='/StudentLogin'element={<StudentLogin/>}/>
         <Route path='/books'element={<Books/>}/>
