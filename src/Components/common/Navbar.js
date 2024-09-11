@@ -52,7 +52,7 @@ function Navbar() {
                   </a>
                 </li>
                 <li class="nav-item list">
-                  <a class="nav-link active mx-lg-2" href="#">
+                  <a class="nav-link active mx-lg-2" href="book-con">
                     BOOKS
                   </a>
                 </li>
