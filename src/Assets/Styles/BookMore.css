@@ -1,22 +1,20 @@
 .cat-nav{
-    height: 60px;
+    height:50%;
     background-color:rgb(117, 161, 147);
 }
-.cat-drop{
-    display: grid;
-    
-}
+
 .cat-button{
     background-color:rgb(117, 161, 147);
     color: black;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 800;
     letter-spacing: 2px;
-    padding: 8px 20px;
+    padding: 8px 40px;
     border-radius: 50px;
     text-decoration: none;
     transition: .5s ;
     border:2px solid;
+    margin: 10px;
 }
 .cat-button:hover{
     background-color: rgb(58, 97, 84);
@@ -25,4 +23,43 @@
 .cat-button:active{
     background-color: rgb(65, 118, 100);
     color: white;
+}
+
+
+.search-col{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.se-box{
+    width: 250px;
+    margin: 10px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    background-color:rgb(117, 161, 147);
+    border: 2px solid black;
+
+}
+.search-box{
+    width: 200px;
+    margin: 2px;
+    background-color:rgb(117, 161, 147);
+    padding: 8px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+}
+.search-box:hover{
+    background-color:rgb(117, 161, 147);
+    border: none;
+}
+.search-button{
+    width: 50px;
+    color: black;
+    font-size: 20px;
+    border-radius: 50px;
+    background-color:rgb(117, 161, 147);
+    border: none;
+    
 }
