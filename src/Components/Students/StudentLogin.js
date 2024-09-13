@@ -1,25 +1,49 @@
 import React, { useState } from 'react';
 import '../../Assets/Styles/StudenLogin.css';
-import img from'../../Assets/Images/loginslide.jpeg'
+import img from'../../Assets/Images/stdlogin.png'
 
 function StudentLogin() {
+  const [Student,setStudent]=useState({email:'',password:''},);
+
+  const login =(login)=>{
+    setStudent({...Student,[login.target.name]:login.target.value});
+
+  }
+  console.log(Student)
+
   return (
-    <div>
-        <div class="login-box">
-          {/* <div class="row"> */}
-            <div class="col box1">
-              <img src={img} alt=''/>
-            </div>
-            <div class="col box2">
-              <h1>Welcome Back</h1>
-              <input type='email' placeholder='enter E-mail' className='st-log-mail'/>
-              <input type='password' placeholder='enter password' className='st-log-pass'/>
-              <button>Login</button>
-              <p>don't have an account<a href=''>Register Now</a></p>
-            </div>
+    <section class="StudentLogin">
+      <div class="container text-center std-con">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 col-sm-12 p-4 order-1">
+            <img src={img} class="img-fluid p-5 std-img"/>
+          </div>
+          <div class="col-lg-7 col-md-6 col-sm-12  p-0 order-sm-2">
+            <form class="mt-5">
+              <h1 class="mb-5 std-h1">STUDENT LOGIN</h1>
+              <div class="form-group std-form ">
+                <div class="input-group mb-3 ">
+                  <span class="input-group-text std-email"><i class="ri-mail-line"></i></span>
+                  <input type="text" class="form-control std-email" name="email" onChange={login} placeholder="EMAIL" />
+                </div>
+                <div class="form-group ">
+                  <div class="input-group  ">
+                    <span class="input-group-text std-password"><i class="ri-shield-keyhole-line"></i></span>
+                    <input type="password" class="form-control std-password" name="password" onChange={login}placeholder="PASSWORD" />
+                  </div>
+                </div>
+                <p class="std-forget">forget password?</p>
+              </div>
+              <button type="button" class="btn std-loginbtn">
+                <i class="ri-lock-unlock-line"></i>
+                LOGIN
+              </button>
+              <p >don't have a account ? <a href="#">Register now</a></p>
+            </form>
           </div>
         </div>
-    // </div>
+      </div>
+    </section>
   )
 }
 

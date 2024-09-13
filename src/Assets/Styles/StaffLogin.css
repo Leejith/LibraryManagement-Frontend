@@ -1,72 +1,85 @@
 
-.staff-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}   
-.staff-row{
-    box-shadow: solid 2px;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    padding: 0;
-    background-color: aqua;
+.StaffLogin{
+    background-color: rgb(168, 192, 184);
+    height: 100%;
+    
+    
+}
+.stf-con{
+    background-color: rgb(119, 177, 158);
+    box-shadow: 15px 20px 20px rgba(0,0,0,.3),
+                inset 6px 6px 10px rgb(114, 152, 140);
+    border-radius: 30px;
+    color: black;
 }
 
-/* login content */
-
-.staff-right{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+.stf-h1{
+    letter-spacing: 2px;
+    font-weight:800 ;
 }
-.staff-login{
-   align-items: center;
+.stf-form{
+    display: grid;
+    justify-content: center !important;
+    gap: 5px;
+    
 }
-.sl-header{
-    margin-bottom: 10px;
-}
-  
-.sl-email{
-
+.stf-email{
     height: 50px;
-    max-width: 50%;
     padding: 10px;
-    border-radius: 60px;
+    border-radius: 80px;
     font-size: large;
     font-weight: 500;
     outline: none;
     border: none;
+    background-color: rgb(152, 228, 203);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.sl-email:hover{
-    border: none;
-    outline: none;
-}
-.sl-password{
-
+.stf-password{
     height: 50px;
-    max-width: 50%;
     padding: 10px;
-    border-radius: 60px;
+    border-radius: 80px;
     font-size: large;
     font-weight: 500;
     outline: none;
     border: none;
+    background-color: rgb(152, 228, 203);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
-
-.sl-button{
-    background-color: blue;
-    max-width: 50%;
+.stf-loginbtn{
+    color: black;
+    width: 260px;
     border-radius: 30px;
     font-size: x-large;
     font-weight: 800;
     letter-spacing: 2px;
     outline: none;
-    border: none;
+    border: 2px solid black;
+    margin-top: 10px;
+    background-color: rgb(152, 228, 203);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin-bottom: 8px;
 }
+.stf-forget{
+    font-weight: 500;
+    display: grid;
+    justify-content:end;
+    color: black;
+    margin-top: 5px;
+    position: relative;
+    right: 10px;
+}
+form p a{
+    font-weight: 700;
+    margin-top: 2px;
+    color: rgb(5, 5, 152);
+}
+form p {
+    color:black;
+    font-size:15px;
+    margin-top: 30px;
+}
+
 
 
 
