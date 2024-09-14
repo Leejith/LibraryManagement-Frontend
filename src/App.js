@@ -34,7 +34,7 @@ function App() {
         <Route path='/Adminreg'element={<AdminRegister/>}/>
         <Route path='/login'element={<Login/>}/>
         <Route path='/StudentReg'element={<StudentReg/>}/>
-        <Route path='/StProf'element={<StProf/>}/>
+        <Route path='/StProf'element={[<Navbar/>,<StProf/>]}/>
        
         
        
