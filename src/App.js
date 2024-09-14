@@ -16,6 +16,8 @@ import Footer from './Components/common/Footer';
 import Books from './Components/common/Books';
 import StProf from './Components/Students/StProf';
 import BookMore from './Components/common/BookMore';
+import StafPr from './Components/Staff/StafPr';
+import AdProf from './Components/Admin/AdProf';
 
 
 
@@ -37,7 +39,9 @@ function App() {
         <Route path='/Adminreg'element={<AdminRegister/>}/>
         <Route path='/login'element={<Login/>}/>
         <Route path='/StudentReg'element={<StudentReg/>}/>
-        <Route path='/StProf'element={<StProf/>}/>
+        <Route path='/StProf'element={[<Navbar/>,<StProf/>]}/>
+        <Route path='/Stafpr'element={<StafPr/>}/>
+        <Route path='/Adprof'element={<AdProf/>}/>
        
         
        
