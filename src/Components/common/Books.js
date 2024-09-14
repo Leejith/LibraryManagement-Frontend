@@ -25,13 +25,13 @@ function Books() {
           displayBook.map((Book)=>{
             
             return(
-            <div class="card-row col-lg-4 col-md-6 col-sm-12">
-              <div class="card ">
+            <div class=" col-lg-4 col-md-6 col-sm-12">
+              <div class="card book-card">
                 <img src={Book.image} class="card-img-top"/>
                 <div class="card-body text-center">
                   <h5 class="card-title">{Book.title}</h5>
                   <p class="card-text">{Book.price}</p>
-                  <a href="#" class="btn login-button">View Book</a>
+                  <a href="#" class="btn view-button">View Book</a>
                 </div>
               </div>
             </div>

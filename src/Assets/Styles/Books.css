@@ -18,7 +18,7 @@
     overflow: hidden;
 }
 
-.card{
+.book-card{
     width: 250px;
     max-height:350px;
     background-color: rgb(168, 192, 184);
@@ -34,18 +34,16 @@
              
    
 }
-.card:hover{
+.book-card:hover{
     box-shadow:inset 4px 4px 10px rgba(0,0,0,.3),
          -4px -4px 10px rgb(114, 152, 140);
     transition: .2s;
 }
 
-.card-title{
-    
-}
 
 
-.login-button{
+
+.view-button{
     background-color: rgb(119, 177, 158);
     color: black;
     font-size: 14px;
@@ -55,7 +53,7 @@
     transition: 1s ;
     border:2px solid
 }
-.login-button:hover{
+.view-button:hover{
     background-color: rgb(65, 118, 100);
     color: white;
 } 

@@ -15,6 +15,9 @@ import AdminRegister from './Components/Admin/AdminRegister';
 import Footer from './Components/common/Footer';
 import Books from './Components/common/Books';
 import StProf from './Components/Students/StProf';
+import BookMore from './Components/common/BookMore';
+import StafPr from './Components/Staff/StafPr';
+import AdProf from './Components/Admin/AdProf';
 
 
 
@@ -25,8 +28,10 @@ function App() {
       <Routes>
         <Route path='/nav'element={[<Navbar/>,<Home/>,<Books/>,<Footer/>]}/>
         <Route path='/home'element={<Home/>}/>
+        <Route path='/navbar'element={<Navbar/>}/>
         <Route path='/StudentLogin'element={<StudentLogin/>}/>
         <Route path='/books'element={<Books/>}/>
+        <Route path='/book'element={<BookMore/>}/>
         <Route path='/footer'element={<Footer/>}/>
         <Route path='/StaffLogin'element={<StaffLogin/>}/>
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
@@ -35,6 +40,8 @@ function App() {
         <Route path='/login'element={<Login/>}/>
         <Route path='/StudentReg'element={<StudentReg/>}/>
         <Route path='/StProf'element={[<Navbar/>,<StProf/>]}/>
+        <Route path='/Stafpr'element={<StafPr/>}/>
+        <Route path='/Adprof'element={<AdProf/>}/>
        
         
        

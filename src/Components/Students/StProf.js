@@ -26,7 +26,7 @@ function StProf() {
     return (
         <div>
             <div class="container-fluid main">
-                <ul class="nav flex-column one">
+                <ul class="nav  flex-column one">
                     <li class="nav-item">
                         <h1>Welcome Leejith</h1>
                     </li>

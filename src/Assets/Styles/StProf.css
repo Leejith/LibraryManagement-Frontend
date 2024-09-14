@@ -58,11 +58,21 @@
 .card1{
     width: 15rem;
     justify-content: space-evenly;
-    max-height: 420px;
+    max-height: 490px;
     background-color: rgb(168, 192, 184);
     border: none;
     overflow: hidden;
 
+}
+.btn-2{
+    border-radius: 40px;
+    margin-left: 10px;
+    background-color: white;
+    position: relative;
+    left: 40px;
+}
+.btn-2:hover{
+    background-color: rgb(253, 38, 38);
 }
 
 
