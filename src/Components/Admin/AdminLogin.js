@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../Assets/Styles/AdminLogin.css';
 import Adimg from '../../Assets/Images/adlogin.png'
+import { Link } from 'react-router-dom';
 
 
 function AdminLogin() {
@@ -13,7 +14,7 @@ function AdminLogin() {
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12  p-0 order-sm-2">
             <form class="mt-5">
-              <h1 class="mb-5 ad-h1">STUDENT LOGIN</h1>
+              <h1 class="mb-5 ad-h1">ADMIN LOGIN</h1>
               <div class="form-group ad-form ">
                 <div class="input-group mb-3 ">
                   <span class="input-group-text std-email"><i class="ri-mail-line"></i></span>
@@ -31,7 +32,7 @@ function AdminLogin() {
                 <i class="ri-lock-unlock-line"></i>
                 LOGIN
               </button>
-              <p >don't have a account ? <a href="#">Register now</a></p>
+              <p >don't have a account ? <Link to={'/Adminreg'}>Register now </Link></p>
             </form>
           </div>
         </div>

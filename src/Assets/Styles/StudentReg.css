@@ -1,92 +1,73 @@
-.register1{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(12, 12, 12) 0px 0px 0px 3px;
-    width: 1000px;
-    height: 600px;
-    position:absolute;
-    left: 15%;
-    top: 10%;
-    border-radius: 15px;
-    align-items: center;
-    overflow: hidden;
+.Studentregister{
+    background-color: rgb(168, 192, 184);
+    height: 100%;
 }
-.form1{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(12, 12, 12) 0px 0px 0px 3px;
-    width: 500px;
-    height: 600px;
-    position:absolute;
-    right: 0px;
-    align-items: center;
-    background-color: rgb(123, 215, 207);
+.std-reg{
+    background-color: rgb(119, 177, 158);
+    box-shadow: 15px 20px 20px rgba(0,0,0,.3),
+                inset 6px 6px 10px rgb(114, 152, 140);
+    border-radius: 30px;
+    color: black;
 }
-.form1 h1{
-    position: relative;
-    text-align: center;
-    top: 50px;
-    font-weight: bolder;
+.std-reg h1{
+    letter-spacing: 2px;
+    font-weight:800;
 }
-.reg-name1{
+.std-form{
+    display: grid;
+    justify-content: center ;
+    gap: 10px;
+    
+}
+.reg-stdname{
     background-color: rgb(125, 203, 195);
-    position: relative;
-    top: 80px;
-    margin-left: 70px;
-    height: 40px;
-    width: 340px;
-    padding: 4px;
+    height: 50px;
+    padding: 10px;
     font-size: large;
-    font-weight: 400;
+    font-weight: 500;   
     outline: none;
-    border: 1px solid;
+    border: 3px solid;
     border-bottom-color: black;
     border-top: none;
     border-left: none;
     border-right: none
 }
-.reg-dep1{
+.reg-stddep{
     background-color:rgb(125, 203, 195);;
-    position: relative;
-    top: 100px;
-    margin-left: 70px;
-    height: 40px;
-    width: 340px;
-    padding: 4px;
+    height: 50px;
+    padding: 10px;
     font-size: large;
-    font-weight: 400;
+    font-weight: 500; 
     outline: none;
-    border: 1px solid;
+    border: 3px solid;
     border-bottom-color: black;
     border-top: none;
     border-left: none;
     border-right: none
 }
-.reg-no1{
+
+
+.reg-stdno{
     background-color:rgb(125, 203, 195);;
-    position: relative;
-    top: 120px;
-    margin-left: 70px;
-    height: 40px;
-    width: 340px;
-    padding: 4px;
+    height: 50px;
+    padding: 10px;
     font-size: large;
-    font-weight: 400;
+    font-weight: 500; 
     outline: none;
-    border: 1px solid;
+    border: 3px solid;
     border-bottom-color: black;
     border-top: none;
     border-left: none;
     border-right: none
 }
-.reg-email1{
+.reg-stdemail{
     background-color:rgb(125, 203, 195);;
-    position: relative;
-    top: 140px;
-    margin-left: 70px;
-    height: 40px;
-    width: 340px;
-    padding: 4px;
+    height: 50px;
+    padding: 10px;
     font-size: large;
-    font-weight: 400;
+    font-weight: 500; 
     outline: none;
-    border: 1px solid;
+    border: 3px solid;
     border-bottom-color: black;
     border-top: none;
     border-left: none;
@@ -94,35 +75,51 @@
     
 }
 
-.reg-password1{
-    background-color:rgb(125, 203, 195);
-    position: relative;
-    top: 160px;
-    margin-left: 70px;
-    height: 40px;
-    width: 340px;
-    padding: 4px;
+.reg-stdpass{
+    background-color:rgb(125, 203, 195);;
+    height: 50px;
+    padding: 10px;
     font-size: large;
-    font-weight: 400;
+    font-weight: 500; 
     outline: none;
-    border: 1px solid;
+    border: 3px solid;
     border-bottom-color: black;
     border-top: none;
     border-left: none;
     border-right: none
 }
-.reg-btn1{
-    background-color: rgb(30, 80, 74);
-    position: relative;
-    top: 215px;
-    margin-left: 125px;
-    height: 60px;
-    width: 230px;
-    padding: 10px;
+.reg-stdbtn{
+    color: black;
+    width: 200px;
     border-radius: 30px;
     font-size: x-large;
     font-weight: 800;
     letter-spacing: 2px;
     outline: none;
-    border: none;
+    border: 2px solid black;
+    margin-top: 10px;
+    background-color: rgb(152, 228, 203);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin: 18px auto;
+}
+.profile-pic{
+    object-fit:cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    border: 4px solid black;
+    overflow: hidden;
+    margin:auto;
+    
+}
+#upload-pic2{
+    display: none;
+}
+
+.upload-photo{
+    position:relative;
+    top: 60px; 
+    right: 65px;
+    color: white;
 }

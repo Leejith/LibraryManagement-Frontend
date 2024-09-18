@@ -16,6 +16,7 @@ import Footer from './Components/common/Footer';
 import Books from './Components/common/Books';
 import StProf from './Components/Students/StProf';
 import BookMore from './Components/common/BookMore';
+import BookDetails from './Components/common/BookDetails';
 
 
 
@@ -36,7 +37,8 @@ function App() {
         <Route path='/Adminlogin'element={<AdminLogin/>}/>
         <Route path='/Adminreg'element={<AdminRegister/>}/>
         <Route path='/login'element={<Login/>}/>
-        <Route path='/StudentReg'element={<StudentReg/>}/>
+        <Route path='/viewbook'element={<BookDetails/>}/>
+        <Route path='/StudentRegister'element={<StudentReg/>}/>
         <Route path='/StProf'element={<StProf/>}/>
        
         

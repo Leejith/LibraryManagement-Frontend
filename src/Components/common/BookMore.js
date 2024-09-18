@@ -20,7 +20,7 @@ function BookMore() {
 <div>
     <div class="container-fluid cat-nav">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12  cat-drop order-1">
+            <div class="col-lg-6 col-md-6 col-sm-12 m-sm-auto  cat-drop order-1">
             <div class="dropdown ">
                 <button class="btn btn-secondary dropdown-toggle cat-button" type="button" data-bs-toggle="dropdown">
                 CATEGORY
@@ -32,7 +32,7 @@ function BookMore() {
                 </ul>
             </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12  search-col order-sm-2">
+            <div class="col-lg-6 col-md-6 col-sm-12 m-sm-auto  search-col order-sm-2">
                 <div class="se-box">
                     
                     <input type='text' name='search'placeholder='search...' class="search-box"/>
