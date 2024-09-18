@@ -32,7 +32,6 @@
     justify-content: end;
 }
 .se-box{
-    width: 250px;
     margin: 10px;
     border-radius: 50px;
     display: flex;
@@ -42,7 +41,6 @@
 
 }
 .search-box{
-    width: 200px;
     margin: 2px;
     background-color:rgb(117, 161, 147);
     padding: 8px;

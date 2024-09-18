@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../Assets/Styles/Books.css' 
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 function Books() {
   const[Book,setBook]=useState([])
@@ -42,7 +43,7 @@ function Books() {
         }
       </div>
       </div> 
-      <button type="button" class="btn more-button p-3">EXPLORE MORE</button>
+      <Link to={'/book'}><button type="button" class="btn more-button p-3">EXPLORE MORE</button></Link>
     </div>
   )
 }

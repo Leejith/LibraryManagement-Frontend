@@ -7,17 +7,14 @@ import StaffLogin from './Components/Staff/StaffLogin';
 import StaffRegister from './Components/Staff/StaffRegister';
 import Navbar from './Components/common/Navbar';
 import AdminLogin from './Components/Admin/AdminLogin';
-import Login from './Components/common/Login';
-import Home from './Components/common/Home';
-import StudentRegister from './Components/Students/StudentReg';
+import Login from './Components/common/Login';import Home from './Components/common/Home';
 import StudentReg from './Components/Students/StudentReg';
 import AdminRegister from './Components/Admin/AdminRegister';
 import Footer from './Components/common/Footer';
 import Books from './Components/common/Books';
 import StProf from './Components/Students/StProf';
 import BookMore from './Components/common/BookMore';
-import StafPr from './Components/Staff/StafPr';
-import AdProf from './Components/Admin/AdProf';
+
 
 
 
@@ -38,10 +35,7 @@ function App() {
         <Route path='/Adminlogin'element={<AdminLogin/>}/>
         <Route path='/Adminreg'element={<AdminRegister/>}/>
         <Route path='/login'element={<Login/>}/>
-        <Route path='/StudentReg'element={<StudentReg/>}/>
-        <Route path='/StProf'element={[<Navbar/>,<StProf/>]}/>
-        <Route path='/Stafpr'element={<StafPr/>}/>
-        <Route path='/Adprof'element={<AdProf/>}/>
+
        
         
        

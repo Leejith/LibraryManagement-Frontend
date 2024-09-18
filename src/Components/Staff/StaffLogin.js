@@ -10,7 +10,7 @@ function StaffLogin() {
     <section class="StaffLogin">
       <div class="container text-center stf-con">
         <div class="row">
-          <div class="col-lg-5 col-md-6 p-0 col-sm-12 order-1">
+          <div class="col-lg-5 col-md-6 p-0 col-sm-12 order-1 m-auto">
             <img src={stfimg} class="img-fluid p-5 "/>
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12  p-0 order-sm-2">
@@ -33,7 +33,7 @@ function StaffLogin() {
                 <i class="ri-lock-unlock-line"></i>
                 LOGIN
               </button>
-              <p >don't have a account ? <a href="#">Register now</a></p>
+              <p >don't have a account ? <Link to={'/StaffRegister'}>Register now </Link></p>
             </form>
           </div>
         </div>
