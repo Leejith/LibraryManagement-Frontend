@@ -19,17 +19,17 @@ function StaffLogin() {
               <div class="form-group stf-form ">
                 <div class="input-group mb-3 ">
                   <span class="input-group-text stf-email"><i class="ri-mail-line"></i></span>
-                  <input type="text" class="form-control stf-email" name="email"placeholder="EMAIL" />
+                  <input type="text" class="form-control stf-email" name="email"placeholder="EMAIL" required/>
                 </div>
                 <div class="form-group ">
                   <div class="input-group  ">
                     <span class="input-group-text stf-password"><i class="ri-shield-keyhole-line"></i></span>
-                    <input type="password" class="form-control stf-password" name="password"placeholder="PASSWORD" />
+                    <input type="password" class="form-control stf-password" name="password"placeholder="PASSWORD" required />
                   </div>
                 </div>
                 <p class="stf-forget">forget password?</p>
               </div>
-              <button type="button" class="btn stf-loginbtn ">
+              <button type="submit" class="btn stf-loginbtn ">
                 <i class="ri-lock-unlock-line"></i>
                 LOGIN
               </button>

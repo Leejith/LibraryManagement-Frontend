@@ -42,29 +42,29 @@ function AdminRegister() {
               <div class="form-group ad-form">
               <div class="input-group ">
                 <span class="input-group-text reg-adname"><i class="ri-user-fill"></i></span>
-                <input type="text" class="form-control reg-adname" name="Name"placeholder="Enter your Name" />
+                <input type="text" class="form-control reg-adname" name="Name"placeholder="Enter your Name" required />
               </div>
             </div>
               
             <div class="form-group ad-form ">
               <div class="input-group ">
                 <span class="input-group-text reg-adno"><i class="ri-registered-line"></i></span>
-                <input type="number" class="form-control reg-adno" name="Regno"placeholder="Register number" />
+                <input type="number" class="form-control reg-adno" name="Regno"placeholder="Register number"  required />
               </div>
             </div>
               <div class="form-group ad-form ">
               <div class="input-group ">
                 <span class="input-group-text reg-ademail"><i class="ri-mail-line"></i></span>
-                <input type="email" class="form-control reg-ademail" name="email"placeholder="Enter your mail" />
+                <input type="email" class="form-control reg-ademail" name="email"placeholder="Enter your mail"required />
               </div>
             </div>
               <div class="form-group ad-form ">
               <div class="input-group ">
                 <span class="input-group-text reg-adpass"><i class="ri-lock-password-line"></i></span>
-                <input type="password" class="form-control reg-adpass" name="password"placeholder="password***" />
+                <input type="password" class="form-control reg-adpass" name="password"placeholder="password***" required />
               </div>
             </div>
-            <button type='button' class="btn reg-adbtn ">REGISTER</button>
+            <button type='submit' class="btn reg-adbtn ">REGISTER</button>
             </form>
           </div>
         </div>

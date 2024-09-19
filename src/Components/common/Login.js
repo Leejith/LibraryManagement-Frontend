@@ -23,8 +23,8 @@ function Login() {
                   <div class="col-lg-6 col-12 ad-card">
                     
                     <Link to='/studentlogin'>
-                      <div class="card card-mainlogin" >
-                        <img src={student} class=" img-fluid card-loginimg " />
+                      <div class="card card-mainlogin " >
+                        <img src={student} class=" img-fluid card-loginimg m-auto " />
                         <div class="card-body">
                           <label class="card-text login-text">STUDENT</label>
                         </div>
