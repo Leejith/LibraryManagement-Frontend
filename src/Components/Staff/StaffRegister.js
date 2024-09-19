@@ -11,6 +11,8 @@ function StaffRegister() {
     const file = upload.target.files[0];
     if(file){
       const reader = new FileReader();
+      console.log(reader);
+      
       reader.onload =()=>{
         setProfile(reader.result);
 
@@ -34,43 +36,43 @@ function StaffRegister() {
 
                 {/* profile card           */}
                 <div class="mb-2 text-center  profile-pic d-flex justfy-content-center">
-                            <img  src={Profile  || profileimg}  class="" for="upload-pic"/>
+                            <img  src={Profile  || profileimg}  class="" />
                             <label class="upload-photo " for="upload-pic">profile</label>
-                            <input type="file" id="upload-pic" accept="image/*" class="form-control" onChange={profileChange}/>
+                            <input type="file" id="upload-pic" accept="image/*" class="form-control" required onChange={profileChange}/>
                            
                         </div>
                   {/* input field */}
                   <div class="form-group stf-form">
                   <div class="input-group ">
                     <span class="input-group-text reg-stfname"><i class="ri-user-fill"></i></span>
-                    <input type="text" class="form-control reg-stfname" name="Name"placeholder="Enter your Name" />
+                    <input type="text" class="form-control reg-stfname" name="Name"placeholder="Enter your Name" required />
                   </div>
                 </div>
                   <div class="form-group stf-form ">
                   <div class="input-group ">
                     <span class="input-group-text reg-stfdep"><i class="ri-id-card-line"></i></span>
-                    <input type="text" class="form-control reg-stfdep" name="Department"placeholder="Department" />
+                    <input type="text" class="form-control reg-stfdep" name="Department"placeholder="Department"required />
                   </div>
                 </div>
                   <div class="form-group stf-form ">
                   <div class="input-group ">
                     <span class="input-group-text reg-stfno"><i class="ri-profile-line"></i></span>
-                    <input type="number" class="form-control reg-stfno" name="IDno"placeholder="ID Number" />
+                    <input type="number" class="form-control reg-stfno" name="IDno"placeholder="ID Number" required />
                   </div>
                 </div>
                   <div class="form-group stf-form ">
                   <div class="input-group ">
                     <span class="input-group-text reg-stfemail"><i class="ri-mail-line"></i></span>
-                    <input type="email" class="form-control reg-stfemail" name="email"placeholder="Enter your mail" />
+                    <input type="email" class="form-control reg-stfemail" name="email"placeholder="Enter your mail" required/>
                   </div>
                 </div>
                   <div class="form-group stf-form ">
                   <div class="input-group ">
                     <span class="input-group-text reg-stfpass"><i class="ri-lock-password-line"></i></span>
-                    <input type="password" class="form-control reg-stfpass" name="password"placeholder="password***" />
+                    <input type="password" class="form-control reg-stfpass" name="password"placeholder="password***" required />
                   </div>
                 </div>
-                <button type='button' class="btn reg-stfbtn ">REGISTER</button>
+                <button type='submit' class="btn reg-stfbtn ">REGISTER</button>
                 </form>
               </div>
             </div>
