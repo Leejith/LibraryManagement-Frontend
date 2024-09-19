@@ -74,7 +74,7 @@ function AdProf() {
                                             Book.map((Book) => {
                                                 return (
                                                     <div class="col-lg-4 col-md-6 col-sm-12 car-con">
-                                                        Book Name:{Book.title}  ,  borrower : 
+                                                        Book Name:{Book.title}   
                                                     </div>
                                                 )
                                             })
