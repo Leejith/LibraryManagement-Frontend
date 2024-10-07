@@ -1,11 +1,11 @@
-.Login-main{
-        background-color: rgb(168, 192, 184);
-        height: 100%;
-        
-        
+.userLogin{
+    background-color: rgb(119, 177, 158);;
+    height: 100%;
+    padding: 40px;
+    
+    
 }
-
-.login-con{
+.user-con{
     background-color: rgb(119, 177, 158);
     box-shadow: 15px 20px 20px rgba(0,0,0,.3),
                 inset 6px 6px 10px rgb(114, 152, 140);
@@ -13,41 +13,70 @@
     color: black;
 }
 
-
-.card-mainlogin{
-    width: 200px;
-    max-height:250px;
-    background-color: rgb(177, 206, 196);
-    border: none;
-    box-shadow: 15px 20px 20px rgba(0,0,0,.3),
-                inset 4px 4px 10px rgb(114, 152, 140);
-    border-radius: 30px;  
-    overflow:hidden;
-    object-fit: cover;
-    justify-content: center;  
-    align-items: center;
-    margin: 20px 60px;
+.user-h1{
+    letter-spacing: 2px;
+    font-weight:800 ;
 }
-.card-loginimg{
-    width: 100px;
-    height: 120px;
-   
-}
-.login-text{
-    font-size: 20px;
-    font-weight: 800;
-   text-decoration: none;
-}
-.ad-card{
+.user-form{
     display: grid;
-    justify-content: center;
-}
-.loginus-con h1{
-    font-weight: 800;
-}
-
-
-
-
-
+    justify-content: center !important;
+    gap: 5px;
     
+}
+.user-email{
+    height: 50px;
+    padding: 10px;
+    border-radius: 80px;
+    font-size: large;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    background-color: rgb(152, 228, 203);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.user-password{
+    height: 50px;
+    padding: 10px;
+    border-radius: 80px;
+    font-size: large;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    background-color: rgb(152, 228, 203);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.user-loginbtn{
+    color: black;
+    width: 260px;
+    border-radius: 30px;
+    font-size: x-large;
+    font-weight: 800;
+    letter-spacing: 2px;
+    outline: none;
+    border: 2px solid black;
+    margin-top: 10px;
+    background-color: rgb(152, 228, 203);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin-bottom: 8px;
+}
+.user-forget{
+    font-weight: 500;
+    display: grid;
+    justify-content:end;
+    color: rgb(5, 5, 152);
+    margin-top: 5px;
+    position: relative;
+    right: 10px;
+}
+form p a{
+    font-weight: 700;
+    margin-top: 2px;
+    color: rgb(5, 5, 152);
+}
+form p {
+    color:rgb(13, 13, 13);
+    font-size:15px;
+    margin-top: 30px;
+}
+

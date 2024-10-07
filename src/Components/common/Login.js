@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../Assets/Styles/Login.css'
+import '../../Assets/Styles/Loginus.css'
 import { Link } from 'react-router-dom'
 import mainlogin from '../../Assets/Images/mainlogin.png'
 import staff from '../../Assets/Images/staff.png'

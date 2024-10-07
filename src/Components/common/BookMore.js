@@ -59,8 +59,8 @@ function BookMore() {
                 <img src={Items.image} class="card-img-top"/>
                 <div class="card-body text-center">
                   <h5 class="card-title">{Items.title}</h5>
-                  <p class="card-text">{Items.price}</p>
-                  <a href="#" class="btn view-button">View Book</a>
+                  <p class="card-text">{Items.isbn13}</p>
+                  <a href={`/details/${Items.isbn13}`} class="btn view-button">View Book</a>
                 </div>
               </div>
             </div>
