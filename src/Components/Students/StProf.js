@@ -36,9 +36,6 @@ function StProf() {
                     <li class="nav-item">
                         <button type="button" class="btn btt1">Edit</button>
                     </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btt2">Primary</button>
-                    </li>
                 </ul>
 
 
