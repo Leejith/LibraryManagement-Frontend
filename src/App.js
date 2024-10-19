@@ -19,6 +19,7 @@ import ForgotPassword from './Components/common/ForgotPassword';
 import BookDetails from './Components/common/BookDetails';
 import Otp from './Components/common/Otp';
 import Reset from './Components/common/Reset';
+import AdProf from './Components/Admin/AdProf';
 
 
 
@@ -46,7 +47,7 @@ function App() {
         <Route path='/otp'element={<Otp/>}/>
         <Route path='/reset-password'element={<Reset/>}/>
         <Route path='/stprof'element={<StProf/>}/>
-
+        <Route path='/adprof'element={<AdProf/>}/>
        
         
        
