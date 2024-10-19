@@ -88,7 +88,7 @@ function AdProf() {
                                                                  <tr>
                                                                      <th scope="row">1</th>
                                                                      <td>{Book.title}</td>
-                                                                     <td>Otto</td>
+                                                                     <td>{Book.price}</td>
                                                                      <td>@mdo</td>
                                                                  </tr>
                                                              </tbody>
