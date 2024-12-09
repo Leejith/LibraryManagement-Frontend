@@ -18,10 +18,10 @@ function Books() {
   const displayBook = Book.slice(0, 3);
 
   return (
-    <div class="container-fluid  books-con ">
+    <div class="container-fluid books-con ">
         <h1 class="text-center py-3">BOOKS</h1>
       <div class="container ">
-        <div class="row">
+        <div class="row ">
         {
           displayBook.map((Book)=>{
             

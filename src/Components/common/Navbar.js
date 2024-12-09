@@ -52,13 +52,13 @@ function Navbar() {
                   </a>
                 </li>
                 <li class="nav-item list">
-                  <a class="nav-link active mx-lg-2" href="book-con">
+                  <a class="nav-link active mx-lg-2" href="book">
                     BOOKS
                   </a>
                 </li>
                 
               </ul>
-            <Link to='/login'><a href="#" class="btn login-button ">login</a></Link>  
+            <Link to='/login'><a href="#" class="btn login-button ">LOGOUT</a></Link>  
             </div>
           </div>
         </div>

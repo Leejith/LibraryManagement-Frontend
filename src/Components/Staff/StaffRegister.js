@@ -41,7 +41,7 @@ function StaffRegister() {
             <img src={stfreg} class="img-fluid p-5" />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12 order-sm-2">
-            <form class="stf-form" onSubmit={handleSubmit} >
+            <form class="stf-form" onSubmit={handleSubmit} >  
               <h1 class="mt-4">REGISTER FORM</h1>
 
               {/* profile card           */}
