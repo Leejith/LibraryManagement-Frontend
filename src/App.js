@@ -19,8 +19,6 @@ import ForgotPassword from './Components/common/ForgotPassword';
 import BookDetails from './Components/common/BookDetails';
 import Reset from './Components/common/Reset';
 import AdProf from './Components/Admin/AdProf';
-import StafPr from './Components/Staff/StafPr';
-import Landing from './Components/common/Landing';
 
 
 
@@ -49,8 +47,6 @@ function App() {
         <Route path='/reset-password'element={<Reset/>}/>
         <Route path='/stprof'element={<StProf/>}/>
         <Route path='/adprof'element={<AdProf/>}/>
-        <Route path='/sttprof'element={<StafPr/>}/>
-
        
         
        
