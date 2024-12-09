@@ -12,8 +12,8 @@ function StaffLogin() {
   console.log(Staff);
   const navigate = useNavigate();
 
-  const handleForgotPassword = () => {
-    navigate("/forgot", { state: { role: "staff" } });
+  const handleForgotPassword =()=>{
+    navigate("/forgot", { state: { role: "staff" }});
   };
 
   return (

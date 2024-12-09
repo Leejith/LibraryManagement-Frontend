@@ -8,3 +8,34 @@
 .view-card{
     width: 20rem;
 }
+.review-section::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* For Firefox */
+  .review-section {
+    scrollbar-width: none; /* Hide the scrollbar */
+  }
+
+  .star.unselected {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: transparent;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    border: 2px solid #006400; /* Green outline for unselected stars */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Styling for selected stars (filled green color) */
+  .star.selected {
+    background-color: #006400; /* Dark green background */
+    border: 2px solid #006400; /* Keep green border */
+  }
+  
+  /* Hover effect for stars */
+  .star:hover {
+    background-color: #006400;
+    border-color: #006400; /* Green border when hovered */
+  }

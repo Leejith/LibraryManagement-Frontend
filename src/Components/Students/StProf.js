@@ -1,99 +1,70 @@
-import React, { useEffect, useState } from 'react'
-import '../../Assets/Styles/StProf.css'
-import axios from 'axios'
-import Books from '../common/Books';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../Assets/Styles/StProf.css'; // Assuming your CSS is in this path
 
-function StProf() {
+function StafPr() {
+  const [books, setBooks] = useState([]);
+  
+  // Fetching the book data from the API
+  useEffect(() => {
+    axios
+      .get("https://api.itbook.store/1.0/new")
+      .then((response) => {
+        console.log(response);
+        setBooks(response.data.books); // Update state with fetched books
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-    const [Book, setBook] = useState([]);
-    useEffect(() => {
-        axios
-            .get("https://api.itbook.store/1.0/new")
-            .then((response) => {
-                console.log(response);
-                setBook(response.data.books)
+  // Display a subset of books (from index 5 to 7)
+  const displayBooks = books.slice(5, 8);
 
-            })
-            .catch((error) => {
-                console.log(error);
+  return (
+    <div className="container-fluid main">
+      {/* Sidebar */}
+      <ul className="nav flex-column one">
+        <li className="nav-item">
+          <h1>Welcome Staff</h1>
+        </li>
+        <li className="nav-item">
+          <h4>Reg No : 961820104059</h4>
+        </li>
+        <li className="nav-item">
+          <button type="button" className="btn btt1">Edit</button>
+        </li>
+        <li className="nav-item">
+          <button type="button" className="btn btt2">Primary</button>
+        </li>
+      </ul>
 
-            })
-    }, []);
-    const displayBook = Book.slice(0, 3);
-
-
-
-    return (
-        <div>
-            <div class="container-fluid main">
-                <ul class="nav  flex-column one">
-                    <li class="nav-item">
-                        <h1>Welcome Leejith</h1>
-                    </li>
-                    <li class="nav-item">
-                        <h4>Reg No : 961820104059</h4>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btt1">Edit</button>
-                    </li>
-                </ul>
-
-
-
-                <div class="container two">
-                    <div class="row dash1">
-                        <div class="col-lg-3 col-md-6 col-sm-12 box">
-                            <div className='box1'>
-                                book borrowed
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 box">
-                            <div className='box1'>
-                                favorites
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 box">
-                            <div className='box1'>
-                                book issued
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 box">
-                            <div className='box1'>
-                                fine amount
-                            </div>
-                        </div>
+        {/* Suggested Books Section */}
+        <div className="row dash2">
+          <div className="col-12">
+            <h1>SUGGESTED FOR YOU</h1>
+            <div className="container">
+              <div className="row">
+                {displayBooks.map((book) => (
+                  <div className="col-lg-4 col-md-6 col-sm-12 car-con" key={book.isbn13}>
+                    <div className="card card1">
+                      <img src={book.image} className="card-img-top" alt={book.title} />
+                      <div className="card-body">
+                        <h5 className="card-title">{book.title}</h5>
+                        <a href={book.url} className="btn btn-primary">View More</a>
+                        <a href="#" className="btn btn-2">Fav</a>
+                      </div>
                     </div>
-
-                    <div class="row dash2">
-                        <div class="col-12">
-                        <h1>SUGESTED FOR YOU</h1>
-                        <div class="container ">
-                        <div class="row">
-                            {
-                                displayBook.map((Book) => {
-                                    return (
-                                        <div class="col-lg-4 col-md-6 col-sm-12 car-con">
-                                            <div class="card card1" >
-                                                <img src={Book.image} class="card-img-top" alt="..." />
-                                                <div class="card-body">
-                                                    <h5 class="card-title">{Book.title}</h5>
-                                                    <a href="#" class="btn btn-primary">view more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-
-                        </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
+                  </div>
+                ))}
+              </div>
             </div>
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default StProf
+export default StafPr;

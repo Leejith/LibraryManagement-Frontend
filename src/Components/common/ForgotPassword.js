@@ -16,7 +16,7 @@ function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/otp", {state:{ email,role}});
+    navigate("/reset-password", {state:{ email,role}});
     console.log("email :", email,"role:",role);
   };
 
@@ -49,9 +49,6 @@ function ForgotPassword() {
               <button type="submit" className="btn forgot-loginbtn">
                 <i className="ri-mail-send-line"></i> reset
               </button>
-              <p className="mt-3">
-                Remember your password? <Link to="/AdminLogin">Login here</Link>
-              </p>
             </form>
           </div>
         </div>
