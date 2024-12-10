@@ -46,9 +46,9 @@ function StaffRegister() {
 
               {/* profile card           */}
               <div class="mb-2 text-center  profile-pic d-flex justfy-content-center">
-                <img src={Profile || profileimg} class="" />
+            
                 <label class="upload-photo " for="upload-pic">
-                  profile
+                <img src={Profile || profileimg} class="" />
                 </label>
                 <input
                   type="file"

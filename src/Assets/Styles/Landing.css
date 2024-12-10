@@ -1,0 +1,161 @@
+.navbar{
+    background-color: rgb(119, 177, 158);
+}
+.login-register{
+    color: black;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 1s ;
+    border:2px solid
+}
+.login-register:hover{
+    background-color: rgb(65, 118, 100);
+    color: white;
+} 
+.navbar-toggler{
+    border: none;
+}
+.navbar-toggler:focus{
+    border: none;
+    outline: none;
+}
+.lan-book{
+    font-family: "Protest Guerrilla", sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    position: relative;
+    top: 7px;
+}
+.container-fluid .logo{
+    height: 40px;
+    width: 40px;
+}
+.lan-list  {
+    color: black;
+    font-weight: 500;
+    border-radius: 50px;
+    border: 2px solid;
+    border-radius: 50%;
+    border: none;
+}
+.list  :hover{
+   background-color: rgb(96, 124, 104); 
+   transition: 1s;
+   border: 2px solid black ;
+}
+
+
+/* landing page */
+
+
+.landing{
+    min-height: 100vh;
+    background-color: rgb(119, 177, 158);
+    color: black;
+}
+.landing h1{
+    font-weight: 700;
+    letter-spacing:14px;
+}
+.landing p{
+    font-size: 16px;
+    position: relative;
+}
+.lan-more{
+    font-size: 20px;
+    font-weight: 500;
+    border: 2px solid;
+}
+.lan-more:hover{
+    background-color: rgb(56, 95, 82);
+    color: white;
+}
+.lan-anime{
+    opacity: 0;
+    transform: translateY(30px);
+    animation: moveup 0.9s linear forwards;
+}
+@keyframes moveup{
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+/* about */
+
+#About{
+    min-height: 100vh;
+    background-color: rgb(188, 186, 186);  
+    color: black;           
+}
+#About h1{
+    font-weight: 800;
+    font-size: 50px;
+}
+#About p{
+    font-size: 17px;
+}
+
+/* aboutBook */
+
+#AboutBook{
+    min-height: 100vh;
+    background-color: rgb(225, 219, 219); 
+}
+
+
+/* author quotes */
+
+.blockquote {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+  
+.blockquote-footer {
+    font-weight: bold;
+    color:black
+}
+  
+.rounded-circle {
+    border: 3px solid #ddd;
+}
+
+
+
+/* alert */
+
+.message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .message-box {
+    background: rgb(121, 155, 125);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  }
+  
+  .message-box h4 {
+    margin-bottom: 10px;
+    color: black;
+  }
+  
+  .message-box p {
+    margin-bottom: 20px;
+    color: black;
+  }

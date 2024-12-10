@@ -76,19 +76,3 @@ section{
     animation-delay: 1s;
     
 }
-
-
-/* about us */
-
-#About{
-    background-color: rgb(188, 186, 186);             
-}
-#About h1{
-    font-weight: 800;
-    font-size: 50px;
-    color: black;
-}
-#About p{
-    color: black;
-    font-size: 17px;
-}
