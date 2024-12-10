@@ -63,7 +63,6 @@ function StafPr() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
