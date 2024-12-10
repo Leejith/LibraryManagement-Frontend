@@ -20,7 +20,8 @@ import Reset from './Components/common/Reset';
 import AdProf from './Components/Admin/AdProf';
 import StafPr from './Components/Staff/StafPr';
 import Landing from './Components/common/Landing';
-import AddBook from './Components/Admin/AddBook';
+
+
 
 
 
@@ -47,7 +48,11 @@ function App() {
         <Route path='/stprof'element={<StProf/>}/>
         <Route path='/adprof'element={<AdProf/>}/>
         <Route path='/sttprof'element={<StafPr/>}/>
-        <Route path='/addbook'element={<AddBook/>}/>
+
+       
+        
+       
+
       </Routes>
     </BrowserRouter>
   )

@@ -40,23 +40,6 @@ function StafPr() {
         </li>
       </ul>
 
-      {/* Main Content */}
-      <div className="container two">
-        <div className="row dash1">
-          <div className="col-lg-3 col-md-6 col-sm-12 box">
-            <div className="box1">Book Borrowed</div>
-          </div>
-          <div className="col-lg-3 col-md-6 col-sm-12 box">
-            <div className="box1">Favorites</div>
-          </div>
-          <div className="col-lg-3 col-md-6 col-sm-12 box">
-            <div className="box1">Book Issued</div>
-          </div>
-          <div className="col-lg-3 col-md-6 col-sm-12 box">
-            <div className="box1">Fine Amount</div>
-          </div>
-        </div>
-
         {/* Suggested Books Section */}
         <div className="row dash2">
           <div className="col-12">
