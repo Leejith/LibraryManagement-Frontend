@@ -19,6 +19,7 @@ import ForgotPassword from './Components/common/ForgotPassword';
 import BookDetails from './Components/common/BookDetails';
 import Reset from './Components/common/Reset';
 import AdProf from './Components/Admin/AdProf';
+import Landing from './Components/common/Landing';
 
 
 
