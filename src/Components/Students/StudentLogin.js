@@ -2,14 +2,32 @@ import React, { useState } from "react";
 import "../../Assets/Styles/Login.css";
 import img from "../../Assets/Images/stdlogin.png";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import ForgotPassword from "../common/ForgotPassword";
 
 function StudentLogin() {
   const [Student, setStudent] = useState({ email: "", password: "" });
+  const [loginVisible, setloginVisible] = useState(false);
 
   const login = (login) => {
     setStudent({ ...Student, [login.target.name]: login.target.value });
   };
-  console.log(Student);
+
+  const Studenthandle=(e)=>{
+    e.preventDefault();
+    axios.post("",Student)
+    .then((response)=>{
+      alert(response.data.msg)
+    })
+    .catch((err)=>{
+      alert(err)
+    })
+  
+
+  }
+
+  const handleloginOpen = () => setloginVisible(true);
+  const handleloginClose = () => setloginVisible(false);
 
   const navigate = useNavigate();
 
@@ -25,7 +43,7 @@ function StudentLogin() {
             <img src={img} class="img-fluid p-3 " />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12  p-0 order-sm-2">
-            <form class="mt-5">
+            <form class="mt-5" onSubmit={Studenthandle}>
               <h1 class="mb-5 user-h1">STUDENT LOGIN</h1>
               <div class="form-group user-form ">
                 <div class="input-group mb-3 ">
@@ -57,7 +75,7 @@ function StudentLogin() {
                   </div>
                 </div>
           
-                  <p class="user-forget" onClick={handleForgotPassword}>forget password?</p>
+                  <p class="user-forget" onClick={handleloginOpen}>forget password?</p>
                
               </div>
               <button type="submit" class="btn user-loginbtn">
@@ -72,6 +90,19 @@ function StudentLogin() {
           </div>
         </div>
       </div>
+      {loginVisible && (
+        <div className="login-overlay" onClick={handleloginClose}>
+          <div
+            className="login-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className="close-button" onClick={handleloginClose}>
+              &times;
+            </button>
+            <ForgotPassword />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

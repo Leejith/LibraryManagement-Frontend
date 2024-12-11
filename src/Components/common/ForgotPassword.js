@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import "../../Assets/Styles/Forgetpassword.css";
+import "../../Assets/Styles/Login.css"
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -24,14 +24,14 @@ function ForgotPassword() {
     <section class="ForgotPassword ">
       <div class="container text-center forgot-con">
         <div class="row justify-content-center">
-          <div class="col-lg-6 col-md-8 col-sm-12 p-4">
-            <form class="mt-5" onSubmit={handleSubmit}>
-              <h1 class="mb-4 forgot-h1">FORGOT PASSWORD</h1>
+          <div class="col-lg-6 col-md-8 col-sm-12 p-2">
+            <form class="m-4" onSubmit={handleSubmit}>
+              <h1 class="mb-2 forgot-h1">FORGOT PASSWORD</h1>
               <p class="mb-4">
                 Enter your email to receive a password reset.
               </p>
               <div class="form-group forgot-form">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 ">
                   <span class="input-group-text forgot-email">
                     <i class="ri-mail-line"></i>
                   </span>

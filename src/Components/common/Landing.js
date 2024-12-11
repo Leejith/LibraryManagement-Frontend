@@ -3,7 +3,7 @@ import "../../Assets/Styles/Landing.css";
 import logo from "../../Assets/Images/logo.png";
 import { Link } from "react-router-dom";
 import home from "../../Assets/Images/home.png";
-import { motion } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 import ABOUTUS from "../../Assets/Images/about us.jpg";
 import img1 from "../../Assets/Images/aboutimg4.webp";
 import img2 from "../../Assets/Images/aboutimg2.webp";
@@ -14,10 +14,12 @@ import author3 from "../../Assets/Images/author3.jpg";
 import author4 from "../../Assets/Images/author4.jpg";
 import author5 from "../../Assets/Images/author5.webp";
 import axios from "axios";
+import Login from "./Login";
 
 function Landing() {
   const [Book, setBook] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
+  const [loginVisible, setloginVisible] = useState(false);
 
   useEffect(() => {
     axios
@@ -39,6 +41,11 @@ function Landing() {
   const handleCloseMessage = () => {
     setShowMessage(false);
   };
+
+  const handleloginOpen = () => setloginVisible(true);
+  const handleloginClose = () => setloginVisible(false);
+
+  const isMobile = window.innerWidth <= 768;
 
   const quotes = [
     {
@@ -109,24 +116,13 @@ function Landing() {
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="offcanvas-body ">
-                <ul class="navbar-nav justify-content-center flex-grow-1 pe-2">
-                  <li class="nav-item lan-list">
-                    <a class="nav-link  active mx-lg-2" href="About">
-                      ABOUT US
-                    </a>
-                  </li>
-                  <li class="nav-item lan-list">
-                    <a class="nav-link active mx-lg-2" href="">
-                      BOOKS
-                    </a>
-                  </li>
-                </ul>
-                <Link to="/login">
-                  <a href="#" class="btn login-register ">
+              <div class="offcanvas-body  ">
+                <ul class="navbar-nav justify-content-center flex-grow-1 pe-2"></ul>
+                
+                  <a href="#" class="btn login-register " onClick={handleloginOpen}>
                     Login / Register
                   </a>
-                </Link>
+               
               </div>
             </div>
           </div>
@@ -139,13 +135,13 @@ function Landing() {
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-7 col-md-7 col-12 py-lg-5 p-5 order-1">
-              <h1 class="display-1 lan-anime ">BOOKWORLD</h1>
-              <p class="my-lg-5 my-sm-3 lan-anime">
-                Reading gives us someplace to go when we have to stay where we
-                are, as turning pages and discovering new worlds allow us to get
-                lost in the story and find ourselves within it
+              <h1 class="display-1 lan-anime pt-5">BOOKWORLD</h1>
+              <p class="my-lg-5 my-sm-3  lan-anime text-justify w-75 pe-4 ">
+                " Reading gives us someplace to go when we have to stay where we
+                are, as turning pages and discovering  new worlds allow us to get
+                lost in the story and find ourselves within it. "
               </p>
-              <div class="m-2">
+              <div class="">
                 <button
                   class="btn lan-more lan-anime"
                   onClick={handleShowMessage}
@@ -167,24 +163,28 @@ function Landing() {
         </div>
       </section>
 
-
       {/* about */}
 
       <section id="About">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-12 p-5">
+            <div class="col-lg-6 col-md-6 col-12 p-lg-4 p-5">
               <motion.img
                 src={ABOUTUS}
                 class="img-fluid ab-img"
                 initial={{ opacity: 0, x: "-7%" }}
-                whileInView={{ opacity: 1,  x: "3%" }}
+                whileInView={{ opacity: 1, x: "3%" }}
                 transition={{ duration: 1.5 }}
               />
             </div>
-            <div class="col-lg-6 col-md-6 col-12 p-lg-4 p-2">
-              <h1>ABOUT US</h1>
-              <p>
+            <div class="col-lg-6 col-md-6 col-12  p-2">
+              <h1 class="text-justify mx-5 mb-4  lead">ABOUT US</h1>
+              <motion.p
+                class="style-p my-3"
+                initial={{ opacity: 0, x: "5%" }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.5 }}
+              >
                 Welcome to BOOKWORLD, your digital gateway to a world of
                 knowledge and imagination. Our mission is to provide a diverse
                 and extensive collection of e-books that cater to every reader's
@@ -202,7 +202,7 @@ function Landing() {
                 to all. Our e-library provides a user-friendly platform where
                 you can explore and enjoy a treasure trove of books, enhancing
                 your personal and professional growth.
-              </p>
+              </motion.p>
             </div>
           </div>
         </div>
@@ -227,7 +227,7 @@ function Landing() {
                   <img
                     src={item.image}
                     alt={item.author}
-                    className="rounded-circle mb-3 shadow"
+                    className="rounded-circle mb-3 shadow img-fluid"
                     style={{ width: "100px", height: "100px" }}
                   />
                   <blockquote class="blockquote">
@@ -263,9 +263,18 @@ function Landing() {
       <section id="AboutBook">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-12 p-5 ">
-              <h1 class="gap-3">About the Genre Collections</h1>
-              <p>
+            <div class="col-lg-6 col-md-6 col-12 p-2 ">
+              <motion.h1 
+              class="mb-2 fw-bold m-5 mt-0"
+              initial={{ opacity: 0}}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1.5 }}
+              >About the Genre Collections</motion.h1>
+              <motion.p
+              class="style-p my-5"
+              initial={{ opacity: 0, x: "-7%" }}
+              whileInView={{ opacity: 1, x: "0%" }}
+              transition={{ duration: 1.5 }}>
                 "At BookWorld, we believe in the power of stories to transport
                 you to different worlds, broaden your horizons, and ignite your
                 imagination. Our extensive genre collection offers something for
@@ -279,39 +288,69 @@ function Landing() {
                 perspectives, revisiting timeless classics, and finding that
                 perfect book for any moment. Dive into our world of books and
                 let your next adventure begin"
-              </p>
+              </motion.p>
             </div>
             <div class="col-lg-6 col-md-6 col-12 p-lg-3 p-5 position-relative">
               <motion.img
                 src={img1}
                 alt="Image 1"
-                className="position-absolute img-fluid"
-                initial={{ x: "-40%", y: "-60%", opacity: 0 }}
-                whileInView={{ x: "40%", y: "-40%", opacity: 1 }}
+                className=" img-fluid img-f"
+                initial={{
+                  x: isMobile ? "-30%" : "-30%",
+                  y: isMobile ? "-60%" : "-30%",
+                  opacity: 0,
+                }}
+                whileInView={{
+                  x: isMobile ? "40%" : "40%",
+                  y: isMobile ? "-45%" : "-10%",
+                  opacity: 1,
+                }}
                 transition={{ duration: 2, ease: "easeInOut" }}
-                style={{ width: "220px" }}
+                style={{ width: isMobile ? "110px" : "220px" }}
               />
 
               {/* Image 2 */}
               <motion.img
                 src={img2}
                 alt="Image 2"
-                className="position-absolute img-fluid"
-                initial={{ x: "120%", y: "10%", opacity: 0 }}
-                whileInView={{ x: "95%", y: "30%", opacity: 1 }}
+                className="img-fluid img-f"
+                initial={{
+                  x: isMobile ? "-80%" : "60%",
+                  y: isMobile ? "60%" : "10%",
+                  opacity: 0,
+                }}
+                whileInView={{
+                  x: isMobile ? "-60%" : "20%",
+                  y: isMobile ? "50%" : "30%",
+                  opacity: 1,
+                }}
                 transition={{ duration: 2, ease: "easeInOut" }}
-                style={{ width: "300px", transform: "translate(-50%, -50%)" }}
+                style={{
+                  width: isMobile ? "140px" : "300px",
+                  transform: "translate(-50%, -50%)",
+                }}
               />
 
               {/* Image 3 */}
               <motion.img
                 src={img3}
                 alt="Image 3"
-                className="position-absolute img-fluid"
-                initial={{ x: "-5%", y: "100%", opacity: 0 }}
-                whileInView={{ x: "10%", y: "90%", opacity: 1 }}
+                className=" img-fluid img-f"
+                initial={{
+                  x: isMobile ? "30%" : "-5%",
+                  y: isMobile ? "0%" : "30%",
+                  opacity: 0,
+                }}
+                whileInView={{
+                  x: isMobile ? "-90%" : "10%",
+                  y: isMobile ? "0%" : "-20%",
+                  opacity: 1,
+                }}
                 transition={{ duration: 2, ease: "easeInOut" }}
-                style={{ width: "300px", transform: "translate(-50%, -50%)" }}
+                style={{
+                  width: isMobile ? "120px" : "300px",
+                  transform: "translate(-50%, -50%)",
+                }}
               />
             </div>
           </div>
@@ -321,12 +360,23 @@ function Landing() {
       {/* collections */}
 
       <div class="container-fluid books-con ">
-        <h1 class="text-center py-3">Discover Our Collections</h1>
+        <motion.h1 
+        class="text-center py-3"
+        initial={{ opacity: 0}}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 2.5 ,easy:easeInOut}}
+        >Discover Our Collections</motion.h1>
         <div class="container ">
           <div class="row ">
             {displayBook.map((Book) => {
               return (
                 <div class=" col-lg-4 col-md-6 col-sm-12">
+                    <motion.div
+                       
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 2.5 }}
+                  >
                   <div class="card book-card">
                     <img src={Book.image} class="card-img-top" />
                     <div class="card-body text-center">
@@ -337,6 +387,7 @@ function Landing() {
                       </a>
                     </div>
                   </div>
+                  </motion.div>
                 </div>
               );
             })}
@@ -364,7 +415,27 @@ function Landing() {
           </div>
         </div>
       )}
+
+
+      {/* login */}
+
+      {loginVisible && (
+        <div className="login-overlay" onClick={handleloginClose}>
+          <div
+            className="login-content"
+          >
+            <button className="close-button" onClick={handleloginClose}>
+              &times;
+            </button>
+            <Login />
+          </div>
+        </div>
+      )}
+
+
     </div>
+
+    
   );
 }
 

@@ -62,7 +62,7 @@
 }
 .landing p{
     font-size: 16px;
-    position: relative;
+    
 }
 .lan-more{
     font-size: 20px;
@@ -100,13 +100,19 @@
     font-size: 17px;
 }
 
+.style-p {
+    text-align: justify;
+    margin: 20px auto;
+    line-height: 1.6;
+    max-width: 600px;
+    font-size: 1.1rem;
+  }
 /* aboutBook */
 
 #AboutBook{
     min-height: 100vh;
     background-color: rgb(225, 219, 219); 
 }
-
 
 /* author quotes */
 
@@ -159,3 +165,31 @@
     margin-bottom: 20px;
     color: black;
   }
+
+
+  /* login  overlay*/
+
+.login-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.login-content {
+    border-radius: 8px;
+    position: relative;
+}
+.close-button {
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 3.5rem;
+    cursor: pointer;
+}

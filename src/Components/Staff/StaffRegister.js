@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../Assets/Styles/StaffRegister.css";
+import "../../Assets/Styles/Register.css";
 import stfreg from "../../Assets/Images/stfreg.png";
 import profileimg from "../../Assets/Images/profile.png";
 
@@ -34,21 +34,20 @@ function StaffRegister() {
 
 
   return (
-    <section class="Staffregister">
-      <div class="container text-center stf-reg">
+    <section class="register">
+      <div class="container text-center reg-contain">
         <div class="row">
           <div class="col-lg-5 col-md-6 col-sm-12 order-1 m-auto">
             <img src={stfreg} class="img-fluid p-5" />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12 order-sm-2">
-            <form class="stf-form" onSubmit={handleSubmit} >  
+            <form class="reg-form" onSubmit={handleSubmit} >  
               <h1 class="mt-4">REGISTER FORM</h1>
 
               {/* profile card           */}
-              <div class="mb-2 text-center  profile-pic d-flex justfy-content-center">
-            
-                <label class="upload-photo " for="upload-pic">
-                <img src={Profile || profileimg} class="" />
+              <div class="mb-2">
+                <label  for="upload-pic">
+                <img src={Profile || profileimg} class="rounded-circle profile-pic"/>
                 </label>
                 <input
                   type="file"
@@ -59,14 +58,14 @@ function StaffRegister() {
                 />
               </div>
               {/* input field */}
-              <div class="form-group stf-form">
+              <div class="form-group reg-form">
                 <div class="input-group ">
-                  <span class="input-group-text reg-stfname">
+                  <span class="input-group-text reg-inputform">
                     <i class="ri-user-fill"></i>
                   </span>
                   <input
                     type="text"
-                    class="form-control reg-stfname"
+                    class="form-control reg-inputform"
                     name="Name"
                     placeholder="Enter your Name"
                     required
@@ -74,14 +73,14 @@ function StaffRegister() {
                   />
                 </div>
               </div>
-              <div class="form-group stf-form ">
+              <div class="form-group reg-form ">
                 <div class="input-group ">
-                  <span class="input-group-text reg-stfdep">
+                  <span class="input-group-text reg-inputform">
                     <i class="ri-id-card-line"></i>
                   </span>
                   <input
                     type="text"
-                    class="form-control reg-stfdep"
+                    class="form-control reg-inputform"
                     name="Department"
                     placeholder="Department"
                     required
@@ -89,14 +88,14 @@ function StaffRegister() {
                   />
                 </div>
               </div>
-              <div class="form-group stf-form ">
+              <div class="form-group reg-form ">
                 <div class="input-group ">
-                  <span class="input-group-text reg-stfno">
+                  <span class="input-group-text reg-inputform">
                     <i class="ri-profile-line"></i>
                   </span>
                   <input
                     type="number"
-                    class="form-control reg-stfno"
+                    class="form-control reg-inputform"
                     name="IDno"
                     placeholder="ID Number"
                     required
@@ -104,14 +103,14 @@ function StaffRegister() {
                   />
                 </div>
               </div>
-              <div class="form-group stf-form ">
+              <div class="form-group reg-form ">
                 <div class="input-group ">
-                  <span class="input-group-text reg-stfemail">
+                  <span class="input-group-text reg-inputform">
                     <i class="ri-mail-line"></i>
                   </span>
                   <input
                     type="email"
-                    class="form-control reg-stfemail"
+                    class="form-control reg-inputform"
                     name="email"
                     placeholder="Enter your mail"
                     required
@@ -119,14 +118,14 @@ function StaffRegister() {
                   />
                 </div>
               </div>
-              <div class="form-group stf-form ">
+              <div class="form-group reg-form ">
                 <div class="input-group ">
-                  <span class="input-group-text reg-stfpass">
+                  <span class="input-group-text reg-inputform">
                     <i class="ri-lock-password-line"></i>
                   </span>
                   <input
                     type="password"
-                    class="form-control reg-stfpass"
+                    class="form-control reg-inputform"
                     name="password"
                     placeholder="password***"
                     required
@@ -134,7 +133,7 @@ function StaffRegister() {
                   />
                 </div>
               </div>
-              <button type="submit" class="btn reg-stfbtn ">
+              <button type="submit" class="btn reg-formbtn ">
                 REGISTER
               </button>
             </form>
