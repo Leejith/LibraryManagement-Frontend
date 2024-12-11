@@ -6,7 +6,6 @@ import '../../Assets/Styles/StProf.css'; // Assuming your CSS is in this path
 function StafPr() {
   const [books, setBooks] = useState([]);
   
-  // Fetching the book data from the API
   useEffect(() => {
     axios
       .get("https://api.itbook.store/1.0/new")

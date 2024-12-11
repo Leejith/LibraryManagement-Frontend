@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../Assets/Styles/Login.css";
 import Adimg from "../../Assets/Images/adlogin.png";
-import { Link, useNavigate } from "react-router-dom";
+
 
 function AdminLogin() {
   const [Admin, setAdmin] = useState({ email: "", password: "" });
@@ -11,11 +11,6 @@ function AdminLogin() {
   };
   console.log(Admin);
 
-  const navigate = useNavigate();
-
-  const handleForgotPassword = () => {
-    navigate("/forgot", { state: { role: "admin" } });
-  };
   return (
     <section class="userLogin">
       <div class="container text-center user-con">
@@ -55,16 +50,11 @@ function AdminLogin() {
                     />
                   </div>
                 </div>
-                  <p class="user-forget" onClick={handleForgotPassword}>forget password?</p>
               </div>
-              <button type="submit" class="btn user-loginbtn">
+              <button type="submit" class="btn user-loginbtn mt-5">
                 <i class="ri-lock-unlock-line"></i>
                 LOGIN
               </button>
-              <p>
-                don't have a account ?{" "}
-                <Link to={"/Adminreg"}>Register now</Link>
-              </p>
             </form>
           </div>
         </div>
