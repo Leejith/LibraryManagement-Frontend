@@ -5,7 +5,7 @@ import profileimg from "../../Assets/Images/profile.png";
 
 function StaffRegister() {
 
-  const [Register, setRegister] = useState({Name:'',Department:'',IDno:"",email:"",password:"",profile:""});
+  const [Register, setRegister] = useState({Name:'',Department:'',IDno:"",email:"",password:"",profile:null});
 
   const reg=(register)=>{
     setRegister({...Register,[register.target.name]:register.target.value})

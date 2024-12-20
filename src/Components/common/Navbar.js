@@ -1,6 +1,5 @@
 import React from "react";
 import "../../Assets/Styles/Navbar.css";
-import logo from "../../Assets/Images/logo.png";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -8,8 +7,8 @@ function Navbar() {
     <div>
       <nav class="navbar navbar-expand-lg fixed-top ">
         <div class="container-fluid">
-          <img class="logo "src={logo} alt="" />
-          <p class="  font-book">
+         
+          <p class="  font-book ">
             BOOKWORLD
           </p>
           <button
@@ -29,36 +28,36 @@ function Navbar() {
             aria-labelledby="offcanvasNavbarLabel"
           >
             <div class="offcanvas-header">
-              <h5 class="offcanvas-title" >
+              <h5 class="offcanvas-title fw-bold " >
                 BOOKWORLD
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                class="btn-close "
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-center flex-grow-1 pe-2 list-item">
+            <div class="offcanvas-body fw-bold">
+              <ul class="navbar-nav  justify-content-center flex-grow-1 pe-2 ">
                 <li class="nav-item list">
-                  <Link to={"/nav"} class="nav-link active mx-lg-2">
+                  <Link to={"/home"} class="nav-link active mx-lg-2 ">
                     HOME
                   </Link>
                 </li>
                 <li class="nav-item list">
-                  <a class="nav-link active mx-lg-2" href="#About">
-                    ABOUT US
-                  </a>
+                  <Link to={"/"} class="nav-link active mx-lg-2">
+                    PROFILE
+                  </Link>
                 </li>
                 <li class="nav-item list">
-                  <a class="nav-link active mx-lg-2" href="book">
+                <Link to={"/book"} class="nav-link list active mx-lg-2">
                     BOOKS
-                  </a>
+                  </Link>
                 </li>
                 
               </ul>
-            <Link to='/login'><a href="#" class="btn login-button ">LOGOUT</a></Link>  
+              <a href="#" class="btn logout-button fw-bold  ">LOGOUT</a> 
             </div>
           </div>
         </div>

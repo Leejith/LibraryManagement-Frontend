@@ -12,14 +12,18 @@ import Home from './Components/common/Home';
 import StudentReg from './Components/Students/StudentReg';
 import Footer from './Components/common/Footer';
 import Books from './Components/common/Books';
-import StProf from './Components/Students/StProf';
 import BookMore from './Components/common/BookMore';
 import ForgotPassword from './Components/common/ForgotPassword';
 import BookDetails from './Components/common/BookDetails';
 import Reset from './Components/common/Reset';
-import AdProf from './Components/Admin/AdProf';
-import StafPr from './Components/Staff/StafPr';
 import Landing from './Components/common/Landing';
+import StudentProfile from './Components/Students/StudentProfile';
+import StaffProfile from './Components/Staff/StaffProfile';
+import AddBook from './Components/Admin/AddBook';
+import AdminHome from './Components/Admin/AdminHome';
+import BookList from './Components/Admin/BookList';
+import StaffList from './Components/Admin/StaffList';
+import StudentList from './Components/Admin/StudentList';
 
 
 
@@ -33,21 +37,27 @@ function App() {
         <Route path='/homepage'element={<Home/>}/>
         <Route path='/Land'element={[<Landing/>,<Footer/>]}/>
         <Route path='/navbar'element={<Navbar/>}/>
+        <Route path='/footer'element={<Footer/>}/>
+        <Route path='/login'element={<Login/>}/>
         <Route path='/StudentLogin'element={<StudentLogin/>}/>
         <Route path='/Studentreg'element={<StudentReg/>}/>
-        <Route path='/books'element={<Books/>}/>
-        <Route path='/book'element={[<Navbar/>,<BookMore/>]}/>
-        <Route path='/details'element={<BookDetails/>}/>
-        <Route path='/footer'element={<Footer/>}/>
+        <Route path='/Studentpf'element={<StudentProfile/>}/>
+        <Route path='/book'element={<Books/>}/>
+        <Route path='/books'element={[<Navbar/>,<BookMore/>,<Footer/>]}/>
+        <Route path='/details/:isbn13'element={[<Navbar/>,<BookDetails/>,<Footer/>]}/>
         <Route path='/StaffLogin'element={<StaffLogin/>}/>
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
+        <Route path='/Staffpf'element={<StaffProfile/>}/>
         <Route path='/Adminlogin'element={<AdminLogin/>}/>
-        <Route path='/login'element={<Login/>}/>
+        <Route path='/Adminhome'element={<AdminHome/>}/>
+        <Route path='/Addbook'element={<AddBook/>}/>
+        <Route path='/BookList'element={<BookList/>}/>
+        <Route path='/StaffList'element={<StaffList/>}/>
+        <Route path='/StudentList'element={<StudentList/>}/>
         <Route path='/forgot'element={<ForgotPassword/>}/>
         <Route path='/reset-password'element={<Reset/>}/>
-        <Route path='/stprof'element={<StProf/>}/>
-        <Route path='/adprof'element={<AdProf/>}/>
-        <Route path='/sttprof'element={<StafPr/>}/>
+        
+        
 
        
         

@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "../../Assets/Styles/Landing.css";
-import logo from "../../Assets/Images/logo.png";
-import { Link } from "react-router-dom";
 import home from "../../Assets/Images/home.png";
-import { easeInOut, motion } from "framer-motion";
+import { easeInOut, motion, AnimatePresence } from "framer-motion";
 import ABOUTUS from "../../Assets/Images/about us.jpg";
-import img1 from "../../Assets/Images/aboutimg4.webp";
-import img2 from "../../Assets/Images/aboutimg2.webp";
-import img3 from "../../Assets/Images/Aboutimg3.jpg";
 import author1 from "../../Assets/Images/author1.jpg";
 import author2 from "../../Assets/Images/author2.jpg";
 import author3 from "../../Assets/Images/author3.jpg";
 import author4 from "../../Assets/Images/author4.jpg";
 import author5 from "../../Assets/Images/author5.webp";
+import img0 from "../../Assets/Images/aboutbook1.png";
+import img1 from "../../Assets/Images/ab2.png";
+import img3 from "../../Assets/Images/ab3.png";
+import img4 from "../../Assets/Images/ab4.png";
+import img5 from "../../Assets/Images/aboutbook4.png";
+
+
+
+
+
 import axios from "axios";
 import Login from "./Login";
 
@@ -20,6 +25,7 @@ function Landing() {
   const [Book, setBook] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const [loginVisible, setloginVisible] = useState(false);
+  const [Index, setIndex] = useState(0);
 
   useEffect(() => {
     axios
@@ -32,7 +38,7 @@ function Landing() {
         console.log(error);
       });
   }, []);
-  const displayBook = Book.slice(0, 3);
+  const displayBook = Book.slice(0, 12);
 
   const handleShowMessage = () => {
     setShowMessage(true);
@@ -83,23 +89,47 @@ function Landing() {
     },
   ];
 
+
+
+
+  const genres = [
+   
+    { name: "Fantasy", image:img0, description: "Fantasy books open the doors to magical realms filled with mythical creatures, heroic quests, and extraordinary powers. These stories often involve conflicts between good and evil, and they transport readers to worlds beyond their wildest dreams." },
+    { name: "Science Fiction", image:img1,description: " Science fiction, or sci-fi, is a genre that explores speculative concepts rooted in scientific principles, technological advancements, and the possibilities of the future. It often delves into futuristic settings, advanced technologies, space exploration, time travel, alien life, and the impact of science on society and individuals." },
+    { name: "horror", image:img3, description: "The Horror genre is designed to evoke fear, dread, and suspense in its audience, often exploring the darker aspects of human nature and the unknown. It delves into themes like death, the supernatural, psychological torment, and monstrous creatures, creating a sense of unease and tension." },
+    { name: "Mystery and Thriller", image:img5, description: "Mystery and thriller books are centered around suspenseful stories that keep readers guessing. They often involve solving crimes, uncovering secrets, or navigating dangerous situations, with plot twists and cliffhangers adding to the excitement." },
+    { name: "romance", image:img4, description: "Romance novels focus on love and relationships, showcasing emotional connections, personal growth, and the pursuit of happiness. They often include heartfelt moments, challenges, and happy endings, making them comforting and enjoyable reads." },
+    
+  ];
+ 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % genres.length);
+    }, 5000);
+
+    return () => clearInterval(interval); 
+  }, []);
+
+  const handleGenreClick = (index) => {
+    setIndex(index);
+  };
+
   return (
-    <div class="LandingPage">
+    <div class="LandingPage ">
       {/* Navbar */}
       <div>
         <nav class="navbar navbar-expand-lg fixed-top lan-nav ">
           <div class="container-fluid">
-            <img class="logo " src={logo} />
             <p class="lan-book">BOOKWORLD</p>
             <button
-              class="navbar-toggler"
+              class="navbar-toggler "
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNavbar"
               aria-controls="offcanvasNavbar"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <i class="ri-menu-fill"></i>
             </button>
             <div
               class="offcanvas offcanvas-end"
@@ -118,11 +148,13 @@ function Landing() {
               </div>
               <div class="offcanvas-body  ">
                 <ul class="navbar-nav justify-content-center flex-grow-1 pe-2"></ul>
-                
-                  <a href="#" class="btn login-register " onClick={handleloginOpen}>
-                    Login / Register
-                  </a>
-               
+
+                <a
+                  class="btn login-register fw-bold "
+                  onClick={handleloginOpen}
+                >
+                  Login / Register
+                </a>
               </div>
             </div>
           </div>
@@ -131,26 +163,26 @@ function Landing() {
 
       {/* Landing page */}
 
-      <section class="landing">
-        <div class="container-fluid">
+      <section class="landing ">
+        <div class="container-fluid mt-3">
           <div class="row">
-            <div class="col-lg-7 col-md-7 col-12 py-lg-5 p-5 order-1">
+            <div class="col-lg-7 col-md-7 col-12 py-lg-5 p-4 mt-lg-4 order-1">
               <h1 class="display-1 lan-anime pt-5">BOOKWORLD</h1>
               <p class="my-lg-5 my-sm-3  lan-anime text-justify w-75 pe-4 ">
                 " Reading gives us someplace to go when we have to stay where we
-                are, as turning pages and discovering  new worlds allow us to get
+                are, as turning pages and discovering new worlds allow us to get
                 lost in the story and find ourselves within it. "
               </p>
               <div class="">
                 <button
-                  class="btn lan-more lan-anime"
+                  class="btn lan-more lan-anime mb-3"
                   onClick={handleShowMessage}
                 >
                   explore more
                 </button>
               </div>
             </div>
-            <div class="col-lg-5 col-md-5 col-12 my-sm-1  p-5 order-sm-2">
+            <div class="col-lg-5 col-md-5 col-12 my-sm-1  mt-1 p-lg-4 p-5 order-sm-2">
               <motion.img
                 src={home}
                 class="img-fluid ab-img"
@@ -210,8 +242,10 @@ function Landing() {
 
       {/* author */}
 
-      <div class="container my-5">
-        <h2 class="fw-bold text-center mb-4">Authors Say About Their Books</h2>
+      <div class="container-fluid ">
+        <h2 class="fw-bold text-center mb-4 mt-3">
+          Authors Say About Their Books
+        </h2>
         <div
           id="authorQuotesCarousel"
           class="carousel slide"
@@ -261,142 +295,124 @@ function Landing() {
 
       {/* about books */}
       <section id="AboutBook">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-12 p-2 ">
-              <motion.h1 
-              class="mb-2 fw-bold m-5 mt-0"
-              initial={{ opacity: 0}}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 1.5 }}
-              >About the Genre Collections</motion.h1>
-              <motion.p
-              class="style-p my-5"
-              initial={{ opacity: 0, x: "-7%" }}
-              whileInView={{ opacity: 1, x: "0%" }}
-              transition={{ duration: 1.5 }}>
-                "At BookWorld, we believe in the power of stories to transport
-                you to different worlds, broaden your horizons, and ignite your
-                imagination. Our extensive genre collection offers something for
-                every reader—whether you’re drawn to the thrills of mystery, the
-                magic of fantasy, the wisdom of non-fiction, or the charm of
-                romance. With handpicked books across genres, BookWorld ensures
-                that you’ll always find the perfect companion for your reading
-                journey. Explore our curated selections today and discover your
-                next favorite story." "With thousands of titles spanning
-                multiple genres, BookWorld is your gateway to discovering new
-                perspectives, revisiting timeless classics, and finding that
-                perfect book for any moment. Dive into our world of books and
-                let your next adventure begin"
-              </motion.p>
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 p-lg-3 p-5 position-relative">
-              <motion.img
-                src={img1}
-                alt="Image 1"
-                className=" img-fluid img-f"
-                initial={{
-                  x: isMobile ? "-30%" : "-30%",
-                  y: isMobile ? "-60%" : "-30%",
-                  opacity: 0,
-                }}
-                whileInView={{
-                  x: isMobile ? "40%" : "40%",
-                  y: isMobile ? "-45%" : "-10%",
-                  opacity: 1,
-                }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-                style={{ width: isMobile ? "110px" : "220px" }}
-              />
-
-              {/* Image 2 */}
-              <motion.img
-                src={img2}
-                alt="Image 2"
-                className="img-fluid img-f"
-                initial={{
-                  x: isMobile ? "-80%" : "60%",
-                  y: isMobile ? "60%" : "10%",
-                  opacity: 0,
-                }}
-                whileInView={{
-                  x: isMobile ? "-60%" : "20%",
-                  y: isMobile ? "50%" : "30%",
-                  opacity: 1,
-                }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-                style={{
-                  width: isMobile ? "140px" : "300px",
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-
-              {/* Image 3 */}
-              <motion.img
-                src={img3}
-                alt="Image 3"
-                className=" img-fluid img-f"
-                initial={{
-                  x: isMobile ? "30%" : "-5%",
-                  y: isMobile ? "0%" : "30%",
-                  opacity: 0,
-                }}
-                whileInView={{
-                  x: isMobile ? "-90%" : "10%",
-                  y: isMobile ? "0%" : "-20%",
-                  opacity: 1,
-                }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-                style={{
-                  width: isMobile ? "120px" : "300px",
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-            </div>
-          </div>
+      <div class="container ">
+      <div class="text-center">
+        <h1 class="fw-bold ">Top Genre Collection</h1>
+        <p class="text-muted">Discover the most exciting genres of books for every reader.</p>
+      </div>
+      <div class="row align-items-center">
+      
+        <div class="col-md-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={genres[Index].name}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 class="fw-bold text-center  mb-2">{genres[Index].name}</h2>
+              <p class="">{genres[Index].description}</p>
+            </motion.div>
+          </AnimatePresence>
+          
         </div>
+        <div className="col-md-6 text-center">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={genres[Index].image}
+              src={genres[Index].image}
+              alt={genres[Index].name}
+              class="img-fluid p-4"
+              style={{maxHeight:"400px", objectFit: "fit" }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6 }}
+            />
+          </AnimatePresence>
+          
+        </div>
+      </div>
+
+      {/* Carousel Thumbnails */}
+      <div class="d-flex small-img justify-content-center">
+      
+          {genres.map((genre, index) => (
+            <motion.div
+              class="img-fluid"
+              key={genre.name}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="m-2"
+              style={{ cursor: "pointer" }}
+              onClick={() => handleGenreClick(index)}
+            >
+              <img
+                src={genre.image}
+                alt={genre.name}
+                class={`rounded border ${
+                  Index === index ? "border-dark" : "border-light"
+                }`}
+                style={{ width: "100px", height: "100px", objectFit: "cover" }}
+              />
+            </motion.div>
+          ))}
+        </div>
+    
+    </div>
       </section>
 
       {/* collections */}
 
-      <div class="container-fluid books-con ">
-        <motion.h1 
-        class="text-center py-3"
-        initial={{ opacity: 0}}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 2.5 ,easy:easeInOut}}
-        >Discover Our Collections</motion.h1>
+      <div class="container-fluid landing-book ">
+        <motion.h1
+          class="text-center py-3 fw-bold"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 2.5, easy: easeInOut }}
+        >
+          Discover Our Collections
+        </motion.h1>
         <div class="container ">
-          <div class="row ">
+          <motion.div
+            class="book-row"
+            animate={{
+              x: ["0%", "-100%"],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 40,
+              ease: "linear",
+            }}
+          >
             {displayBook.map((Book) => {
               return (
-                <div class=" col-lg-4 col-md-6 col-sm-12">
-                    <motion.div
-                       
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 2.5 }}
-                  >
-                  <div class="card book-card">
-                    <img src={Book.image} class="card-img-top" />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">{Book.title}</h5>
-                      <p class="card-text">{Book.price}</p>
-                      <a class="btn view-button" onClick={handleShowMessage}>
-                        View Book
-                      </a>
+                <div class=" col-lg-3 col-md-6 col-sm-12">
+                  <div>
+                    <div class="card land-card">
+                      <img src={Book.image} class="card-img-top" />
+                      <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">{Book.title}</h5>
+                        <p class="card-text">{Book.price}</p>
+                        <a
+                          class="btn view-button fw-bold"
+                          onClick={handleShowMessage}
+                        >
+                          View Book
+                        </a>
+                      </div>
                     </div>
                   </div>
-                  </motion.div>
                 </div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
 
         <button
           type="button"
-          class="btn more-button p-3"
+          class="btn land-more p-3 mb-4 mt-4 fw-bold"
           onClick={handleShowMessage}
         >
           EXPLORE MORE
@@ -409,21 +425,18 @@ function Landing() {
           <div className="message-box">
             <h4>Please Login or Register</h4>
             <p>To continue, you need to log in or register an account.</p>
-            <button className="btn btn-primary" onClick={handleCloseMessage}>
+            <button className="btn btn-dark" onClick={handleCloseMessage}>
               Close
             </button>
           </div>
         </div>
       )}
 
-
       {/* login */}
 
       {loginVisible && (
-        <div className="login-overlay" onClick={handleloginClose}>
-          <div
-            className="login-content"
-          >
+        <div className="login-overlay " onClick={handleloginClose}>
+          <div className="login-content">
             <button className="close-button" onClick={handleloginClose}>
               &times;
             </button>
@@ -431,11 +444,8 @@ function Landing() {
           </div>
         </div>
       )}
-
-
-    </div>
-
     
+    </div>
   );
 }
 

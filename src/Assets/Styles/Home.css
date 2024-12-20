@@ -15,19 +15,18 @@ section{
 /****home****/
 
 .home{
-    background-color: rgb(119, 177, 158);
+    background-color:#0b2e33;
+    color: white;
    
 }
 .home h1{
     font-weight: 700;
-    color: black;
     letter-spacing:14px;
     
     
 }
 
 .home p{
-    color: black;
     font-size: 16px;
     position: relative;
     animation-delay: 0.5s;
@@ -40,7 +39,7 @@ section{
    
 }
 .ex-more{
-    color: black;
+    color:white;
     font-size: 20px;
     font-weight: 500;
     border: 2px solid;
@@ -49,8 +48,8 @@ section{
 
 }
 .ex-more:hover{
-    background-color: rgb(56, 95, 82);
-    color: white;
+    background-color:white;
+    color:black;
 }
 .home.ex-more.anime{
     animation-delay: 1s; 

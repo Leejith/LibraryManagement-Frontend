@@ -4,14 +4,13 @@ import profileimg from "../../Assets/Images/profile.png";
 import stdimg from "../../Assets/Images/stdreg.png";
 
 function StudentReg() {
-  const [Register, setRegister] = useState({Name:'',Department:'',regno:"",email:"",password:""});
+  const [StudentRegister, setStudentRegister] = useState({Name:'',Department:'',regno:"",email:"",password:""});
+  const [Profile, setProfile] = useState();
 
   const reg=(register)=>{
-    setRegister({...Register,[register.target.name]:register.target.value})
+    setStudentRegister({...StudentRegister,[register.target.name]:register.target.value})
   }
-  console.log(Register)
-
-  const [Profile, setProfile] = useState();
+ 
 
   const profileChange = (upload) => {
     const file = upload.target.files[0];
@@ -27,7 +26,10 @@ function StudentReg() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
+    console.log(StudentRegister)
   };
+  
+  
 
   return (
     <section class="register">

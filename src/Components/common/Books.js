@@ -18,7 +18,7 @@ function Books() {
   const displayBook = Book.slice(0, 3);
 
   return (
-    <div class="container-fluid books-con ">
+    <div class="container-fluid book-con ">
         <h1 class="text-center py-3">BOOKS</h1>
       <div class="container ">
         <div class="row ">
@@ -27,12 +27,12 @@ function Books() {
             
             return(
             <div class=" col-lg-4 col-md-6 col-sm-12">
-              <div class="card book-card">
+              <div class="card books-card">
                 <img src={Book.image} class="card-img-top"/>
                 <div class="card-body text-center">
                   <h5 class="card-title">{Book.title}</h5>
-                  <p class="card-text">{Book.price}</p>
-                  <a href="#" class="btn view-button">View Book</a>
+                  <p class="card-text b-3">{Book.price}</p>
+                  <a href="#" class=" fw-bold views-button ">View Book</a>
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@ function Books() {
         }
       </div>
       </div> 
-      <Link to={'/book'}><button type="button" class="btn more-button p-3">EXPLORE MORE</button></Link>
+      <Link to={'/books'}><button type="button" class="btn more-books p-3">EXPLORE MORE</button></Link>
     </div>
   )
 }
