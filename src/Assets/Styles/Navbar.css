@@ -3,11 +3,18 @@
 
 
 .navbar{
-    background-color: rgb(119, 177, 158);
+    background-color:#0b2e33;
+
 }
-.login-button{
-    background-color: rgb(119, 177, 158);
+.home-nav{
+    color: white;
+}
+.home-nav:hover{
     color: black;
+}
+.logout-button{
+    background-color:#0b2e33;
+    color:white;
     font-size: 14px;
     padding: 8px 20px;
     border-radius: 50px;
@@ -15,9 +22,9 @@
     transition: 1s ;
     border:2px solid
 }
-.login-button:hover{
-    background-color: rgb(65, 118, 100);
-    color: white;
+.logout-button:hover{
+    background-color:white;
+    color: black;
 } 
 .navbar-toggler{
     border: none;
@@ -34,26 +41,8 @@
     font-size: 30px;
     position: relative;
     top: 7px;
+    left: 7px;
    
 }
 
-.container-fluid .logo{
-    height: 40px;
-    width: 40px;
-}
-.list-item{
-    border-radius: 50%;
-}
-.list  {
-    color: black;
-    font-weight: 500;
-    border-radius: 50px;
-    border: 2px solid;
-    border: none;
-}
 
-.list  :hover{
-   background-color: rgb(96, 124, 104); 
-   transition: 1s;
-   border: 2px solid black ;
-}

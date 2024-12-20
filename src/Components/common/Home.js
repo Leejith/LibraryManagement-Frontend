@@ -8,10 +8,10 @@ import { Link } from 'react-router-dom'
 function Home() {
   return (
    
-  <section class="home">
+  <section class="home mt-5 mt-lg-2">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-7 col-md-7 col-12 py-lg-5 p-5 order-1">
+          <div class="col-lg-7 col-md-7 col-12 py-lg-5 p-5 mt-4 order-1">
             <h1 class="display-1 anime ">BOOKWORLD</h1>
             <p class="my-lg-5 my-sm-3 anime">Reading gives us someplace to go when we have to stay where we are,
             as turning pages and discovering new worlds allow us to get lost in the story

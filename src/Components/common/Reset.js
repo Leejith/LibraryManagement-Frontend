@@ -1,35 +1,31 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import '../../Assets/Styles/Reset.css'
+import "../../Assets/Styles/Reset.css";
 
 function Reset() {
-    const location = useLocation();
-    const navigate = useNavigate();
-  
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
-    const role = location.state?.role;
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-  
-      if (password === confirmPassword) {
-        console.log("Password reset for: ", location.state.email);
-        if(role==="staff"){
-          navigate('/StaffLogin');
-        }
-        else if(role==="student"){
-          navigate('/StudentLogin');
-        }
-        else if(role==="admin"){
-          navigate('/Adminlogin')
-        }
-      } else {
-        setError("Passwords do not match.");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const role = location.state?.role;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (password === confirmPassword) {
+      console.log("Password reset for: ", location.state.email);
+      if (role === "staff") {
+        navigate("/StaffLogin");
+      } else if (role === "student") {
+        navigate("/StudentLogin");
       }
-    };
+    } else {
+      setError("Passwords do not match.");
+    }
+  };
   return (
     <section class="reset">
       <div class="container text-center reset-con">
@@ -61,7 +57,7 @@ function Reset() {
                 </div>
               </div>
 
-              <div class="form-group ad-form">
+              <div class="form-group reset-form">
                 <div class="input-group mb-3">
                   <span class="input-group-text reset-password">
                     <i class="ri-lock-password-line"></i>
@@ -78,7 +74,11 @@ function Reset() {
                 </div>
               </div>
 
-              <button type="submit" class="btn reset-loginbtn" onClick={handleSubmit}>
+              <button
+                type="submit"
+                class="btn reset-loginbtn"
+                onClick={handleSubmit}
+              >
                 <i className="ri-check-line"></i> Reset Password
               </button>
             </form>
@@ -89,4 +89,4 @@ function Reset() {
   );
 }
 
-export default Reset
+export default Reset;

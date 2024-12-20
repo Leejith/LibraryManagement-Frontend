@@ -1,41 +1,57 @@
 .view{
-    background-color: rgb(119, 177, 158);
+    background-color: #4f7c82;
 }
 .viewbook{
     box-shadow: #00000029 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
    
 }
-.view-card{
-    width: 20rem;
+.cardbook{
+  background-color: #4f7c82;
 }
+.bookimage-side{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.borrow{
+  background-color: #4f7c82;
+    color: black;
+    font-size: 18px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    
+    text-decoration: none;
+    transition: 1s ;
+    border:2px solid
+}
+.borrow:hover{
+  background-color:white;
+  color: black;
+}
+
+.review-section {
+  max-height: 300px; 
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+
 .review-section::-webkit-scrollbar {
     display: none;
   }
+.btn-review{
+  background-color: #4f7c82;
+  color: black;
+  font-size: 18px;
+  padding: 8px 20px;
+  border-radius: 50px;
   
-  /* For Firefox */
-  .review-section {
-    scrollbar-width: none; /* Hide the scrollbar */
-  }
-
-  .star.unselected {
-    width: 40px;
-    height: 40px;
-    display: inline-block;
-    background-color: transparent;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    border: 2px solid #006400; /* Green outline for unselected stars */
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  /* Styling for selected stars (filled green color) */
-  .star.selected {
-    background-color: #006400; /* Dark green background */
-    border: 2px solid #006400; /* Keep green border */
-  }
-  
-  /* Hover effect for stars */
-  .star:hover {
-    background-color: #006400;
-    border-color: #006400; /* Green border when hovered */
-  }
+  text-decoration: none;
+  transition: 1s ;
+  border:2px solid
+} 
+.btn-review:hover{
+  background-color:white;
+    color: black;
+}

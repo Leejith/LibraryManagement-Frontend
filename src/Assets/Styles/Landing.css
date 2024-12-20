@@ -1,8 +1,9 @@
 .navbar{
-    background-color: rgb(119, 177, 158);
+    background-color:#0b2e33;
+    color: white;
 }
 .login-register{
-    color: black;
+    color:white;
     font-size: 14px;
     padding: 8px 20px;
     border-radius: 50px;
@@ -11,8 +12,8 @@
     border:2px solid
 }
 .login-register:hover{
-    background-color: rgb(65, 118, 100);
-    color: white;
+    background-color: rgb(239, 238, 235);
+    color:black;
 } 
 .navbar-toggler{
     border: none;
@@ -28,10 +29,15 @@
     font-size: 30px;
     position: relative;
     top: 7px;
+    left: 15px;
 }
-.container-fluid .logo{
-    height: 40px;
-    width: 40px;
+.offcanvas{
+    background-color: #0b2e33;
+    color: white;
+}
+
+.navbar-toggler{
+    color: white;
 }
 .lan-list  {
     color: black;
@@ -41,11 +47,6 @@
     border-radius: 50%;
     border: none;
 }
-.list  :hover{
-   background-color: rgb(96, 124, 104); 
-   transition: 1s;
-   border: 2px solid black ;
-}
 
 
 /* landing page */
@@ -53,8 +54,8 @@
 
 .landing{
     min-height: 100vh;
-    background-color: rgb(119, 177, 158);
-    color: black;
+    background-color:#0d2e33;
+    color:rgb(245, 245, 245);
 }
 .landing h1{
     font-weight: 700;
@@ -65,13 +66,14 @@
     
 }
 .lan-more{
+    color: white;
     font-size: 20px;
     font-weight: 500;
     border: 2px solid;
 }
 .lan-more:hover{
-    background-color: rgb(56, 95, 82);
-    color: white;
+    background-color:white;
+    color:black;
 }
 .lan-anime{
     opacity: 0;
@@ -89,7 +91,7 @@
 
 #About{
     min-height: 100vh;
-    background-color: rgb(188, 186, 186);  
+    background-color: #93b1b5;  
     color: black;           
 }
 #About h1{
@@ -109,9 +111,8 @@
   }
 /* aboutBook */
 
-#AboutBook{
-    min-height: 100vh;
-    background-color: rgb(225, 219, 219); 
+#AboutBook{ 
+    background-color: #93b1b5; 
 }
 
 /* author quotes */
@@ -131,8 +132,70 @@
     border: 3px solid #ddd;
 }
 
+/* collection */
+.landing-book{
+    background-color:#4f7c82;
+    height: 100%;
+    display:grid ;
+    place-items:center;
+    overflow: hidden;
+}
+.landing-book img{
+    width: 150px;
+    max-height: 200px;
+    overflow: hidden;
+}
+.land-card{
+    width: 250px;
+    max-height:350px;
+    background-color:#4f7c82;
+    border: none;
+    box-shadow: 15px 20px 20px rgba(0,0,0,.3),
+                inset 4px 4px 10px #4f7c82;
+    border-radius: 10px;  
+    overflow: hidden;
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+    margin: 20px 40px;  
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
 
-
+.land-card:hover {
+    transform: scale(1.05); /* Enlarge the card when hovered */
+    z-index: 10;
+  }
+.view-button{
+    background-color: #4f7c82;
+    color: black;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 1s ;
+    border:2px solid
+}
+.view-button:hover{
+    background-color: rgb(239, 238, 235);
+    color:black;
+}
+.land-more{
+    color:black;
+    font-size: 20px;
+    font-weight: 500;
+    border: 3px solid ;
+}
+.land-more:hover{
+    background-color:white;
+    color:black;
+}
+/* animation */
+.book-row{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
 /* alert */
 
 .message-overlay {
@@ -149,7 +212,7 @@
   }
   
   .message-box {
-    background: rgb(121, 155, 125);
+    background: #789093;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
@@ -170,7 +233,7 @@
   /* login  overlay*/
 
 .login-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -178,6 +241,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
+
 }
   
 .login-content {
@@ -193,3 +258,34 @@
     font-size: 3.5rem;
     cursor: pointer;
 }
+
+
+
+/* Highlight for the selected thumbnail */
+img.border-dark {
+    border-width: 3px !important;
+  }
+  
+  /* Smooth hover animations for thumbnails */
+  img {
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  
+  img:hover {
+    transform: scale(1.1);
+  }
+  
+  
+ 
+  
+
+.small-img{
+  
+    overflow: hidden;
+    max-width: 100%;
+}
+.png-img{
+    position: relative;
+    bottom: 120px;
+}
+

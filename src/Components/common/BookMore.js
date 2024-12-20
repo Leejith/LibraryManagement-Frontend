@@ -4,13 +4,13 @@ import axios from "axios";
 import { motion } from 'framer-motion';
 
 function BookMore() {
-  const [Items, setItems] = useState([]);
+  const [Books, setBooks] = useState([]);
   useEffect(() => {
     axios
       .get("https://api.itbook.store/1.0/new")
       .then((response) => {
         console.log(response);
-        setItems(response.data.books);
+        setBooks(response.data.books);
       })
       .catch((error) => {
         console.log(error);
@@ -18,19 +18,19 @@ function BookMore() {
   }, []);
 
   return (
-    <div class="more-book">
-      <div class="container-fluid cat-nav">
+    <div>
+      <div class="container-fluid category-nav more-book fixed-top mb-5">
         <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-12 m-sm-auto  cat-drop order-1">
+          <div class="col-lg-6 col-md-6 col-sm-12 m-sm-auto order-1">
             <div class="dropdown ">
               <button
-                class="btn btn-secondary dropdown-toggle cat-button"
+                class="btn btn-secondary dropdown-toggle category-button"
                 type="button"
                 data-bs-toggle="dropdown"
               >
                 CATEGORY
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu category-menulist">
                 <li>
                   <a class="dropdown-item" href="#">
                     comic
@@ -66,11 +66,11 @@ function BookMore() {
       </div>
 
       <section>
-        <div class="container-fluid  books-con ">
+        <div class="container-fluid  Morebooks-con ">
           <h1 class="text-center py-3">BOOKS</h1>
           <div class="container ">
             <div class="row">
-              {Items.map((Items,index) => {
+              {Books.map((books,index) => {
                 return (
                   
                     <div class=" col-lg-4 col-md-6 col-sm-12">
@@ -81,13 +81,13 @@ function BookMore() {
                     transition={{ duration: 0.8 ,delay: index * 0.1}}
                   >
                       <div class="card book-card">
-                        <img src={Items.image} class="card-img-top" />
+                        <img src={books.image} class="card-img-top" />
                         <div class="card-body text-center">
-                          <h5 class="card-title">{Items.title}</h5>
-                          <p class="card-text">{Items.isbn13}</p>
+                          <h5 class="card-title fw-bold">{books.title}</h5>
+                          <p class="card-text">{books.isbn13}</p>
                           <a
-                            href={`/details/${Items.isbn13}`}
-                            class="btn view-button"
+                            href={`/details/${books.isbn13}`}
+                            class="btn view-button fw-bold"
                           >
                             View Book
                           </a>

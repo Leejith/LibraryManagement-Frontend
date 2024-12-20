@@ -1,14 +1,14 @@
 .userLogin{
-    background-color: rgb(119, 177, 158);;
+    background-color: #4f7c82;
     height: 100%;
     padding: 40px;
     
     
 }
 .user-con{
-    background-color: rgb(119, 177, 158);
+    background-color: #4f7c82;
     box-shadow: 15px 20px 20px rgba(0,0,0,.3),
-                inset 6px 6px 10px rgb(114, 152, 140);
+                inset 6px 6px 10px #3f5b5f;
     border-radius: 30px;
     color: black;
 }
@@ -24,6 +24,7 @@
     
 }
 .user-email{
+    color: black;
     height: 50px;
     padding: 10px;
     border-radius: 80px;
@@ -31,11 +32,12 @@
     font-weight: 500;
     outline: none;
     border: none;
-    background-color: rgb(152, 228, 203);
+    background-color: #4f7c82;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .user-password{
+    color: black;
     height: 50px;
     padding: 10px;
     border-radius: 80px;
@@ -43,7 +45,7 @@
     font-weight: 500;
     outline: none;
     border: none;
-    background-color: rgb(152, 228, 203);
+    background-color: #4f7c82;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .user-loginbtn{
@@ -56,7 +58,7 @@
     outline: none;
     border: 2px solid black;
     margin-top: 10px;
-    background-color: rgb(152, 228, 203);
+    background-color:#4f7c82;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     margin-bottom: 8px;
 }
@@ -84,9 +86,12 @@ form p {
 
 
 /* forget password */
-
+.ForgotPassword{
+    background-color:#4f7c82;
+    min-height: 100vh;
+}
 .forgot-con{
-    background-color: rgb(119, 177, 158);
+    background-color: #4f7c82;
     box-shadow: 15px 20px 20px rgba(0,0,0,.3),
                 inset 6px 6px 10px rgb(114, 152, 140);
     border-radius: 30px;
@@ -104,7 +109,7 @@ form p {
     font-weight: 500;
     outline: none;
     border: none;
-    background-color: rgb(152, 228, 203);
+    background-color: #4f7c82;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .forgot-loginbtn{
@@ -117,7 +122,7 @@ form p {
     outline: none;
     border: 2px solid black;
     margin-top: 10px;
-    background-color: rgb(152, 228, 203);
+    background-color: #4f7c82;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     margin-bottom: 8px;
 }
@@ -143,7 +148,7 @@ form p {
 }
 .close-button {
     position: absolute;
-    top: 100px;
+    top: 40px;
     right: 10px;
     background: transparent;
     border: none;

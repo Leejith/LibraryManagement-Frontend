@@ -1,9 +1,9 @@
 
 
 .login-con{
-    background-color: rgb(119, 177, 158);
+    background-color: #4f7c82;
     box-shadow: 15px 20px 20px rgba(0,0,0,.3),
-                inset 6px 6px 10px rgb(114, 152, 140);
+                inset 6px 6px 10px #415254;
     border-radius: 30px;
     color: black;
 }
@@ -12,22 +12,25 @@
 .card-mainlogin{
     width: 200px;
     max-height:250px;
-    background-color: rgb(177, 206, 196);
+    background-color: #4f7c82;
     border: none;
     box-shadow: 15px 20px 20px rgba(0,0,0,.3),
-                inset 4px 4px 10px rgb(114, 152, 140);
+                inset 4px 4px 10px #415254;
     border-radius: 30px;  
     overflow:hidden;
     object-fit: cover;
     justify-content: center;  
     align-items: center;
     margin: 20px 60px;
+    transition: transform 0.3s ease;
 }
 .card-loginimg{
     width: 100px;
     height: 120px;
    
-}
+}.card-mainlogin:hover {
+    transform: scale(1.1); 
+  }
 .login-text{
     font-size: 20px;
     font-weight: 800;
