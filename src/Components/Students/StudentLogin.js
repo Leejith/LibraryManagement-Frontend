@@ -14,16 +14,22 @@ function StudentLogin() {
   const handleStudentLogin = (e) => {
     e.preventDefault();
     axios
-      .post("", Student)
+      .post("http://localhost:4060/loginstudent", Student)
       .then((response) => {
-        alert(response.data.msg);
+        if(response.data.msg){
+          console.log(response)
+          localStorage.setItem("studentid",response.data.data._id)
+          navigate("/home")
+        }else{
+          alert(response.data.msg)
+        }
       })
       .catch((err) => {
         alert(err);
       });
-      console.log(Student);
+    console.log(Student);
   };
- 
+
   const navigate = useNavigate();
 
   const handleForgotPassword = () => {

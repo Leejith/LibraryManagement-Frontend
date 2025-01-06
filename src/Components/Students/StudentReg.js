@@ -2,16 +2,29 @@ import React, { useState } from "react";
 import "../../Assets/Styles/Register.css";
 import profileimg from "../../Assets/Images/profile.png";
 import stdimg from "../../Assets/Images/stdreg.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function StudentReg() {
-  const [StudentRegister, setStudentRegister] = useState({Name:'',Department:'',regno:"",email:"",password:""});
+  const [StudentRegister, setStudentRegister] = useState({
+    name: "",
+    department: "",
+    regno: "",
+    email: "",
+    password: "",
+    file: "",
+  });
   const [Profile, setProfile] = useState();
 
-  const reg=(register)=>{
-    setStudentRegister({...StudentRegister,[register.target.name]:register.target.value})
-  }
- 
+  const reg = (e) => {
+    setStudentRegister({
+      ...StudentRegister,
+      [e.target.name]:
+        e.target.name == "file" ? e.target.files[0] : e.target.value,
+    });
+  };
 
+  const navigate = useNavigate();
   const profileChange = (upload) => {
     const file = upload.target.files[0];
     if (file) {
@@ -22,14 +35,32 @@ function StudentReg() {
       reader.readAsDataURL(file);
     }
   };
-
+  const handleFileChange = (e) => {
+    reg(e);
+    profileChange(e);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const studentData = new FormData();
+    for (let i in StudentRegister) {
+      studentData.append(i, StudentRegister[i]);
+    }
+    
+
+    axios
+      .post("http://localhost:4060/savestudent", studentData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((response) => {
+        alert(response.data.msg);
+        navigate("/StudentLogin");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     console.log("Form submitted");
-    console.log(StudentRegister)
+    console.log(StudentRegister);
   };
-  
-  
 
   return (
     <section class="register">
@@ -44,18 +75,23 @@ function StudentReg() {
 
               {/* profile card           */}
               <div class="mb-2">
-                <label  for="upload-pic">
-                <img src={Profile || profileimg} class="rounded-circle profile-pic"/>
+                <label for="upload-pic">
+                  <img
+                    src={Profile || profileimg}
+                    class="rounded-circle profile-pic"
+                  />
                 </label>
                 <input
                   type="file"
                   id="upload-pic"
                   accept="image/*"
                   class="form-control"
-                  onChange={profileChange}
+                  name="file"
+                  onChange={handleFileChange}
+                
                 />
               </div>
-            
+
               {/* input field */}
               <div class="form-group reg-form">
                 <div class="input-group ">
@@ -65,7 +101,7 @@ function StudentReg() {
                   <input
                     type="text"
                     class="form-control reg-inputform"
-                    name="Name"
+                    name="name"
                     placeholder="Enter your Name"
                     required
                     onChange={reg}
@@ -80,7 +116,7 @@ function StudentReg() {
                   <input
                     type="text"
                     class="form-control reg-inputform"
-                    name="Department"
+                    name="department"
                     placeholder="Department"
                     required
                     onChange={reg}
@@ -95,7 +131,7 @@ function StudentReg() {
                   <input
                     type="number"
                     class="form-control reg-inputform"
-                    name="Regno"
+                    name="regno"
                     placeholder="Register number"
                     required
                     onChange={reg}

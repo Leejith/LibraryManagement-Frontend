@@ -2,30 +2,28 @@ import React, { useState } from "react";
 import "../../Assets/Styles/Addbook.css";
 
 function AddBook() {
-  const [formData, setFormData] = useState({
-    title: "",
-    author: "",
-    isbn: "",
+  const [AddBook, setAddBook] = useState({
+    booktitle: "",
+    authorname: "",
     genre: "",
-    publishedDate: "",
-    quantity: 0,
-    coverImage: null,
+    description: "",
+    date: "",
+    file: null,
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setAddBook({ ...AddBook, [e.target.name]: e.target.value });
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, coverImage: e.target.files[0] });
+    setAddBook({ ...AddBook, coverImage: e.target.files[0] });
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       console.log(reader);
 
       reader.onload = () => {
-        setFormData(reader.result);
+        setAddBook(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -33,19 +31,20 @@ function AddBook() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Book Details Submitted:", formData);
-    // Add API call here to save book data
+    console.log("Book Details Submitted:",AddBook);
   };
-
+  const handleCoverImage=(e)=>{
+    handleFileChange(e)
+    handleChange(e)
+  }
   const handleReset = () => {
-    setFormData({
-      title: "",
-      author: "",
-      isbn: "",
+    setAddBook({
+      booktitle: "",
+      authorname: "",
       genre: "",
-      publishedDate: "",
-      quantity: 0,
-      coverImage: null,
+      description: "",
+      Date: "",
+      file: null,
     });
   };
 
@@ -65,15 +64,15 @@ function AddBook() {
                     <div class="col-md-4 ">
                       <label for="coverimage">
                         <div class="mb-4 book-cover  ">
-                          <img src={formData} alt="upload cover image" />
+                          <img src={AddBook} alt="upload cover image" />
                         </div>
                       </label>
                       <input
                         type="file"
                         class="form-control d-none"
                         accept="image/*"
-                        id="coverimage"
-                        onChange={handleFileChange}
+                        id="image"
+                        onChange={handleCoverImage}
                         required
                       />
                       <div class="mb-3">
@@ -81,8 +80,8 @@ function AddBook() {
                         <input
                           type="text"
                           class="form-control"
-                          name="title"
-                          value={formData.title}
+                          name="booktitle"
+                    
                           onChange={handleChange}
                           placeholder="Enter book title"
                           required
@@ -95,8 +94,8 @@ function AddBook() {
                         <input
                           type="text"
                           class="form-control"
-                          name="author"
-                          value={formData.author}
+                          name="authorname"
+                        
                           onChange={handleChange}
                           placeholder="Enter author's name"
                           required
@@ -107,26 +106,12 @@ function AddBook() {
                     {/* Right Side: Form Fields */}
                     <div class="col-md-8">
                       <div class="mb-3">
-                        <label class="form-label fw-semibold">Price</label>
-                        <input
-                          type="number"
-                          class="form-control"
-                          name="price"
-                          value={formData.price}
-                          onChange={handleChange}
-                          placeholder="Enter book price"
-                          min="0"
-                          required
-                        />
-                      </div>
-                      <div class="mb-3">
                         <label class="form-label fw-semibold">
                           Book Description
                         </label>
                         <textarea
                           class="form-control"
                           name="description"
-                          value={formData.description}
                           onChange={handleChange}
                           placeholder="Enter book description"
                           rows="4"
@@ -140,8 +125,7 @@ function AddBook() {
                         <input
                           type="date"
                           class="form-control"
-                          name="publishedDate"
-                          value={formData.publishedDate}
+                          name="date"
                           onChange={handleChange}
                           required
                         />
@@ -151,7 +135,7 @@ function AddBook() {
                         <select
                           class="form-select"
                           name="genre"
-                          value={formData.genre}
+                        
                           onChange={handleChange}
                           required
                         >
@@ -162,7 +146,7 @@ function AddBook() {
                           <option value="History">History</option>
                         </select>
                       </div>
-                      <div class="d-flex justify-content-between">
+                      <div class="d-flex justify-content-between mt-4">
                         <button
                           type="reset"
                           class="btn btn-outline-dark rounded-pill px-4"
