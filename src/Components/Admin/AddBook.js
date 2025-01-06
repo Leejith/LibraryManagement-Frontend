@@ -81,7 +81,7 @@ function AddBook() {
                     <div class="col-md-4 ">
                       <label for="coverimage">
                         <div class="mb-4 book-cover  ">
-                          <img src={AddBook} alt="upload cover image" />
+                          <img src={""} alt="upload cover image" />
                         </div>
                       </label>
                       <input
