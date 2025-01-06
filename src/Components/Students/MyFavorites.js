@@ -2,7 +2,9 @@ import React from 'react'
 
 function MyFavorites() {
   return (
-    <div>MyFavorites</div>
+    <div>
+      <h1 class="fw-bold">Favorites</h1>
+    </div>
   )
 }
 

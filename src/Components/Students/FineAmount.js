@@ -18,7 +18,7 @@ function FineAmount() {
 
   return (
     <div>
-      <h2>Fine Amount</h2>
+      <h2 class="fw-bold">Fine Amount</h2>
 
       <div class="mt-5 ">
         <table class="table table-striped ">

@@ -7,27 +7,27 @@ import axios from "axios";
 function StaffLogin() {
   const [Staff, setStaff] = useState({ email: "", password: "" });
 
-  const login = (login) => {
-    setStaff({ ...Staff, [login.target.name]: login.target.value });
+  const login = (e) => {
+    setStaff({ ...Staff, [e.target.name]: e.target.value });
   };
 
-  const staffhandle=(e)=>{
+  const staffhandle = (e) => {
     e.preventDefault();
-    axios.post("",Staff)
-    .then((response)=>{
-      alert(response.data)
-    })
-    .catch((err)=>{
-      alert(err)
-    })
-  }
-
+    axios
+      .post("", Staff)
+      .then((response) => {
+        alert(response.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
 
   console.log(Staff);
   const navigate = useNavigate();
 
-  const handleForgotPassword =()=>{
-    navigate("/forgot", { state: { role: "staff" }});
+  const handleForgotPassword = () => {
+    navigate("/forgot", { state: { role: "staff" } });
   };
 
   return (
@@ -38,7 +38,7 @@ function StaffLogin() {
             <img src={stfimg} class="img-fluid p-5 " />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12  p-0 order-sm-2">
-            <form class="mt-5 p-4 "onSubmit={staffhandle}>
+            <form class="mt-5 p-4 " onSubmit={staffhandle}>
               <h1 class="mb-5 user-h1">STAFF LOGIN</h1>
               <div class="form-group user-form ">
                 <div class="input-group mb-3 ">
@@ -66,11 +66,12 @@ function StaffLogin() {
                       placeholder="PASSWORD"
                       required
                       onChange={login}
-                    
                     />
                   </div>
                 </div>
-                  <p class="user-forget" onClick={handleForgotPassword}>forget password?</p>
+                <p class="user-forget" onClick={handleForgotPassword}>
+                  forget password?
+                </p>
               </div>
               <button type="submit" class="btn user-loginbtn ">
                 <i class="ri-lock-unlock-line"></i>

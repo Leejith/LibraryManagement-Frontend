@@ -51,6 +51,9 @@
     border-radius: 50px;
     border: none;
     outline: none;
+    color: white;
+    font-weight: 600;
+
 }
 .search-box:hover{
     background-color:#2d4649;

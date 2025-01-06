@@ -96,10 +96,24 @@
   
 .table th {
     background-color: #2d4649;
-    color:black;
+    color:white;
 }
 
+/* overlay */
+.show{
+  background-color:rgba(0, 0, 0, 0.7) ;
+}
 
+.edit-header{
+  background-color: #0b2e33;
+  color: white;
+}
+.form-edit{
+  background-color: #4f7c82;
+}
+.close-edit{
+  color: white;
+}
 
   
   

@@ -4,13 +4,23 @@ import stfreg from "../../Assets/Images/stfreg.png";
 import profileimg from "../../Assets/Images/profile.png";
 
 function StaffRegister() {
+  const [Register, setRegister] = useState({
+    Name: "",
+    Department: "",
+    IDno: "",
+    email: "",
+    password: "",
+    profile: null,
+  });
 
-  const [Register, setRegister] = useState({Name:'',Department:'',IDno:"",email:"",password:"",profile:null});
-
-  const reg=(register)=>{
-    setRegister({...Register,[register.target.name]:register.target.value})
-  }
-  console.log(Register)
+  const reg = (e) => {
+    setRegister({
+      ...Register,
+      [e.target.name]:
+        e.target.name == "profile" ? e.target.files[0] : e.target.value,
+    });
+  };
+  console.log(Register);
 
   const [Profile, setProfile] = useState();
 
@@ -27,11 +37,16 @@ function StaffRegister() {
     }
   };
 
-  const handleSubmit = (register) => {
-    register.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    for (let i in Register) {
+      formData.append(i, Register[i]);
+    }
+    formData.append("image", Register.image);
+
     console.log("Form submitted");
   };
-
 
   return (
     <section class="register">
@@ -41,13 +56,16 @@ function StaffRegister() {
             <img src={stfreg} class="img-fluid p-5" />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12 order-sm-2">
-            <form class="reg-form" onSubmit={handleSubmit} >  
+            <form class="reg-form" onSubmit={handleSubmit}>
               <h1 class="mt-4">REGISTER FORM</h1>
 
               {/* profile card           */}
               <div class="mb-2">
-                <label  for="upload-pic">
-                <img src={Profile || profileimg} class="rounded-circle profile-pic"/>
+                <label for="upload-pic">
+                  <img
+                    src={Profile || profileimg}
+                    class="rounded-circle profile-pic"
+                  />
                 </label>
                 <input
                   type="file"

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../Assets/Styles/Profile.css";
 import Mybook from "./Mybook";
 import Favorites from "./Favorites";
-
+import profileimg from "../../Assets/Images/profile.png";
 function StaffProfile() {
   const [SlideisOpen, setSlideIsOpen] = useState(false);
   const [activeComponent, setActiveComponent] = useState("MyBook");
@@ -24,6 +24,42 @@ function StaffProfile() {
     }
   };
 
+  const profileChange = (upload) => {
+    const file = upload.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      console.log(reader);
+
+      reader.onload = () => {
+        setProfile(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const [showModal, setShowModal] = useState(false);
+  const [profile, setProfile] = useState({
+    image: "",
+    name: "User Name",
+    department: "Department",
+    id: "ID.NO",
+  });
+
+  const handleEdit = () => {
+    setShowModal(true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile({ ...profile, [name]: value });
+  };
+
+  const handleSave = () => {
+    setShowModal(false);
+  };
   return (
     <div>
       {/* navbar */}
@@ -131,9 +167,7 @@ function StaffProfile() {
 
       {/* Slidebar */}
       <div
-        class={`sidebar ${
-          SlideisOpen ? "sidebar-open" : "sidebar-closed"
-        } `}
+        class={`sidebar ${SlideisOpen ? "sidebar-open" : "sidebar-closed"} `}
       >
         <button class="btn d-lg-none close-btn" onClick={toggleSidebar}>
           <i class="ri-close-large-line"></i>
@@ -150,11 +184,10 @@ function StaffProfile() {
               style={{
                 width: "60px",
                 height: "60px",
-                
               }}
-              // onClick={() => setShowModal(true)}
+              onClick={() => setShowModal(true)}
             >
-             <i class="ri-edit-fill"></i>
+              <i class="ri-edit-fill"></i>
             </button>
             <h5 class="mt-4">User Name</h5>
             <p>Department</p>
@@ -167,6 +200,68 @@ function StaffProfile() {
       <div class="main-content mt-5">
         <div class="p-4">{renderActiveComponent()}</div>
       </div>
+
+      {/* editprofile */}
+      {showModal && (
+        <div class="modal show d-block " tabIndex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content form-edit">
+              <div class="modal-header edit-header">
+                <h5 class="modal-title fw-bold ">Edit Profile</h5>
+                <button
+                  type="button"
+                  class="btn-close close-edit"
+                  onClick={handleClose}
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-2 text-center">
+                    <label for="upload-pic">
+                      <img
+                        src={profile || profileimg}
+                        class="rounded-circle border-dark profile-pic"
+                      />
+                    </label>
+                    <input
+                      type="file"
+                      id="upload-pic"
+                      accept="image/*"
+                      class="form-control"
+                      onChange={profileChange}
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      value={profile.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Department</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="department"
+                      value={profile.department}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-dark" onClick={handleSave}>
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

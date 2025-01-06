@@ -115,6 +115,10 @@
     background-color: #93b1b5; 
 }
 
+img.border-dark {
+    border-width: 3px !important;
+  }
+
 /* author quotes */
 
 .blockquote {
@@ -260,32 +264,11 @@
 }
 
 
-
-/* Highlight for the selected thumbnail */
-img.border-dark {
-    border-width: 3px !important;
-  }
-  
-  /* Smooth hover animations for thumbnails */
-  img {
-    transition: transform 0.2s ease, border-color 0.2s ease;
-  }
-  
-  img:hover {
-    transform: scale(1.1);
-  }
+ 
   
   
  
   
 
-.small-img{
-  
-    overflow: hidden;
-    max-width: 100%;
-}
-.png-img{
-    position: relative;
-    bottom: 120px;
-}
+
 
