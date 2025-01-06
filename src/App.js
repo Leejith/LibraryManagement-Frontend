@@ -33,9 +33,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='/'element={[<Landing/>,<Footer/>]}/>
         <Route path='/home'element={[<Navbar/>,<Home/>,<Books/>,<Footer/>]}/>
         <Route path='/homepage'element={<Home/>}/>
-        <Route path='/Land'element={[<Landing/>,<Footer/>]}/>
         <Route path='/navbar'element={<Navbar/>}/>
         <Route path='/footer'element={<Footer/>}/>
         <Route path='/login'element={<Login/>}/>
