@@ -64,14 +64,14 @@ function AddBook() {
                     <div class="col-md-4 ">
                       <label for="coverimage">
                         <div class="mb-4 book-cover  ">
-                          <img src={AddBook} alt="upload cover image" />
+                          <img src={""} alt="upload cover image" />
                         </div>
                       </label>
                       <input
                         type="file"
                         class="form-control d-none"
                         accept="image/*"
-                        id="image"
+                        id="coverimage"
                         onChange={handleCoverImage}
                         required
                       />
