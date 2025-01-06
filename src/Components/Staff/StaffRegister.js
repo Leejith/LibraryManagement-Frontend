@@ -2,25 +2,30 @@ import React, { useState } from "react";
 import "../../Assets/Styles/Register.css";
 import stfreg from "../../Assets/Images/stfreg.png";
 import profileimg from "../../Assets/Images/profile.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function StaffRegister() {
+
+const navigate=useNavigate()
+
   const [Register, setRegister] = useState({
-    Name: "",
-    Department: "",
-    IDno: "",
+    name: "",
+    department: "",
+    idno: "",
     email: "",
     password: "",
-    profile: null,
+    file:null,
   });
 
   const reg = (e) => {
     setRegister({
       ...Register,
       [e.target.name]:
-        e.target.name == "profile" ? e.target.files[0] : e.target.value,
+        e.target.name == "file" ? e.target.files[0] : e.target.value
     });
   };
-  console.log(Register);
+  
 
   const [Profile, setProfile] = useState();
 
@@ -35,7 +40,14 @@ function StaffRegister() {
       };
       reader.readAsDataURL(file);
     }
+
+    
   };
+
+  const handlefilechange=(e)=>{
+    reg(e);
+    profileChange(e);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,9 +55,19 @@ function StaffRegister() {
     for (let i in Register) {
       formData.append(i, Register[i]);
     }
-    formData.append("image", Register.image);
+    console.log(formData)
 
-    console.log("Form submitted");
+    axios.post("http://localhost:4060/savestaff",formData,{
+      headers:{"condent-type": "multipart/form-data"}
+    })
+    .then((response)=>{
+        alert(response.data.msg)
+        navigate("/StaffLogin")
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+    console.log(Register)
   };
 
   return (
@@ -72,7 +94,8 @@ function StaffRegister() {
                   id="upload-pic"
                   accept="image/*"
                   class="form-control"
-                  onChange={profileChange}
+                  name="file"
+                  onChange={handlefilechange}
                 />
               </div>
               {/* input field */}
@@ -84,7 +107,7 @@ function StaffRegister() {
                   <input
                     type="text"
                     class="form-control reg-inputform"
-                    name="Name"
+                    name="name"
                     placeholder="Enter your Name"
                     required
                     onChange={reg}
@@ -99,7 +122,7 @@ function StaffRegister() {
                   <input
                     type="text"
                     class="form-control reg-inputform"
-                    name="Department"
+                    name="department"
                     placeholder="Department"
                     required
                     onChange={reg}
@@ -114,7 +137,7 @@ function StaffRegister() {
                   <input
                     type="number"
                     class="form-control reg-inputform"
-                    name="IDno"
+                    name="idno"
                     placeholder="ID Number"
                     required
                     onChange={reg}
