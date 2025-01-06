@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "../../Assets/Styles/Addbook.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function AddBook() {
+  const navigate=useNavigate()
   const [AddBook, setAddBook] = useState({
     booktitle: "",
     authorname: "",
@@ -31,7 +34,21 @@ function AddBook() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Book Details Submitted:",AddBook);
+    const formdata = new FormData()
+    for (let i in AddBook){
+      formdata.append(i,AddBook[i])
+    }
+    axios.post("http://localhost:4060/savebook",formdata,{
+      headers:{"content-type":"multipart/formdata"}
+    })
+    .then((response)=>{
+      alert(response.data.msg)
+      navigate("/BookList")
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+
   };
   const handleCoverImage=(e)=>{
     handleFileChange(e)
@@ -71,7 +88,7 @@ function AddBook() {
                         type="file"
                         class="form-control d-none"
                         accept="image/*"
-                        id="image"
+                        id="coverimage"
                         onChange={handleCoverImage}
                         required
                       />
