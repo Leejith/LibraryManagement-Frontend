@@ -14,10 +14,6 @@ import img3 from "../../Assets/Images/ab3.png";
 import img4 from "../../Assets/Images/ab4.png";
 import img5 from "../../Assets/Images/aboutbook4.png";
 
-
-
-
-
 import axios from "axios";
 import Login from "./Login";
 
@@ -89,25 +85,45 @@ function Landing() {
     },
   ];
 
-
-
-
   const genres = [
-   
-    { name: "Fantasy", image:img0, description: "Fantasy books open the doors to magical realms filled with mythical creatures, heroic quests, and extraordinary powers. These stories often involve conflicts between good and evil, and they transport readers to worlds beyond their wildest dreams." },
-    { name: "Science Fiction", image:img1,description: " Science fiction, or sci-fi, is a genre that explores speculative concepts rooted in scientific principles, technological advancements, and the possibilities of the future. It often delves into futuristic settings, advanced technologies, space exploration, time travel, alien life, and the impact of science on society and individuals." },
-    { name: "horror", image:img3, description: "The Horror genre is designed to evoke fear, dread, and suspense in its audience, often exploring the darker aspects of human nature and the unknown. It delves into themes like death, the supernatural, psychological torment, and monstrous creatures, creating a sense of unease and tension." },
-    { name: "Mystery and Thriller", image:img5, description: "Mystery and thriller books are centered around suspenseful stories that keep readers guessing. They often involve solving crimes, uncovering secrets, or navigating dangerous situations, with plot twists and cliffhangers adding to the excitement." },
-    { name: "romance", image:img4, description: "Romance novels focus on love and relationships, showcasing emotional connections, personal growth, and the pursuit of happiness. They often include heartfelt moments, challenges, and happy endings, making them comforting and enjoyable reads." },
-    
+    {
+      name: "Fantasy",
+      image: img0,
+      description:
+        "Fantasy books open the doors to magical realms filled with mythical creatures, heroic quests, and extraordinary powers. These stories often involve conflicts between good and evil, and they transport readers to worlds beyond their wildest dreams.",
+    },
+    {
+      name: "Science Fiction",
+      image: img1,
+      description:
+        " Science fiction, or sci-fi, is a genre that explores speculative concepts rooted in scientific principles, technological advancements, and the possibilities of the future. It often delves into futuristic settings, advanced technologies, space exploration, time travel, alien life, and the impact of science on society and individuals.",
+    },
+    {
+      name: "horror",
+      image: img3,
+      description:
+        "The Horror genre is designed to evoke fear, dread, and suspense in its audience, often exploring the darker aspects of human nature and the unknown. It delves into themes like death, the supernatural, psychological torment, and monstrous creatures, creating a sense of unease and tension.",
+    },
+    {
+      name: "Mystery and Thriller",
+      image: img5,
+      description:
+        "Mystery and thriller books are centered around suspenseful stories that keep readers guessing. They often involve solving crimes, uncovering secrets, or navigating dangerous situations, with plot twists and cliffhangers adding to the excitement.",
+    },
+    {
+      name: "romance",
+      image: img4,
+      description:
+        "Romance novels focus on love and relationships, showcasing emotional connections, personal growth, and the pursuit of happiness. They often include heartfelt moments, challenges, and happy endings, making them comforting and enjoyable reads.",
+    },
   ];
- 
+
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % genres.length);
     }, 5000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, []);
 
   const handleGenreClick = (index) => {
@@ -295,72 +311,71 @@ function Landing() {
 
       {/* about books */}
       <section id="AboutBook">
-      <div class="container ">
-      <div class="text-center">
-        <h1 class="fw-bold ">Top Genre Collection</h1>
-        <p class="text-muted">Discover the most exciting genres of books for every reader.</p>
-      </div>
-      <div class="row align-items-center">
-      
-        <div class="col-md-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={genres[Index].name}
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 class="fw-bold text-center  mb-2">{genres[Index].name}</h2>
-              <p class="">{genres[Index].description}</p>
-            </motion.div>
-          </AnimatePresence>
-          
+        <div class="container ">
+          <div class="text-center">
+            <h1 class="fw-bold ">Top Genre Collection</h1>
+            <p class="text-muted">
+              Discover the most exciting genres of books for every reader.
+            </p>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={genres[Index].name}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 50 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h2 class="fw-bold text-center">{genres[Index].name}</h2>
+                  <p class="">{genres[Index].description}</p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            <div className="col-md-6 text-center">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={genres[Index].image}
+                  src={genres[Index].image}
+                  alt={genres[Index].name}
+                  class="img-fluid p-4"
+                  style={{ maxHeight: "400px", objectFit: "fit" }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.6 }}
+                />
+              </AnimatePresence>
+            </div>
+          </div>
+          <div class="d-flex small-img justify-content-center">
+            {genres.map((genre, index) => (
+              <motion.div
+                class="img-fluid"
+                key={genre.name}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="m-2"
+                style={{ cursor: "pointer" }}
+                onClick={() => handleGenreClick(index)}
+              >
+                <img
+                  src={genre.image}
+                  alt={genre.name}
+                  class={`rounded-circle border ${
+                    Index === index ? "border-dark" : "border-light"
+                  }`}
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                  }}
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
-        <div className="col-md-6 text-center">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={genres[Index].image}
-              src={genres[Index].image}
-              alt={genres[Index].name}
-              class="img-fluid p-4"
-              style={{maxHeight:"400px", objectFit: "fit" }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.6 }}
-            />
-          </AnimatePresence>
-          
-        </div>
-      </div>
-
-      {/* Carousel Thumbnails */}
-      <div class="d-flex small-img justify-content-center">
-      
-          {genres.map((genre, index) => (
-            <motion.div
-              class="img-fluid"
-              key={genre.name}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="m-2"
-              style={{ cursor: "pointer" }}
-              onClick={() => handleGenreClick(index)}
-            >
-              <img
-                src={genre.image}
-                alt={genre.name}
-                class={`rounded border ${
-                  Index === index ? "border-dark" : "border-light"
-                }`}
-                style={{ width: "100px", height: "100px", objectFit: "cover" }}
-              />
-            </motion.div>
-          ))}
-        </div>
-    
-    </div>
       </section>
 
       {/* collections */}
@@ -444,7 +459,6 @@ function Landing() {
           </div>
         </div>
       )}
-    
     </div>
   );
 }

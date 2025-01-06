@@ -22,7 +22,7 @@ function AdminHome() {
       case "RequestList":
         return <RequestList />;
       default:
-        return;
+        return <RequestList/>;
     }
   };
   return (

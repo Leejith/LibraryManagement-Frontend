@@ -21,7 +21,7 @@ function BookList() {
         <div class="container ">
           <div class="row">
             <table class="table">
-              <thead>
+              <thead> 
                 <tr>
                   <th scope="col">SL.NO</th>
                   <th scope="col">title</th>
