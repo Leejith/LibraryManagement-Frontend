@@ -5,6 +5,9 @@ import stfimg from "../../Assets/Images/stfimg.png";
 import axios from "axios";
 
 function StaffLogin() {
+  
+  const navigate = useNavigate();
+
   const [Staff, setStaff] = useState({ email: "", password: "" });
 
   const login = (e) => {
@@ -14,17 +17,25 @@ function StaffLogin() {
   const staffhandle = (e) => {
     e.preventDefault();
     axios
-      .post("", Staff)
+      .post("http://localhost:4060/stafflogin", Staff)
       .then((response) => {
-        alert(response.data);
+        if(response.data.msg == "Logged In Successfully"){
+          localStorage.setItem("staffid",response.data.data._id)
+          alert(response.data.msg);
+          navigate("/home")
+        }
+        else{
+          alert(response.data.msg)
+        }
+        
       })
       .catch((err) => {
         alert(err);
       });
-  };
 
+  };
   console.log(Staff);
-  const navigate = useNavigate();
+  
 
   const handleForgotPassword = () => {
     navigate("/forgot", { state: { role: "staff" } });
