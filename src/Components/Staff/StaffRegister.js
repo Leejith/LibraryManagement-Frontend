@@ -58,7 +58,7 @@ const navigate=useNavigate()
     console.log(formData)
 
     axios.post("http://localhost:4060/savestaff",formData,{
-      headers:{"condent-type": "multipart/form-data"}
+      headers:{"content-type": "multipart/form-data"}
     })
     .then((response)=>{
         alert(response.data.msg)

@@ -13,7 +13,6 @@ import img1 from "../../Assets/Images/ab2.png";
 import img3 from "../../Assets/Images/ab3.png";
 import img4 from "../../Assets/Images/ab4.png";
 import img5 from "../../Assets/Images/aboutbook4.png";
-
 import axios from "axios";
 import Login from "./Login";
 
