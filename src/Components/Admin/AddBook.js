@@ -85,7 +85,9 @@ const [Profile, setProfile] = useState();
                     <div class="col-md-4 ">
                       <label for="coverimage">
                         <div class="mb-4 book-cover  ">
+
                           <img src={Profile} alt="upload cover image" />
+
                         </div>
                       </label>
                       <input
