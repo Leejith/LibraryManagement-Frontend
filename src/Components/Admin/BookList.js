@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 
 function BookList() {
   const [Book, setBook] = useState([]);
-  useEffect(() => {
+
+  const booklist=()=>{
     axios
       .get("http://localhost:4060/booklist")
       .then((response) => {
@@ -13,10 +14,21 @@ function BookList() {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  useEffect(() => {
+    booklist()
   }, []);
 
-  const removebook=()=>{
-    axios.put("")
+  const removebook=(bookid)=>{
+    axios.post(`http://localhost:4060/removebook/${bookid}`)
+    .then((response)=>{
+      console.log(response)
+      booklist()
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
   }
 
   return (
@@ -44,7 +56,7 @@ function BookList() {
                       <td>{Book.authorname}</td>
                       <td>{Book.genre}</td>
                       <td>
-                        <a class="btn view-button" onClick={removebook}>remove Book</a>
+                        <a class="btn view-button" onClick={()=>{removebook(Book._id)}}>remove Book</a>
                       </td>
                     </tr>
                   </tbody>
