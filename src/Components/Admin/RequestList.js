@@ -4,12 +4,12 @@ function RequestList() {
     const [requests, setRequests] = useState([]);
   return (
     <div>
-        <div className="container my-5">
-      <h2 className="mb-4">Borrow Requests</h2>
+        <div class="container my-5">
+      <h2 class="mb-4">Borrow Requests</h2>
       {requests.length === 0 ? (
         <div>No requests received.</div>
       ) : (
-        <table className="table table-bordered">
+        <table class="table table-bordered">
           <thead>
             <tr>
               <th>User ID</th>

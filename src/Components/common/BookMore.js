@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import "../../Assets/Styles/BookMore.css";
 import axios from "axios";
 import { motion } from 'framer-motion';
+import imgurl from '../../Api/Imgurl'
 
 function BookMore() {
   const [Books, setBooks] = useState([]);
   useEffect(() => {
     axios
-      .get("https://api.itbook.store/1.0/new")
+      .get("http://localhost:4060/booklist")
       .then((response) => {
         console.log(response);
-        setBooks(response.data.books);
+        setBooks(response.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -81,10 +82,11 @@ function BookMore() {
                     transition={{ duration: 0.8 ,delay: index * 0.1}}
                   >
                       <div class="card book-card">
-                        <img src={books.image} class="card-img-top" />
+                        <img src={`${imgurl}${books?.image?.originalname}`} class="card-img-top" />
                         <div class="card-body text-center">
-                          <h5 class="card-title fw-bold">{books.title}</h5>
-                          <p class="card-text">{books.isbn13}</p>
+                          <h5 class="card-title fw-bold">{books.booktitle}</h5>
+                        
+                          <p class="card-text">{books.genre}</p>
                           <a
                             href={`/details/${books.isbn13}`}
                             class="btn view-button fw-bold"

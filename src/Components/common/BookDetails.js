@@ -9,7 +9,6 @@ function BookDetails() {
   const [Details, setDetails] = useState({});
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [reviewText, setReviewText] = useState("");
-  // const [rating, setRating] = useState(0);
 
   useEffect(() => {
     axios
@@ -37,24 +36,14 @@ function BookDetails() {
     { name: "Mary Ann", comment: "Fascinating from start to finish!" },
   ];
 
-// const overallRating = (
-//     reviews.reduce((total, review) => total + review.rating, 0) / reviews.length
-//   ).toFixed(1);
-
   const reviewsToDisplay = showAllReviews ? reviews : reviews.slice(0, 3);
 
   const handleSubmitReview = () => {
-    // console.log("Submitted Review:", rating, reviewText);
-    // setRating(0);
-    // setReviewText("");
   };
   const handleReviewTextChange = (e) => {
     setReviewText(e.target.value);
   };
 
-  // const handleStarClick = (star) => {
-  //   setRating(star);
-  // };
   return (
     
     <section class="view mt-5">
@@ -78,7 +67,6 @@ function BookDetails() {
             <div class="col-md-8 p-4">
               <h2 class="fw-bold d-flex align-items-center">
                 {Details.title}
-                {/* <span className="badge bg-warning text-dark ms-3 fs-6">{overallRating} / 5</span> */}
               </h2>
               <p>
                 <strong>Author:</strong> {Details.authors}
@@ -86,7 +74,6 @@ function BookDetails() {
               <p>
                 <strong>Category:</strong> Fiction
               </p>
-              {/* <p><strong>ISBN:</strong> 123-456-789</p> */}
               <p>
                 <strong>Description:</strong> {Details.desc}
               </p>
@@ -103,17 +90,6 @@ function BookDetails() {
                   <p class="mb-2">
                     <strong>Your Rating:</strong>
                   </p>
-                  {/* <div class="mb-3">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <span
-                      key={star}
-                      className={`me-1 fs-4 star ${star <= rating ? "selected" : "unselected"}`}
-                      onClick={() => handleStarClick(star)}
-                    >
-                      ⭐
-                    </span>
-                  ))}
-                </div> */}
                   <textarea
                     class="form-control mb-3"
                     placeholder="Write your review here..."
@@ -134,9 +110,6 @@ function BookDetails() {
                     <li class="mb-4" key={index}>
                       <strong>{review.name}:</strong>
                       <p class="mb-1">{review.comment}</p>
-                      {/* <div>
-                      <small className="text-muted">Rating: {review.rating} / 5</small>
-                    </div> */}
                     </li>
                   ))}
                 </ul>

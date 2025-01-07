@@ -10,7 +10,7 @@ import AdminLogin from './Components/Admin/AdminLogin';
 import Login from './Components/common/Login';
 import Home from './Components/common/Home';
 import StudentReg from './Components/Students/StudentReg';
-import Footer from './Components/common/footer';
+import Footer from './Components/common/Footer';
 import Books from './Components/common/Books';
 import BookMore from './Components/common/BookMore';
 import ForgotPassword from './Components/common/ForgotPassword';
