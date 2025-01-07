@@ -1,14 +1,31 @@
 import React, { useState } from "react";
 import "../../Assets/Styles/Login.css";
 import Adimg from "../../Assets/Images/adlogin.png";
+import { useNavigate } from "react-router-dom";
 
 
 function AdminLogin() {
   const [Admin, setAdmin] = useState({ email: "", password: "" });
-
+   let email="admin@gmail.com"
+  let pass="123"
+  const navigate=useNavigate()
   const login = (login) => {
     setAdmin({ ...Admin, [login.target.name]: login.target.value });
   };
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+      if(email==Admin.email && pass==Admin.password)
+      {
+        
+      navigate("/adminhome")
+      }
+      else{
+        alert("Incorrect Credentials")
+      }
+  
+    console.log(Admin)
+    
+  }
   console.log(Admin);
 
   return (
@@ -19,7 +36,7 @@ function AdminLogin() {
             <img src={Adimg} class="img-fluid p-5 user-img" />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12  p-0 order-sm-2">
-            <form class="mt-5">
+            <form class="mt-5" onSubmit={handleSubmit}>
               <h1 class="mb-5 user-h1">ADMIN LOGIN</h1>
               <div class="form-group user-form ">
                 <div class="input-group mb-3 ">
