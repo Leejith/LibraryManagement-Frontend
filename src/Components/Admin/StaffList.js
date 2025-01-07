@@ -5,10 +5,10 @@ function StaffList() {
   const [StaffList, setStaffList] = useState([]);
   useEffect(() => {
     axios
-      .get("https://api.itbook.store/1.0/new")
+      .get("http://localhost:4060/stafflist")
       .then((response) => {
         console.log(response);
-        setStaffList(response.data.books);
+        setStaffList(response.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -26,17 +26,19 @@ function StaffList() {
                   <th scope="col">SL.NO</th>
                   <th scope="col">NAME</th>
                   <th scope="col">ID.NO</th>
-                  <th scope="col">Details</th>
-                  <th scope="col">Details</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">Email</th>
                 </tr>
               </thead>
-              {StaffList.map((Book, index) => {
+              {StaffList.map((staff, index) => {
                 return (
                   <tbody>
                     <tr>
                       <th scope="row">{index + 1}</th>
-                      <td>{Book.title}</td>
-                      <td>{Book.authors}</td>
+                      <td>{staff.name}</td>
+                      <td>{staff.idno}</td>
+                      <td>{staff.department}</td>
+                      <td>{staff.email}</td>
                     </tr>
                   </tbody>
                 );
