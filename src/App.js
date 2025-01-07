@@ -24,6 +24,7 @@ import AdminHome from './Components/Admin/AdminHome';
 import BookList from './Components/Admin/BookList';
 import StaffList from './Components/Admin/StaffList';
 import StudentList from './Components/Admin/StudentList';
+import StaffHome from './Components/Staff/StaffHome';
 
 
 
@@ -48,6 +49,7 @@ function App() {
         <Route path='/StaffLogin'element={<StaffLogin/>}/>
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
         <Route path='/Staffpf'element={<StaffProfile/>}/>
+        <Route path='/Staffhome'element={<StaffHome/>}/>
         <Route path='/Adminlogin'element={<AdminLogin/>}/>
         <Route path='/Adminhome'element={<AdminHome/>}/>
         <Route path='/Addbook'element={<AddBook/>}/>

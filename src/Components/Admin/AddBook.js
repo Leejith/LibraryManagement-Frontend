@@ -4,56 +4,60 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function AddBook() {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [AddBook, setAddBook] = useState({
     booktitle: "",
     authorname: "",
     genre: "",
     description: "",
     date: "",
-    file: null,
+    file: "",
   });
-
+const [Profile, setProfile] = useState();
   const handleChange = (e) => {
-    setAddBook({ ...AddBook, [e.target.name]: e.target.value });
+    setAddBook({
+      ...AddBook,
+      [e.target.name]:
+        e.target.name == "file" ? e.target.files[0] : e.target.value,
+    });
   };
-
-  const handleFileChange = (e) => {
-    setAddBook({ ...AddBook, coverImage: e.target.files[0] });
-    const file = e.target.files[0];
+ 
+  const profileChange = (upload) => {
+    const file = upload.target.files[0];
     if (file) {
       const reader = new FileReader();
-      console.log(reader);
-
       reader.onload = () => {
-        setAddBook(reader.result);
+        setProfile(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
-
+  const handleCoverImage = (e) => {
+    profileChange(e)
+    handleChange(e);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formdata = new FormData()
-    for (let i in AddBook){
-      formdata.append(i,AddBook[i])
+    const formdata = new FormData();
+    for (let i in AddBook) {
+      formdata.append(i, AddBook[i]);
     }
-    axios.post("http://localhost:4060/savebook",formdata,{
-      headers:{"content-type":"multipart/formdata"}
-    })
-    .then((response)=>{
-      alert(response.data.msg)
-      navigate("/BookList")
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-
+    axios
+      .post("http://localhost:4060/savebook", formdata, {
+        headers: { "content-Type": "multipart/form-data" },
+      })
+      .then((response) => {
+        alert(response.data.msg);
+        // navigate("/BookList");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      console.log(AddBook);
   };
-  const handleCoverImage=(e)=>{
-    handleFileChange(e)
-    handleChange(e)
-  }
+ 
+  
+ 
   const handleReset = () => {
     setAddBook({
       booktitle: "",
@@ -61,7 +65,7 @@ function AddBook() {
       genre: "",
       description: "",
       Date: "",
-      file: null,
+      file:"",
     });
   };
 
@@ -81,7 +85,9 @@ function AddBook() {
                     <div class="col-md-4 ">
                       <label for="coverimage">
                         <div class="mb-4 book-cover  ">
-                          <img src={""} alt="upload cover image" />
+
+                          <img src={Profile} alt="upload cover image" />
+
                         </div>
                       </label>
                       <input
@@ -90,7 +96,7 @@ function AddBook() {
                         accept="image/*"
                         id="coverimage"
                         onChange={handleCoverImage}
-                        required
+                        name='file'
                       />
                       <div class="mb-3">
                         <label class="form-label fw-semibold">Book Title</label>
@@ -98,7 +104,6 @@ function AddBook() {
                           type="text"
                           class="form-control"
                           name="booktitle"
-                    
                           onChange={handleChange}
                           placeholder="Enter book title"
                           required
@@ -112,7 +117,6 @@ function AddBook() {
                           type="text"
                           class="form-control"
                           name="authorname"
-                        
                           onChange={handleChange}
                           placeholder="Enter author's name"
                           required
@@ -152,7 +156,6 @@ function AddBook() {
                         <select
                           class="form-select"
                           name="genre"
-                        
                           onChange={handleChange}
                           required
                         >
