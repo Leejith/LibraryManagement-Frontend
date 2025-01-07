@@ -5,15 +5,20 @@ function BookList() {
   const [Book, setBook] = useState([]);
   useEffect(() => {
     axios
-      .get("https://api.itbook.store/1.0/new")
+      .get("http://localhost:4060/booklist")
       .then((response) => {
         console.log(response);
-        setBook(response.data.books);
+        setBook(response.data.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  const removebook=()=>{
+    axios.put("")
+  }
+
   return (
     <div>
       <div class="container text-center mt-5">
@@ -26,8 +31,8 @@ function BookList() {
                   <th scope="col">SL.NO</th>
                   <th scope="col">title</th>
                   <th scope="col">author</th>
-                  <th scope="col">Details</th>
-                  <th scope="col">Details</th>
+                  <th scope="col">genre</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               {Book.map((Book, index) => {
@@ -35,18 +40,11 @@ function BookList() {
                   <tbody>
                     <tr>
                       <th scope="row">{index + 1}</th>
-                      <td>{Book.title}</td>
-                      <td>{Book.authors}</td>
+                      <td>{Book.booktitle}</td>
+                      <td>{Book.authorname}</td>
+                      <td>{Book.genre}</td>
                       <td>
-                        <a
-                          href={`/details/${Book.isbn13}`}
-                          class="btn view-button"
-                        >
-                          View Book
-                        </a>
-                      </td>
-                      <td>
-                        <a class="btn view-button">remove Book</a>
+                        <a class="btn view-button" onClick={removebook}>remove Book</a>
                       </td>
                     </tr>
                   </tbody>
