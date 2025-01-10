@@ -20,7 +20,7 @@ function Landing() {
   const [Book, setBook] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const [loginVisible, setloginVisible] = useState(false);
-  const [Index, setIndex] = useState(0);
+  const [Index, setIndex] = useState(0); 
 
   useEffect(() => {
     axios
