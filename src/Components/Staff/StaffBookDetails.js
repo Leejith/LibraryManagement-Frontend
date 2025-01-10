@@ -11,7 +11,7 @@ function StaffBookDetails() {
 
   useEffect(() => {
     axios
-      .get(`https://api.itbook.store/1.0/books/${isbn13}`)
+      .get(`http://localhost:4060/viewbook/${id}`)
       .then((response) => {
         console.log(response);
         setDetails(response.data);
