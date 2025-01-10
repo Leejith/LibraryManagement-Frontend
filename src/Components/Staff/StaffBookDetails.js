@@ -5,7 +5,9 @@ import { useLocation, useParams } from 'react-router-dom';
 import imgurl from '../../Api/Imgurl';
 
 function StaffBookDetails() {
+
   const {id} = useParams();
+
   const [Details, setDetails] = useState({});
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [reviewText, setReviewText] = useState("");
