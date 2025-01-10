@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
 import "../../Assets/Styles/BookDetails.css"
+import { useLocation, useParams } from 'react-router-dom';
+import imgurl from '../../Api/Imgurl';
 
 function StaffBookDetails() {
-    const { isbn13 } = useParams();
-  console.log(isbn13);
+  const {id} = useParams();
   const [Details, setDetails] = useState({});
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [reviewText, setReviewText] = useState("");
@@ -15,12 +15,12 @@ function StaffBookDetails() {
       .get(`http://localhost:4060/viewbook/${id}`)
       .then((response) => {
         console.log(response);
-        setDetails(response.data);
+        setDetails(response.data.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [isbn13]);
+  }, [id]);
 
   const reviews = [
     {
@@ -51,7 +51,7 @@ function StaffBookDetails() {
           <div class="row g-0">
             <div class="col-md-3 text-center p-4">
               <img
-                src={Details.image}
+                src={`${imgurl}${Details?.image?.originalname}`}
                 alt="Book Cover"
                 className="img-fluid rounded shadow-sm"
               />
@@ -61,14 +61,6 @@ function StaffBookDetails() {
                 </button>
                 <button class="btn  borrow fw-bold w-100">Add to Cart</button>
               </div>
-              <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="..."/>
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
             </div>
             ;
             <div class="col-md-8 p-4">
@@ -76,13 +68,13 @@ function StaffBookDetails() {
                 {Details.title}
               </h2>
               <p>
-                <strong>Author:</strong> {Details.authors}
+                <strong>Author:</strong> {Details.authorname}
               </p>
               <p>
-                <strong>Category:</strong> Fiction
+                <strong>Category:</strong> {Details.genre}
               </p>
               <p>
-                <strong>Description:</strong> {Details.desc}
+                <strong>Description:</strong> {Details.description}
               </p>
 
               <div class="review-section">

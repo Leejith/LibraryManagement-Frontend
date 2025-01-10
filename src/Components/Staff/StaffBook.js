@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import imgurl from '../../Api/Imgurl'
 
 function StaffBook() {
+    
     const [Books, setBooks] = useState([]);
   useEffect(() => {
     axios
@@ -86,7 +87,7 @@ function StaffBook() {
                         
                           <p class="card-text">{books.genre}</p>
                           <a
-                            href={`/Staffbookdetails/${books.id}`}
+                            href={`/Staffbookdetails/${books._id}`}
                             class="btn view-button fw-bold"
                           >
                             View Book

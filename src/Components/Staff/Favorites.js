@@ -1,19 +1,66 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import "../../Assets/Styles/Favorites.css"
+import {motion} from 'framer-motion'
+import axios from 'axios'
 
 function Favorites() {
+  const [Favorite,setFavorite]=useState()
+
+  useEffect(()=>{
+    axios.get("")
+    .then((response)=>{
+      console.log(response)
+      setFavorite(response.data.data)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  },[])
+
   return (
     <div>
-    <h2>Favorites</h2>
+      <h2>Favorites</h2>
 
-    <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="..."/>
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-  </div>
+      <section>
+        <div class="container-fluid  Morebooks-con ">
+          <h1 class="text-center py-3">BOOKS</h1>
+          <div class="container ">
+            <div class="row">
+              {Favorite.map((fav,index) => {
+                return (
+                  
+                    <div class=" col-lg-4 col-md-6 col-sm-12">
+                      <motion.div
+                       key={index}
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 ,delay: index * 0.1}}
+                  >
+                      <div class="card book-card">
+                        <img src={""} alt=''class="card-img-top" />
+                        <div class="card-body text-center">
+                          <h5 class="card-title fw-bold">Title</h5>
+                        
+                          <p class="card-text">Genre</p>
+                          <a
+                            href={`/Staffbookdetails/${fav._id}`}
+                            class="btn view-button fw-bold"
+                          >
+                            View Book
+                          </a>
+                        </div>
+                      </div>
+                      </motion.div>
+                    </div>
+                  
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
   )
 }
 
