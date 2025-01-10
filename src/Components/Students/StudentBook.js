@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
-import "../../Assets/Styles/BookMore.css";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import imgurl from '../../Api/Imgurl'
+import axios from 'axios';
 
-function BookMore() {
-  const [Books, setBooks] = useState([]);
-  useEffect(() => {
-    axios
-      .get("http://localhost:4060/booklist")
-      .then((response) => {
-        console.log(response);
-        setBooks(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
+function StudentBook() {
+    const [Books, setBooks] = useState([]);
+    useEffect(() => {
+      axios
+        .get("http://localhost:4060/booklist")
+        .then((response) => {
+          console.log(response);
+          setBooks(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
   return (
     <div>
       <div class="container-fluid category-nav more-book fixed-top mb-5">
@@ -33,17 +31,17 @@ function BookMore() {
               </button>
               <ul class="dropdown-menu category-menulist">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item">
                     comic
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item">
                     novel
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" >
                     Something else here
                   </a>
                 </li>
@@ -82,13 +80,13 @@ function BookMore() {
                     transition={{ duration: 0.8 ,delay: index * 0.1}}
                   >
                       <div class="card book-card">
-                        <img src={`${imgurl}${books?.image?.originalname}`} class="card-img-top" />
+                        <img src={`${imgurl}${books?.image?.originalname}`} alt=''class="card-img-top" />
                         <div class="card-body text-center">
                           <h5 class="card-title fw-bold">{books.booktitle}</h5>
                         
                           <p class="card-text">{books.genre}</p>
                           <a
-                            href={`/details/${books.isbn13}`}
+                            href={`/Staffbookdetails/${books.isbn}`}
                             class="btn view-button fw-bold"
                           >
                             View Book
@@ -105,7 +103,7 @@ function BookMore() {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default BookMore;
+export default StudentBook
