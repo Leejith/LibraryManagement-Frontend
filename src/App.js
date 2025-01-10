@@ -25,6 +25,9 @@ import BookList from './Components/Admin/BookList';
 import StaffList from './Components/Admin/StaffList';
 import StudentList from './Components/Admin/StudentList';
 import StaffHome from './Components/Staff/StaffHome';
+import StaffNavbar from './Components/Staff/StaffNavbar';
+import StaffBook from './Components/Staff/StaffBook';
+import StaffBookDetails from './Components/Staff/StaffBookDetails';
 
 
 
@@ -49,7 +52,10 @@ function App() {
         <Route path='/StaffLogin'element={<StaffLogin/>}/>
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
         <Route path='/Staffpf'element={<StaffProfile/>}/>
-        <Route path='/Staffhome'element={<StaffHome/>}/>
+        <Route path='/Staffhome'element={[<StaffNavbar/>,<StaffHome/>,]}/>
+        <Route path='/Staffnavbar'element={<StaffNavbar/>}/>
+        <Route path='/Staffbook'element={[<StaffNavbar/>,<StaffBook/>,<Footer/>]}/>
+        <Route path='/Staffbookdetails/id'element={[<StaffNavbar/>,<StaffBookDetails/>,<Footer/>]}/>
         <Route path='/Adminlogin'element={<AdminLogin/>}/>
         <Route path='/Adminhome'element={<AdminHome/>}/>
         <Route path='/Addbook'element={<AddBook/>}/>
