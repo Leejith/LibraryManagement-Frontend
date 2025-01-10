@@ -1,3 +1,51 @@
+/* navbar */
+@import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
+
+
+
+.navbar{
+    background-color:#0b2e33;
+
+}
+.home-nav{
+    color: white;
+}
+.home-nav:hover{
+    color: black;
+}
+.logout-button{
+    background-color:#0b2e33;
+    color:white;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 1s ;
+    border:2px solid
+}
+.logout-button:hover{
+    background-color:white;
+    color: black;
+} 
+.navbar-toggler{
+    border: none;
+    
+}
+.navbar-toggler:focus{
+    border: none;
+    outline: none;
+}
+.font-book{
+    font-family: "Protest Guerrilla", sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    position: relative;
+    top: 7px;
+    left: 7px;
+   
+}
+
 *{
     padding: 0;
     margin: 0;

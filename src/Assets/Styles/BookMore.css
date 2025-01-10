@@ -79,7 +79,7 @@
     margin-top: 130px;
     display:grid ;
     place-items:center;
-  
+    min-height: 100vh;
 }
 .Morebooks-con h1{
     font-weight: 700;

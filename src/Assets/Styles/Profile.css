@@ -67,8 +67,14 @@
 }
 .edit-btn{
   color: white;
+  position: relative;
+  top:70px;
+  right:4px
 }
-
+.profile-img{
+  height: 140px;
+  width: 140px;
+}
 
 
 /* main contant */
