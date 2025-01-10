@@ -1,7 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function StudentNavbar() {
+    const navigate=useNavigate()
+    const handleLogout=(e)=>{
+        e.preventDefault()
+        const id=localStorage.removeItem("empid")
+        navigate("/")
+        
+    }
   return (
     <div>
               <nav class="navbar navbar-expand-lg fixed-top ">
@@ -56,7 +63,7 @@ function StudentNavbar() {
                         </li>
                         
                       </ul>
-                      <a href="/home" class="btn logout-button fw-bold  ">LOGOUT</a> 
+                      <a href="/home" class="btn logout-button fw-bold  " onClick={handleLogout}>LOGOUT</a> 
                     </div>
                   </div>
                 </div>

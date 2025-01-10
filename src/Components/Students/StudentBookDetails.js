@@ -1,25 +1,26 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import imgurl from '../../Api/Imgurl'
 
 function StudentBookDetails() {
-    const { isbn13 } = useParams();
-    console.log(isbn13);
+    const { id } = useParams();
+    console.log(id);
     const [Details, setDetails] = useState({});
     const [showAllReviews, setShowAllReviews] = useState(false);
     const [reviewText, setReviewText] = useState("");
   
     useEffect(() => {
       axios
-        .get(`https://api.itbook.store/1.0/books/${isbn13}`)
+      .get(`http://localhost:4060/viewbook/${id}`)
         .then((response) => {
           console.log(response);
-          setDetails(response.data);
+          setDetails(response.data.data);
         })
         .catch((error) => {
           console.log(error);
         });
-    }, [isbn13]);
+    }, [id]);
   
     const reviews = [
       {
@@ -49,7 +50,7 @@ function StudentBookDetails() {
         <div class="row g-0">
           <div class="col-md-3 text-center p-4">
             <img
-              src={Details.image}
+              src={`${imgurl}${Details?.image?.originalname}`}
               alt="Book Cover"
               className="img-fluid rounded shadow-sm"
             />
@@ -63,16 +64,16 @@ function StudentBookDetails() {
           ;
           <div class="col-md-8 p-4">
             <h2 class="fw-bold d-flex align-items-center">
-              {Details.title}
+              {Details.booktitle}
             </h2>
             <p>
-              <strong>Author:</strong> {Details.authors}
+              <strong>Author:</strong> {Details.authorsname}
             </p>
             <p>
-              <strong>Category:</strong> Fiction
+              <strong>Category:</strong> {Details.genre}
             </p>
             <p>
-              <strong>Description:</strong> {Details.desc}
+              <strong>Description:</strong> {Details.description}
             </p>
             <p>
               <strong>Availability:</strong>{" "}

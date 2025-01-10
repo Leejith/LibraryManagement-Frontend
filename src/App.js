@@ -26,6 +26,7 @@ import StaffBookDetails from './Components/Staff/StaffBookDetails';
 import StudentHome from './Components/Students/StudentHome';
 import StudentNavbar from './Components/Students/StudentNavbar';
 import StudentBook from './Components/Students/StudentBook';
+import StudentBookDetails from './Components/Students/StudentBookDetails';
 
 
 
@@ -43,6 +44,7 @@ function App() {
         <Route path='/Studenthome'element={[<StudentNavbar/>,<StudentHome/>,<Footer/>]}/>
         <Route path='/Studentpf'element={<StudentProfile/>}/>
         <Route path='/studentbook'element={[<StudentNavbar/>,<StudentBook/>,<Footer/>]}/>
+        <Route path='/studentbookdetails/:id'element={[<StudentNavbar/>,<StudentBookDetails/>,<Footer/>]}/>
         <Route path='/StaffLogin'element={<StaffLogin/>}/>
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
         <Route path='/Staffpf'element={<StaffProfile/>}/>

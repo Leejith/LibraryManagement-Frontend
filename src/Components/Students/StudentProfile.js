@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../Assets/Styles/Profile.css";
 import BorrowBooks from "./BorrowBooks";
 import MyFavorites from "./MyFavorites";
 import FineAmount from "./FineAmount";
 import profileimg from "../../Assets/Images/profile.png";
+import axios from "axios";
+import imgurl from '../../Api/Imgurl'
 
 function StudentProfile() {
   const [SlideisOpen, setSlideIsOpen] = useState(false);
@@ -11,10 +13,12 @@ function StudentProfile() {
   const [profile, setProfile] = useState({});
   const [EditPage, setEditPage] = useState(false);
   const [editData, setEditData] = useState(profile);
+  const [UserProfile,setUserProfile]=useState({})
 
   const toggleSidebar = () => {
     setSlideIsOpen(!SlideisOpen);
   };
+
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
@@ -43,15 +47,25 @@ function StudentProfile() {
       reader.readAsDataURL(file);
     }
   };
-
+  useEffect(()=>{
+    const id=localStorage.getItem("studentid")
+    console.log(id)
+      axios.get(`http://localhost:4060/studentprofile/${id}`)
+      .then((response)=>{
+        console.log(response,"ïi")
+        setUserProfile(response.data.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+  },[])
   const handleEditClick = () => {
     setEditData(profile);
     setEditPage(true);
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditData({ ...editData, [name]: value });
+    setEditData({ ...editData, [e.target.name]: e.target.value });
   };
   
   const handleSave = () => {
@@ -182,9 +196,9 @@ function StudentProfile() {
         <div class="p-2 mt-3">
           <div class="text-center mb-5   text-slidebar">
             <img
-              src="https://via.placeholder.com/80"
+              src={`${imgurl}${UserProfile?.image?.originalname}`}
               alt="Profile"
-              class="rounded-circle img-fluid "
+              class="rounded-circle profile-img img-fluid "
             />
             <button
               class="btn edit-btn fw-bold position-absolute mt-5 fs-4 "
@@ -196,9 +210,11 @@ function StudentProfile() {
             >
               <i class="ri-edit-fill"></i>
             </button>
-            <h5 class="mt-4">User Name</h5>
-            <p>Department</p>
-            <p>reg.no</p>
+            <h5 class="mt-4">{UserProfile.name}</h5>
+            <p>{UserProfile.regno}</p>
+            <p>{UserProfile.department}</p>
+            <p>{UserProfile.email}</p>
+            
           </div>
         </div>
       </div>

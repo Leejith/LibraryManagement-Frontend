@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import "../../Assets/Styles/BookDetails.css"
 
 function StaffBookDetails() {
-    const { isbn13 } = useParams();
-  console.log(isbn13);
+    const { id } = useParams();
+  console.log(id);
   const [Details, setDetails] = useState({});
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [reviewText, setReviewText] = useState("");
@@ -20,7 +20,7 @@ function StaffBookDetails() {
       .catch((error) => {
         console.log(error);
       });
-  }, [isbn13]);
+  }, [id]);
 
   const reviews = [
     {
