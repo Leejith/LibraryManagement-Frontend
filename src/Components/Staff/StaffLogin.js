@@ -22,7 +22,7 @@ function StaffLogin() {
         if(response.data.msg == "Logged In Successfully"){
           localStorage.setItem("staffid",response.data.data._id)
           alert(response.data.msg);
-          navigate("/home")
+          navigate("/Staffhome")
         }
         else{
           alert(response.data.msg)

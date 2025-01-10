@@ -19,7 +19,7 @@ function StudentLogin() {
         if(response.data.msg){
           console.log(response)
           localStorage.setItem("studentid",response.data.data._id)
-          navigate("/home")
+          navigate("/Studenthome")
         }else{
           alert(response.data.msg)
         }
