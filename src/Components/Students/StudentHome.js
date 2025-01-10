@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import home from '../../Assets/Images/home.png'
+import '../../Assets/Styles/Home.css'
 function StudentHome() {
     const[Book,setBook]=useState([])
   useEffect(()=>{

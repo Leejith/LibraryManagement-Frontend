@@ -7,14 +7,9 @@ import StaffLogin from './Components/Staff/StaffLogin';
 import StaffRegister from './Components/Staff/StaffRegister';
 import AdminLogin from './Components/Admin/AdminLogin';
 import Login from './Components/common/Login';
-
 import StudentReg from './Components/Students/StudentReg';
-
-import Footer from './Components/common/footer';
-
-
+import Footer from './Components/common/Footer';
 import ForgotPassword from './Components/common/ForgotPassword';
-
 import Reset from './Components/common/Reset';
 import Landing from './Components/common/Landing';
 import StudentProfile from './Components/Students/StudentProfile';

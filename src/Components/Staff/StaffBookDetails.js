@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import "../../Assets/Styles/BookDetails.css"
 
 function StaffBookDetails() {
     const { isbn13 } = useParams();

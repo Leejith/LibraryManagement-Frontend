@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import imgurl from '../../Api/Imgurl'
 import axios from 'axios';
+import '../../Assets/Styles/BookMore.css'
 
 function StudentBook() {
     const [Books, setBooks] = useState([]);
