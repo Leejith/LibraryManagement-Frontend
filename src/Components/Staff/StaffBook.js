@@ -86,7 +86,7 @@ function StaffBook() {
                         
                           <p class="card-text">{books.genre}</p>
                           <a
-                            href={`/Staffbookdetails/${books.isbn}`}
+                            href={`/Staffbookdetails/${books.id}`}
                             class="btn view-button fw-bold"
                           >
                             View Book
