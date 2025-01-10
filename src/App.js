@@ -9,7 +9,9 @@ import AdminLogin from './Components/Admin/AdminLogin';
 import Login from './Components/common/Login';
 
 import StudentReg from './Components/Students/StudentReg';
-import Footer from './Components/common/Footer';
+
+import Footer from './Components/common/footer';
+
 
 import ForgotPassword from './Components/common/ForgotPassword';
 
