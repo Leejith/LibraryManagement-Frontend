@@ -48,7 +48,7 @@ const [Profile, setProfile] = useState();
       })
       .then((response) => {
         alert(response.data.msg);
-        // navigate("/BookList");
+        navigate("/BookList");
       })
       .catch((err) => {
         console.log(err);
