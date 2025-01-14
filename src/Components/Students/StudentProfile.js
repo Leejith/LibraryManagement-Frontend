@@ -6,6 +6,7 @@ import FineAmount from "./FineAmount";
 import profileimg from "../../Assets/Images/profile.png";
 import axios from "axios";
 import imgurl from '../../Api/Imgurl'
+import StudentCart from "./StudentCart";
 
 function StudentProfile() {
   const [SlideisOpen, setSlideIsOpen] = useState(false);
@@ -26,8 +27,8 @@ function StudentProfile() {
         return <BorrowBooks />;
       case "Favorites":
         return <MyFavorites />;
-      //   case "Cart":
-      //     return <Cart />;
+        case "StudentCart":
+          return <StudentCart />;
       case "FineAmount":
         return <FineAmount />;
       default:
@@ -85,7 +86,7 @@ function StudentProfile() {
             <i class="ri-menu-line"></i>
           </button>
 
-          <h1 class="navbar-brand  m-2 fw-bold">BOOKWORLD</h1>
+          <h1 class="navbar-brand  fw-bold lan-book">BOOKWORLD</h1>
           <div class="ms-auto">
             <ul class="nav d-none d-lg-flex fw-bold">
               <li class="nav-item">
@@ -110,7 +111,7 @@ function StudentProfile() {
                 <a
                   class="nav-link"
                   href="#cart"
-                  onClick={() => setActiveComponent("cart")}
+                  onClick={() => setActiveComponent("StudentCart")}
                 >
                   Cart
                 </a>
@@ -193,7 +194,7 @@ function StudentProfile() {
         <button class="btn d-lg-none close-btn" onClick={toggleSidebar}>
           <i class="ri-close-large-line"></i>
         </button>
-        <div class="p-2 mt-3">
+        <div class="p-2 mt-5  ">
           <div class="text-center mb-5   text-slidebar">
             <img
               src={`${imgurl}${UserProfile?.image?.originalname}`}

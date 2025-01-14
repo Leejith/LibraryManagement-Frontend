@@ -131,7 +131,7 @@ section{
     height: 100%;
     display:grid ;
     place-items:center;
-  
+    overflow: hidden;
 }
 .book-con h1{
     font-weight: 700;
@@ -142,14 +142,14 @@ section{
 }
 
 .book-con img{
-    width: 100px;
-    max-height: 200px;
+    width: 150px;
+    height: 200px;
     overflow: hidden;
 }
 
 .books-card{
     width: 230px;
-    max-height:300px;
+    height: 300px;
     background-color:#4f7c82;
     border: none;
     box-shadow: 15px 20px 20px rgba(0,0,0,.3),

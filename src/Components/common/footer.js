@@ -12,13 +12,13 @@ function Footer() {
           </p>
         </div>
         <div class="col-lg-4 p-5 col-md-6 m-auto">
-        <ul>
-            
-          <p>aboutus</p>
-          <p>contact us</p>
-          <p>books</p>
-          
-         </ul>
+          <ul>
+
+            <p>aboutus</p>
+            <p>contact us</p>
+            <p>books</p>
+
+          </ul>
         </div>
         <div class="col-lg-4 p-5 col-md-6 icon ">
           <p>contactus</p>
@@ -28,13 +28,14 @@ function Footer() {
         </div>
       </div>
     </div>
-  //   <div className="bg-dark text-white text-center py-3">
-  //   <p>© 2024 E-Library Management | All Rights Reserved</p>
-  //   <div>
-  //     <a href="#" className="text-white me-3">Privacy Policy</a>
-  //     <a href="#" className="text-white">Contact Us</a>
-  //   </div>
-  // </div>
+    
+    // <div className="bg-dark text-white text-center py-3">
+    //     <p>© 2024 E-Library Management | All Rights Reserved</p>
+    //     <div>
+    //       <a href="#" className="text-white me-3">Privacy Policy</a>
+    //       <a href="#" className="text-white">Contact Us</a>
+    //     </div>
+    //   </div>
   )
 }
 
