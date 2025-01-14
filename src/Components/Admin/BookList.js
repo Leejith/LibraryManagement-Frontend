@@ -67,28 +67,28 @@ function BookList() {
 
   return (
     <div>
-      <div className="container text-center mt-5">
-        <h1 className="fw-bold mb-4">BOOK LIST</h1>
-        <div className="container">
-        <div className=" search-col order-sm-2">
-              <div className="se-box">
-                <input
-                  type="text"
-                  name="search"
-                  placeholder="search..."
-                  value={searchTerm}
-                  onChange={handleSearch}
-                  className="search-box"
-                />
-                <button className="search-button" type="button">
-                  <i className="ri-search-line"></i>
-                </button>
-              </div>
+      <div class="container text-center mt-5">
+        <h1 class="fw-bold mb-4">BOOK LIST</h1>
+        <div class="container">
+          <div class=" search-col order-sm-2">
+            <div class="se-box">
+              <input
+                type="text"
+                name="search"
+                placeholder="search..."
+                value={searchTerm}
+                onChange={handleSearch}
+                class="search-box"
+              />
+              <button class="search-button" type="button">
+                <i class="ri-search-line"></i>
+              </button>
             </div>
-          <div className="row">
-            
+          </div>
+          <div class="row">
 
-            <table className="table mb-5">
+
+            <table class="table mb-5">
               <thead>
                 <tr>
                   <th scope="col">SL.NO</th>
@@ -98,57 +98,65 @@ function BookList() {
                   <th scope="col"></th>
                 </tr>
               </thead>
-              {(searchTerm ? filteredBooks : Book).map((book, index) => {
-                return (
-                  <tbody key={book._id}>
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td className="fw-bold">{book.booktitle}</td>
-                      <td className="fw-semibold">{book.authorname}</td>
-                      <td className="fw-semibold">{book.genre}</td>
-                      <td>
-                        <a
-                          className="btn remove-button fw-bold"
-                          onClick={() => openModal(book)}
-                        >
-                          remove Book
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              })}
+              {filteredBooks.length > 0 ?
+                (searchTerm ? filteredBooks : Book).map((book, index) => {
+                  return (
+                    <tbody key={book._id}>
+                      <tr>
+                        <th scope="row">{index + 1}</th>
+                        <td class="fw-bold">{book.booktitle}</td>
+                        <td class="fw-semibold">{book.authorname}</td>
+                        <td class="fw-semibold">{book.genre}</td>
+                        <td>
+                          <a href="#"
+                            class="btn remove-button fw-bold"
+                            onClick={() => openModal(book)}
+                          >
+                            remove Book
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                }
+                ) : (
+                  <div class="text-center mt-5">
+                    <h3 class="text-dark  fw-bold ">No books found !</h3>
+                    <p>Try a different search term .</p>
+                  </div>
+                )
+              }
             </table>
           </div>
         </div>
       </div>
       {showModal && selectedBook && (
-        <div className="modal d-flex justify-content-center align-items-center show removebook-box">
-          <div className="modal-dialog">
-            <div className="modal-content remove-bookbox">
-              <div className="modal-header remove-header">
-                <h5 className="modal-title fw-bold">Confirm Removal</h5>
+        <div class="modal d-flex justify-content-center align-items-center show removebook-box">
+          <div class="modal-dialog">
+            <div class="modal-content remove-bookbox">
+              <div class="modal-header remove-header">
+                <h5 class="modal-title fw-bold">Confirm Removal</h5>
                 <button
                   type="button"
-                  className="btn-close"
+                  class="btn-close"
                   onClick={closeModal}
                 ></button>
               </div>
-              <div className="modal-body text-center">
+              <div class="modal-body text-center">
                 <p>Are you sure you want to remove this book?</p>
                 <img
                   src={`${imgurl}${selectedBook?.image?.originalname}`}
                   alt={selectedBook.booktitle}
-                  className="img-fluid mb-3 remove-img"
+                  class="img-fluid mb-3 remove-img"
                 />
-                <p className="fw-bold">{selectedBook.booktitle}</p>
+                <p class="fw-bold">{selectedBook.booktitle}</p>
                 <p>Genre: {selectedBook.genre}</p>
               </div>
-              <div className="modal-footer d-flex justify-content-between">
-                <button className="btn btn-dark" onClick={closeModal}>
+              <div class="modal-footer d-flex justify-content-between">
+                <button class="btn btn-dark" onClick={closeModal}>
                   Cancel
                 </button>
-                <button className="btn btn-danger" onClick={removebook}>
+                <button class="btn btn-danger" onClick={removebook}>
                   Remove
                 </button>
               </div>
