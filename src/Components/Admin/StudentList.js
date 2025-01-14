@@ -35,10 +35,10 @@ function StudentList() {
                   <tbody>
                     <tr>
                       <th scope="row">{index + 1}</th>
-                      <td>{data.name}</td>
-                      <td>{data.department}</td>
-                      <td>{data.regno}</td>
-                      <td>{data.email}</td>
+                      <td class="fw-bold">{data.name}</td>
+                      <td class="fw-semibold">{data.department}</td>
+                      <td class="fw-semibold">{data.regno}</td>
+                      <td class="fw-semibold">{data.email}</td>
                     </tr>
                   </tbody>
                 );
