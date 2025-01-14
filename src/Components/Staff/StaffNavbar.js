@@ -5,7 +5,7 @@ function StaffNavbar() {
     const navigate = useNavigate()
     const handleLogout = (e) => {
         e.preventDefault()
-        const id = localStorage.removeItem("empid")
+        const id = localStorage.removeItem("staffid")
         navigate("/")
 
     }

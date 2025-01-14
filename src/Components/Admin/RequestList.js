@@ -5,7 +5,7 @@ function RequestList() {
   return (
     <div>
         <div class="container my-5">
-      <h2 class="mb-4">Borrow Requests</h2>
+      <h2 class="mb-4 fw-bold">Borrow Requests</h2>
       {requests.length === 0 ? (
         <div>No requests received.</div>
       ) : (
