@@ -49,7 +49,7 @@ function StaffBookDetails() {
   return (
     <section class="view mt-5">
       <div class="container my-5">
-        <div class="card cardbook shadow-lg">
+        <div class=" cardbook shadow-lg">
           <div class="row g-0">
             <div class="col-md-3 text-center p-4">
               <img
@@ -67,7 +67,7 @@ function StaffBookDetails() {
             ;
             <div class="col-md-8 p-4">
               <h2 class="fw-bold d-flex align-items-center">
-                {Details.title}
+                {Details.booktitle}
               </h2>
               <p>
                 <strong>Author:</strong> {Details.authorname}

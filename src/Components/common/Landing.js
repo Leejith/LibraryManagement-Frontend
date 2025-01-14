@@ -15,6 +15,7 @@ import img4 from "../../Assets/Images/ab4.png";
 import img5 from "../../Assets/Images/aboutbook4.png";
 import axios from "axios";
 import Login from "./Login";
+import imgurl from '../../Api/Imgurl'
 
 function Landing() {
   const [Book, setBook] = useState([]);
@@ -24,10 +25,10 @@ function Landing() {
 
   useEffect(() => {
     axios
-      .get("https://api.itbook.store/1.0/new")
+      .get("http://localhost:4060/booklist")
       .then((response) => {
         console.log(response);
-        setBook(response.data.books);
+        setBook(response.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -123,7 +124,7 @@ function Landing() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  },[]);
 
   const handleGenreClick = (index) => {
     setIndex(index);
@@ -405,9 +406,9 @@ function Landing() {
                 <div class=" col-lg-3 col-md-6 col-sm-12">
                   <div>
                     <div class="card land-card">
-                      <img src={Book.image} class="card-img-top" />
+                      <img src={`${imgurl}${Book?.image?.originalname}`} class="card-img-top" />
                       <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">{Book.title}</h5>
+                        <h5 class="card-title fw-bold">{Book.booktitle}</h5>
                         <p class="card-text">{Book.price}</p>
                         <a
                           class="btn view-button fw-bold"

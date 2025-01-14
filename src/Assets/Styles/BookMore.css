@@ -76,9 +76,6 @@
 /* book section */
 .Morebooks-con{
     background-color: #4f7c82;
-    margin-top: 130px;
-    display:grid ;
-    place-items:center;
     min-height: 100vh;
 }
 .Morebooks-con h1{
@@ -97,7 +94,7 @@
 
 .book-card{
     width: 250px;
-    max-height:350px;
+    min-height:350px;
     background-color: #4f7c82;
     border: none;
     box-shadow: 15px 20px 20px rgba(0,0,0,.3),

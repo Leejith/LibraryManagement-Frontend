@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../Assets/Styles/AdminHome.css";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import BookList from "./BookList";
 import AddBook from "./AddBook";
 import StaffList from "./StaffList";
@@ -7,24 +8,7 @@ import StudentList from "./StudentList";
 import RequestList from "./RequestList";
 
 function AdminHome() {
-  const [AdminField, SetAdminField] = useState();
-
-  const renderAdminField = () => {
-    switch (AdminField) {
-      case "BookList":
-        return <BookList />;
-      case "AddBook":
-        return <AddBook />;
-      case "StaffList":
-        return <StaffList />;
-      case "StudentList":
-        return <StudentList />;
-      case "RequestList":
-        return <RequestList />;
-      default:
-        return <RequestList/>;
-    }
-  };
+  
   return (
     <div>
       <div>
@@ -59,9 +43,9 @@ function AdminHome() {
               <div class="offcanvas-body ">
                 <div class="nav d-flex justify-content-center flex-grow-1 pe-2">
                   <li class="nav-item ">
-                    <a class="nav-link active fw-bold" aria-current="page" onClick={() => SetAdminField("RequestList")}>
+                    <Link class="nav-link active fw-bold" to="requestlist">
                       REQUEST LIST
-                    </a>
+                    </Link>
                   </li>
 
                   <div class="dropdown ">
@@ -75,20 +59,14 @@ function AdminHome() {
                     </button>
                     <ul class="dropdown-menu dropadmin">
                       <li>
-                        <a
-                          class="dropdown-item"
-                          onClick={() => SetAdminField("StaffList")}
-                        >
-                          STAFF
-                        </a>
+                      <Link className="dropdown-item" to="stafflist">
+                        STAFF
+                      </Link>
                       </li>
                       <li>
-                        <a
-                          class="dropdown-item"
-                          onClick={() => SetAdminField("StudentList")}
-                        >
-                          STUDENT
-                        </a>
+                      <Link className="dropdown-item" to="studentlist">
+                        STUDENT
+                      </Link>
                       </li>
                     </ul>
                   </div>
@@ -103,20 +81,14 @@ function AdminHome() {
                     </button>
                     <ul class="dropdown-menu dropadmin ">
                       <li>
-                        <a
-                          class="dropdown-item"
-                          onClick={() => SetAdminField("BookList")}
-                        >
-                          BOOKS
-                        </a>
+                      <Link className="dropdown-item" to="booklist">
+                        BOOKS LIST
+                      </Link>
                       </li>
                       <li>
-                        <a
-                          class="dropdown-item"
-                          onClick={() => SetAdminField("AddBook")}
-                        >
-                          ADD BOOKS
-                        </a>
+                      <Link className="dropdown-item" to="addbook">
+                        ADD BOOKS
+                      </Link>
                       </li>
                     </ul>
                   </div>
@@ -130,7 +102,16 @@ function AdminHome() {
         </nav>
       </div>
       <div class="container-fluid mt-4 admin-field">
-        <div class="p-4">{renderAdminField()}</div>
+        <div class="p-4"></div>
+        <Routes>
+            <Route path="booklist" element={<BookList />} />
+            <Route path="addbook" element={<AddBook />} />
+            <Route path="stafflist" element={<StaffList />} />
+            <Route path="studentlist" element={<StudentList />} />
+            <Route path="requestlist" element={<RequestList />} />
+            {/* Redirect the default /admin route */}
+            <Route path="/" element={<Navigate to="requestlist" />} />
+          </Routes>
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function AddBook() {
-  const navigate = useNavigate();
   const [AddBook, setAddBook] = useState({
     booktitle: "",
     authorname: "",
@@ -12,16 +11,21 @@ function AddBook() {
     description: "",
     date: "",
     file: "",
+    epubFile: "",
   });
-const [Profile, setProfile] = useState();
+  const [ValideDate, setValideDate] = useState()
+  const [Profile, setProfile] = useState();
+
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setAddBook({
       ...AddBook,
       [e.target.name]:
-        e.target.name == "file" ? e.target.files[0] : e.target.value,
+        e.target.name == "file" || e.target.name === "epubFile" ? e.target.files[0] : e.target.value,
     });
   };
- 
+  
   const profileChange = (upload) => {
     const file = upload.target.files[0];
     if (file) {
@@ -42,22 +46,35 @@ const [Profile, setProfile] = useState();
     for (let i in AddBook) {
       formdata.append(i, AddBook[i]);
     }
+    if (!ValidateDate(AddBook.date)) {
+      return; // Stop submission if the validation fails
+    }
     axios
       .post("http://localhost:4060/savebook", formdata, {
         headers: { "content-Type": "multipart/form-data" },
       })
       .then((response) => {
         alert(response.data.msg);
-        navigate("/BookList");
+        navigate("/adminhome/booklist");
       })
       .catch((err) => {
         console.log(err);
       });
-      console.log(AddBook);
+    console.log(AddBook);
   };
- 
-  
- 
+
+  const ValidateDate = (DateValue) => {
+    const SelectedDate = new Date(DateValue)
+    const TodayDate = new Date()
+
+    if (SelectedDate > TodayDate) {
+      setValideDate("Invalid date");
+      return false;
+    }
+    setValideDate("");
+    return true;
+  }
+
   const handleReset = () => {
     setAddBook({
       booktitle: "",
@@ -65,7 +82,8 @@ const [Profile, setProfile] = useState();
       genre: "",
       description: "",
       Date: "",
-      file:"",
+      file: "",
+      epubFile: "",
     });
   };
 
@@ -75,7 +93,7 @@ const [Profile, setProfile] = useState();
         <div class="row justify-content-center">
           <div class="col-lg-10">
             <div class="card add-card">
-              <div class="card-header text-center add-card">
+              <div class="card-header text-center headercard">
                 <h3 class="fw-bold mb-0">Add New Book</h3>
               </div>
               <div class="card-body p-4">
@@ -150,7 +168,11 @@ const [Profile, setProfile] = useState();
                           onChange={handleChange}
                           required
                         />
+                        {ValideDate && (
+                          <small className="text-danger bg-light">{ValideDate}</small>
+                        )}
                       </div>
+
                       <div class="mb-3">
                         <label class="form-label fw-semibold">Genre</label>
                         <select
@@ -160,23 +182,25 @@ const [Profile, setProfile] = useState();
                           required
                         >
                           <option value="">Choose Genre</option>
-                          <option value="Fiction">Fiction</option>
-                          <option value="Non-Fiction">Non-Fiction</option>
-                          <option value="Science">Science</option>
-                          <option value="History">History</option>
+                          <option value="Fiction">FICTION</option>
+                          <option value="comics">COMICS</option>
+                          <option value="fantasy">FANTASY</option>
+                          <option value="romantic">ROMANTIC</option>
+                          <option value="non-fiction">non-fiction</option>
+                          <option value="science">Science</option>
                         </select>
                       </div>
                       <div class="d-flex justify-content-between mt-4">
                         <button
                           type="reset"
-                          class="btn btn-outline-dark rounded-pill px-4"
+                          class="btn btn-outline-dark rounded-pill px-4 fw-semibold"
                           onClick={handleReset}
                         >
                           Reset
                         </button>
                         <button
                           type="submit"
-                          class="btn btn-primary rounded-pill px-4 add-button"
+                          class="btn  rounded-pill px-4 add-button fw-semibold"
                         >
                           Add Book
                         </button>
