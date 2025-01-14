@@ -1,35 +1,38 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import "../../Assets/Styles/BookDetails.css"
-import {  useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import imgurl from '../../Api/Imgurl';
 
 function StudentBookDetails() {
-
-  const {id} = useParams();
-
   const [Details, setDetails] = useState({});
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [reviewText, setReviewText] = useState("");
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4060/viewbook/${id}`)
-      .then((response) => {
-        console.log(response);
-        setDetails(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id]);
+  const { id } = useParams();
 
-  const studentid= localStorage.getItem("studentid")
-  const handleorder=(e)=>{
-    axios.post("http://localhost:4060/order",{
-      studentid,
-      Bookid:id
-    })
+
+  const handleorder = async (e) => {
+
+    const studentid = localStorage.getItem("studentid")
+    const bookid = id
+
+    console.log(studentid, "studentid")
+    console.log(bookid, "bookid")
+
+
+    await axios.post("http://localhost:4060/orderr", {
+      studentid: studentid,
+      bookid: bookid
+    }
+
+    )
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 
   }
   const reviews = [
@@ -53,6 +56,18 @@ function StudentBookDetails() {
   const handleReviewTextChange = (e) => {
     setReviewText(e.target.value);
   };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4060/viewbook/${id}`)
+      .then((response) => {
+        console.log(response);
+        setDetails(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
 
   return (
     <section class="view mt-5">

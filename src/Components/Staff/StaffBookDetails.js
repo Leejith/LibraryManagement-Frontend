@@ -24,6 +24,16 @@ function StaffBookDetails() {
       });
   }, [id]);
 
+
+  const handleorder=(e)=>{
+    const teacherid = localStorage.getItem("staffid")
+    const bookid = id
+    axios.post("http://localhost:4060/order",{
+      teacherid : teacherid,
+      bookid : bookid
+    })
+  }
+
   const reviews = [
     {
       name: "Jane Doe",
@@ -58,7 +68,7 @@ function StaffBookDetails() {
                 className="img-fluid rounded shadow-sm"
               />
               <div class="mt-5">
-                <button class="btn borrow fw-bold  w-100 mb-4">
+                <button class="btn borrow fw-bold  w-100 mb-4" onClick={handleorder}>
                   Borrow Book
                 </button>
                 <button class="btn  borrow fw-bold w-100">Add to Cart</button>
