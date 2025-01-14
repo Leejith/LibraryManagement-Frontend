@@ -2,10 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion';
 import imgurl from '../../Api/Imgurl'
+import '../../Assets/Styles/BookMore.css'
 
 function StaffBook() {
-    
-    const [Books, setBooks] = useState([]);
+
+  const [Books, setBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   useEffect(() => {
     axios
       .get("http://localhost:4060/booklist")
@@ -17,6 +20,28 @@ function StaffBook() {
         console.log(error);
       });
   }, []);
+  const handleCategoryChange = (category) => {
+    if (category === '') {
+      setFilteredBooks(Books);
+    } else {
+      const filtered = Books.filter((book) => book.genre.toLowerCase() === category.toLowerCase());
+      setFilteredBooks(filtered);
+    }
+  };
+
+  const handleSearch = (e) => {
+    const Search = e.target.value.toLowerCase();
+    setSearchTerm(Search);
+
+    const filtered = Books.filter(
+      (book) => {
+        return book.booktitle.toLowerCase().includes(Search) ||
+          book.genre.toLowerCase().includes(Search) ||
+          book.author?.toLowerCase().includes(Search);
+      }
+    );
+    setFilteredBooks(filtered);
+  };
   return (
     <div>
       <div class="container-fluid category-nav more-book fixed-top mb-5">
@@ -32,18 +57,33 @@ function StaffBook() {
               </button>
               <ul class="dropdown-menu category-menulist">
                 <li>
-                  <a class="dropdown-item">
-                    comic
+                  <a class="dropdown-item" onClick={() => handleCategoryChange('')}>
+                    ALL CATEGORY
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item">
-                    novel
+                  <a class="dropdown-item" onClick={() => handleCategoryChange('fiction')}>
+                    FICTION
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" >
-                    Something else here
+                  <a class="dropdown-item" onClick={() => handleCategoryChange('comics')}>
+                    COMICS
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" onClick={() => handleCategoryChange('fantasy')} >
+                    FANTASY
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" onClick={() => handleCategoryChange('science')} >
+                    SCIENCE
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" onClick={() => handleCategoryChange('romantic')} >
+                    ROMANTIC
                   </a>
                 </li>
               </ul>
@@ -55,6 +95,8 @@ function StaffBook() {
                 type="text"
                 name="search"
                 placeholder="search..."
+                value={searchTerm}
+                onChange={handleSearch}
                 class="search-box"
               />
               <button class="search-button" type="buton">
@@ -66,39 +108,47 @@ function StaffBook() {
       </div>
 
       <section>
-        <div class="container-fluid  Morebooks-con ">
-          <h1 class="text-center py-3">BOOKS</h1>
+        <div class="container-fluid  Morebooks-con  ">
+          <h1 class="text-center  mb-4 mt-3 ">BOOKS</h1>
           <div class="container ">
             <div class="row">
-              {Books.map((books,index) => {
-                return (
-                  
+              {filteredBooks.length > 0 ?
+                (filteredBooks.map((books, index) => {
+                  return (
+
                     <div class=" col-lg-4 col-md-6 col-sm-12">
                       <motion.div
-                       key={index}
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 ,delay: index * 0.1}}
-                  >
-                      <div class="card book-card">
-                        <img src={`${imgurl}${books?.image?.originalname}`} alt=''class="card-img-top" />
-                        <div class="card-body text-center">
-                          <h5 class="card-title fw-bold">{books.booktitle}</h5>
-                        
-                          <p class="card-text">{books.genre}</p>
-                          <a
-                            href={`/Staffbookdetails/${books._id}`}
-                            class="btn view-button fw-bold"
-                          >
-                            View Book
-                          </a>
+                        key={index}
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: index * 0.1 }}
+                      >
+                        <div class="card book-card">
+                          <img src={`${imgurl}${books?.image?.originalname}`} alt='' class="card-img-top" />
+                          <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">{books.booktitle}</h5>
+
+                            <p class="card-text">{books.genre}</p>
+                            <a
+                              href={`/Studentbookdetails/${books._id}`}
+                              class="btn view-button fw-bold"
+                            >
+                              View Book
+                            </a>
+                          </div>
                         </div>
-                      </div>
                       </motion.div>
                     </div>
-                  
-                );
-              })}
+
+                  );
+                })
+                ) : (
+                  <div class="text-center mt-5">
+                    <h3 class="text-dark fw-bold m-2">No books found !</h3>
+                    <p>Try a different search term .</p>
+                  </div>
+                )
+              }
             </div>
           </div>
         </div>

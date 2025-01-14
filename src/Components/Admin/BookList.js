@@ -1,28 +1,31 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import imgurl from '../../Api/Imgurl'
-import '../../Assets/Styles/AdminHome.css'
+import imgurl from "../../Api/Imgurl";
+import "../../Assets/Styles/AdminHome.css";
 
 function BookList() {
   const [Book, setBook] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const booklist=()=>{
+  const booklist = () => {
     axios
       .get("http://localhost:4060/booklist")
       .then((response) => {
-        console.log(response);
         setBook(response.data.data);
+        setFilteredBooks(response.data.data); // Initialize filtered list
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
-  }
+  };
 
   useEffect(() => {
-    booklist()
+    booklist();
   }, []);
+
   const openModal = (book) => {
     setSelectedBook(book);
     setShowModal(true);
@@ -32,30 +35,61 @@ function BookList() {
     setShowModal(false);
     setSelectedBook(null);
   };
-  const removebook=(bookid)=>{
+
+  const removebook = () => {
     if (selectedBook) {
       axios
         .post(`http://localhost:4060/removebook/${selectedBook._id}`)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           booklist();
           closeModal();
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     }
-    
-  }
+  };
+
+  const handleSearch = (e) => {
+    const search = e.target.value.toLowerCase();
+    setSearchTerm(search);
+
+    const filtered = Book.filter((book) => {
+      return (
+        book.booktitle.toLowerCase().includes(search) ||
+        book.genre.toLowerCase().includes(search) ||
+        book.authorname?.toLowerCase().includes(search)
+      );
+    });
+
+    setFilteredBooks(filtered);
+  };
 
   return (
     <div>
-      <div class="container text-center mt-5">
-        <h1 class="fw-bold mb-4">BOOK LIST</h1>
-        <div class="container ">
-          <div class="row">
-            <table class="table mb-5">
-              <thead> 
+      <div className="container text-center mt-5">
+        <h1 className="fw-bold mb-4">BOOK LIST</h1>
+        <div className="container">
+        <div className=" search-col order-sm-2">
+              <div className="se-box">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="search..."
+                  value={searchTerm}
+                  onChange={handleSearch}
+                  className="search-box"
+                />
+                <button className="search-button" type="button">
+                  <i className="ri-search-line"></i>
+                </button>
+              </div>
+            </div>
+          <div className="row">
+            
+
+            <table className="table mb-5">
+              <thead>
                 <tr>
                   <th scope="col">SL.NO</th>
                   <th scope="col">TITLE</th>
@@ -64,16 +98,21 @@ function BookList() {
                   <th scope="col"></th>
                 </tr>
               </thead>
-              {Book.map((Book, index) => {
+              {(searchTerm ? filteredBooks : Book).map((book, index) => {
                 return (
-                  <tbody>
+                  <tbody key={book._id}>
                     <tr>
                       <th scope="row">{index + 1}</th>
-                      <td class="fw-bold">{Book.booktitle}</td>
-                      <td class="fw-semibold">{Book.authorname}</td>
-                      <td class="fw-semibold">{Book.genre}</td>
+                      <td className="fw-bold">{book.booktitle}</td>
+                      <td className="fw-semibold">{book.authorname}</td>
+                      <td className="fw-semibold">{book.genre}</td>
                       <td>
-                        <a class="btn remove-button fw-bold"onClick={() => openModal(Book)}>remove Book</a>
+                        <a
+                          className="btn remove-button fw-bold"
+                          onClick={() => openModal(book)}
+                        >
+                          remove Book
+                        </a>
                       </td>
                     </tr>
                   </tbody>
@@ -84,43 +123,32 @@ function BookList() {
         </div>
       </div>
       {showModal && selectedBook && (
-        <div
-          class="modal d-flex justify-content-center align-items-center show removebook-box"
-        
-        >
-          <div class="modal-dialog ">
-            <div class="modal-content remove-bookbox">
-              <div class="modal-header remove-header">
-                <h5 class="modal-title fw-bold ">Confirm Removal</h5>
+        <div className="modal d-flex justify-content-center align-items-center show removebook-box">
+          <div className="modal-dialog">
+            <div className="modal-content remove-bookbox">
+              <div className="modal-header remove-header">
+                <h5 className="modal-title fw-bold">Confirm Removal</h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   onClick={closeModal}
                 ></button>
               </div>
-              <div class="modal-body text-center">
-              <p class="">Are you sure you want to remove this book?</p>
+              <div className="modal-body text-center">
+                <p>Are you sure you want to remove this book?</p>
                 <img
                   src={`${imgurl}${selectedBook?.image?.originalname}`}
                   alt={selectedBook.booktitle}
-                  class="img-fluid mb-3 remove-img"
-    
+                  className="img-fluid mb-3 remove-img"
                 />
-                <p class="fw-bold">{selectedBook.booktitle}</p>
-                <p class="">Genre: {selectedBook.genre}</p>
-                
+                <p className="fw-bold">{selectedBook.booktitle}</p>
+                <p>Genre: {selectedBook.genre}</p>
               </div>
-              <div class="modal-footer d-flex justify-content-between">
-                <button
-                  class="btn btn-dark"
-                  onClick={closeModal}
-                >
+              <div className="modal-footer d-flex justify-content-between">
+                <button className="btn btn-dark" onClick={closeModal}>
                   Cancel
                 </button>
-                <button
-                  class="btn btn-danger"
-                  onClick={removebook}
-                >
+                <button className="btn btn-danger" onClick={removebook}>
                   Remove
                 </button>
               </div>
@@ -133,3 +161,4 @@ function BookList() {
 }
 
 export default BookList;
+

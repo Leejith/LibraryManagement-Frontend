@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../Assets/Styles/Profile.css";
 import Mybook from "./Mybook";
 import Favorites from "./Favorites";
 import profileimg from "../../Assets/Images/profile.png";
+import StaffCart from "./StaffCart";
+import axios from "axios";
+import imgurl from '../../Api/Imgurl'
 function StaffProfile() {
-  const [SlideisOpen, setSlideIsOpen] = useState(false);
-  const [activeComponent, setActiveComponent] = useState("MyBook");
+ const [SlideisOpen, setSlideIsOpen] = useState(false);
+   const [activeComponent, setActiveComponent] = useState("MyBook");
+   const [profile, setProfile] = useState({});
+   const [EditPage, setEditPage] = useState(false);
+   const [editData, setEditData] = useState(profile);
+   const [UserProfile,setUserProfile]=useState({})
 
   const toggleSidebar = () => {
     setSlideIsOpen(!SlideisOpen);
@@ -17,13 +24,24 @@ function StaffProfile() {
         return <Mybook />;
       case "Favorites":
         return <Favorites />;
-      //   case "Cart":
-      //     return <Cart />;
+      case "StaffCart":
+        return <StaffCart />;
       default:
         return <Mybook />;
     }
   };
-
+  useEffect(() => {
+    const id = localStorage.getItem("staffid")
+    console.log(id)
+    axios.get(`http://localhost:4060/staffprofile/${id}`)
+      .then((response) => {
+        console.log(response, "ïi")
+        setUserProfile(response.data.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
   const profileChange = (upload) => {
     const file = upload.target.files[0];
     if (file) {
@@ -36,20 +54,14 @@ function StaffProfile() {
       reader.readAsDataURL(file);
     }
   };
-  const [showModal, setShowModal] = useState(false);
-  const [profile, setProfile] = useState({
-    image: "",
-    name: "User Name",
-    department: "Department",
-    id: "ID.NO",
-  });
 
-  const handleEdit = () => {
-    setShowModal(true);
+
+  const handleEditClick = () => {
+    setEditData(profile);
+    setEditPage(true);
   };
-
   const handleClose = () => {
-    setShowModal(false);
+    setEditPage(false);
   };
 
   const handleChange = (e) => {
@@ -58,7 +70,8 @@ function StaffProfile() {
   };
 
   const handleSave = () => {
-    setShowModal(false);
+    setProfile(editData);
+    setEditPage(false);
   };
   return (
     <div>
@@ -98,7 +111,7 @@ function StaffProfile() {
                 <a
                   class="nav-link "
                   href="#cart"
-                  onClick={() => setActiveComponent("cart")}
+                  onClick={() => setActiveComponent("StaffCart")}
                 >
                   Cart
                 </a>
@@ -126,7 +139,7 @@ function StaffProfile() {
                     <a
                       class="dropdown-item"
                       href="#myBook"
-                      onClick={() => setActiveComponent("myBook")}
+                      onClick={() => setActiveComponent("MyBook")}
                     >
                       My Book
                     </a>
@@ -135,7 +148,7 @@ function StaffProfile() {
                     <a
                       class="dropdown-item "
                       href="#favorites"
-                      onClick={() => setActiveComponent("favorites")}
+                      onClick={() => setActiveComponent("Favorites")}
                     >
                       Favorites
                     </a>
@@ -173,11 +186,11 @@ function StaffProfile() {
           <i class="ri-close-large-line"></i>
         </button>
         <div class="p-2 mt-3">
-          <div class="text-center mb-5 text-slidebar">
+        <div class="text-center mb-5   text-slidebar">
             <img
-              src="https://via.placeholder.com/80"
+              src={`${imgurl}${UserProfile?.image?.originalname}`}
               alt="Profile"
-              class="rounded-circle img-fluid "
+              class="rounded-circle profile-img img-fluid "
             />
             <button
               class="btn edit-btn fw-bold position-absolute mt-5 fs-4 "
@@ -185,13 +198,15 @@ function StaffProfile() {
                 width: "60px",
                 height: "60px",
               }}
-              onClick={() => setShowModal(true)}
+              onClick={handleEditClick}
             >
               <i class="ri-edit-fill"></i>
             </button>
-            <h5 class="mt-4">User Name</h5>
-            <p>Department</p>
-            <p>ID.NO</p>
+            <h5 class="mt-4">{UserProfile.name}</h5>
+            <p>{UserProfile.regno}</p>
+            <p>{UserProfile.department}</p>
+            <p>{UserProfile.email}</p>
+            
           </div>
         </div>
       </div>
@@ -202,7 +217,7 @@ function StaffProfile() {
       </div>
 
       {/* editprofile */}
-      {showModal && (
+      {EditPage && (
         <div class="modal show d-block " tabIndex="-1">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content form-edit">
