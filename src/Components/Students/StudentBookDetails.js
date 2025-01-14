@@ -24,6 +24,14 @@ function StudentBookDetails() {
       });
   }, [id]);
 
+  const studentid= localStorage.getItem("studentid")
+  const handleorder=(e)=>{
+    axios.post("http://localhost:4060/order",{
+      studentid,
+      Bookid:id
+    })
+
+  }
   const reviews = [
     {
       name: "Jane Doe",
@@ -58,7 +66,7 @@ function StudentBookDetails() {
                 className="img-fluid rounded shadow-sm"
               />
               <div class="mt-5">
-                <button class="btn borrow fw-bold  w-100 mb-4">
+                <button class="btn borrow fw-bold  w-100 mb-4" onClick={handleorder}>
                   Borrow Book
                 </button>
                 <button class="btn  borrow fw-bold w-100">Add to Cart</button>
