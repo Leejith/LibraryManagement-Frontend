@@ -11,7 +11,7 @@ function AddBook() {
     description: "",
     date: "",
     file: "",
-    epubFile: "",
+    
   });
   const [ValideDate, setValideDate] = useState()
   const [Profile, setProfile] = useState();
@@ -22,7 +22,7 @@ function AddBook() {
     setAddBook({
       ...AddBook,
       [e.target.name]:
-        e.target.name == "file" || e.target.name === "epubFile" ? e.target.files[0] : e.target.value,
+        e.target.name === "file" ? e.target.files[0] : e.target.value,
     });
   };
   
@@ -186,8 +186,11 @@ function AddBook() {
                           <option value="comics">COMICS</option>
                           <option value="fantasy">FANTASY</option>
                           <option value="romantic">ROMANTIC</option>
-                          <option value="non-fiction">non-fiction</option>
-                          <option value="science">Science</option>
+                          <option value="non-fiction">NON_FICTION</option>
+                          <option value="science">SCIENCE</option>
+                          <option value="Biography">BIOGRAPHY</option>
+                          <option value="Mystery">MYSTERY</option>
+                          <option value="Mystery">HISTORICAL</option>
                         </select>
                       </div>
                       <div class="d-flex justify-content-between mt-4">

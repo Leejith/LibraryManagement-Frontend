@@ -22,31 +22,60 @@
 .removebook-box {
     background-Color: "rgba(0, 0, 0, 0.5)";
     display: "block";
-    
+
 }
-.remove-bookbox{
+
+.remove-bookbox {
     background-color: #4f7c82;
 
 }
-.remove-header{
-    background-color:#0b2e33;
+
+.remove-header {
+    background-color: #0b2e33;
     color: white;
 }
-.remove-img{
+
+.remove-img {
     max-height: 150px;
 }
 
-.remove-button{
-    background-color:#0b2e33;
-    color:white;
+.remove-button {
+    background-color: #0b2e33;
+    color: white;
     padding: 7px 10px;
     border-radius: 50px;
     text-decoration: none;
-    transition: 1s ;
-    border:2px solid
+    transition: 1s;
+    border: 2px solid
 }
-.remove-button:hover{
+
+.remove-button:hover {
     background-color: #4f7c82;
-    color:black;
-   
-} 
+    color: black;
+
+}
+
+.count-list {
+    background-color: #2d4649;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: .5s;
+    border: 2px solid white;
+    margin: 2px;
+
+}
+
+.add-button {
+    background-color: #4f7c82;
+    color: black;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 1s;
+    border: 2px solid
+}
+
+.add-button:hover {
+    background-color: white;
+    color: black;
+}

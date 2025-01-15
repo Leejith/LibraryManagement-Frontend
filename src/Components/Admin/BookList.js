@@ -9,13 +9,32 @@ function BookList() {
   const [showModal, setShowModal] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [totalBooks, setTotalBooks] = useState(0);
+  const [categoryCount, setCategoryCount] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All Books");
+  const [categoryBookCount, setCategoryBookCount] = useState(0);
 
+  // Fetch the book statistics from the backend
+  useEffect(() => {
+    axios
+      .get("http://localhost:4060/bookcount")
+      .then((response) => {
+        setTotalBooks(response.data.totalBooks);
+        setCategoryCount(response.data.categoryCount);
+        setCategoryBookCount(response.data.totalBooks);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching book stats:", error);
+      });
+  }, []);
+
+  // Fetch the book list from the backend
   const booklist = () => {
     axios
       .get("http://localhost:4060/booklist")
       .then((response) => {
         setBook(response.data.data);
-        setFilteredBooks(response.data.data); // Initialize filtered list
+        setFilteredBooks(response.data.data);
       })
       .catch((error) => {
         console.error(error);
@@ -26,16 +45,60 @@ function BookList() {
     booklist();
   }, []);
 
+  // Handle category change
+  const handleCategoryChange = (e) => {
+    const selected = e.target.value;
+    setSelectedCategory(selected);
+
+    if (selected === "All Books") {
+      setCategoryBookCount(totalBooks);
+      setFilteredBooks(Book);
+    } else {
+      const category = categoryCount.find((c) => c._id === selected);
+      if (category) {
+        setCategoryBookCount(category.count);
+        setFilteredBooks(Book.filter((book) => book.genre === selected));
+      }
+    }
+  };
+
+  // Handle search functionality
+  const handleSearch = (e) => {
+    const search = e.target.value.toLowerCase();
+    setSearchTerm(search);
+
+    // Filter books based on both search term and selected category
+    let filtered = Book;
+
+    if (selectedCategory !== "All Books") {
+      filtered = filtered.filter((book) => book.genre === selectedCategory);
+    }
+
+    if (search) {
+      filtered = filtered.filter(
+        (book) =>
+          book.booktitle.toLowerCase().includes(search) ||
+          book.genre.toLowerCase().includes(search) ||
+          book.authorname?.toLowerCase().includes(search)
+      );
+    }
+
+    setFilteredBooks(filtered);
+  };
+
+  // Open modal to remove book
   const openModal = (book) => {
     setSelectedBook(book);
     setShowModal(true);
   };
 
+  // Close modal
   const closeModal = () => {
     setShowModal(false);
     setSelectedBook(null);
   };
 
+  // Remove book from the list
   const removebook = () => {
     if (selectedBook) {
       axios
@@ -50,44 +113,48 @@ function BookList() {
     }
   };
 
-  const handleSearch = (e) => {
-    const search = e.target.value.toLowerCase();
-    setSearchTerm(search);
-
-    const filtered = Book.filter((book) => {
-      return (
-        book.booktitle.toLowerCase().includes(search) ||
-        book.genre.toLowerCase().includes(search) ||
-        book.authorname?.toLowerCase().includes(search)
-      );
-    });
-
-    setFilteredBooks(filtered);
-  };
-
   return (
     <div>
       <div class="container text-center mt-5">
         <h1 class="fw-bold mb-4">BOOK LIST</h1>
         <div class="container">
-          <div class=" search-col order-sm-2">
-            <div class="se-box">
-              <input
-                type="text"
-                name="search"
-                placeholder="search..."
-                value={searchTerm}
-                onChange={handleSearch}
-                class="search-box"
-              />
-              <button class="search-button" type="button">
-                <i class="ri-search-line"></i>
-              </button>
+          <div class="row d-flex justify-content-between">
+            <div class="col-lg-3 col-sm-12 count-list fw-bold mb-4 ">
+              <p class="mt-3 text-center" >Total Books: {totalBooks} / {selectedCategory}: {categoryBookCount}</p></div>
+            <div class="col-lg-3 col-sm-12">
+              <select onChange={handleCategoryChange} value={selectedCategory} class="category-button">
+                <option class="fw-bold" value="All Books">ALL category</option>
+                {categoryCount.map((category, index) => (
+                  <option class="fw-bold" key={index} value={category._id}>
+                    {category._id}
+                  </option>
+                ))}
+              </select></div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="search-col order-sm-2">
+                <div class="se-box">
+                  <input
+                    type="text"
+                    name="search"
+                    placeholder="search..."
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    class="search-box"
+                  />
+                  <button class="search-button" type="button">
+                    <i class="ri-search-line"></i>
+                  </button>
+                </div>
+              </div>
             </div>
+            
           </div>
+
+          {/* Search Bar */}
+
+
+          {/* Book List Table */}
           <div class="row">
-
-
             <table class="table mb-5">
               <thead>
                 <tr>
@@ -98,8 +165,8 @@ function BookList() {
                   <th scope="col"></th>
                 </tr>
               </thead>
-              {filteredBooks.length > 0 ?
-                (searchTerm ? filteredBooks : Book).map((book, index) => {
+              {filteredBooks.length > 0 ? (
+                filteredBooks.map((book, index) => {
                   return (
                     <tbody key={book._id}>
                       <tr>
@@ -108,7 +175,8 @@ function BookList() {
                         <td class="fw-semibold">{book.authorname}</td>
                         <td class="fw-semibold">{book.genre}</td>
                         <td>
-                          <a href="#"
+                          <a
+                            href="#"
                             class="btn remove-button fw-bold"
                             onClick={() => openModal(book)}
                           >
@@ -118,18 +186,19 @@ function BookList() {
                       </tr>
                     </tbody>
                   );
-                }
-                ) : (
-                  <div class="text-center mt-5">
-                    <h3 class="text-dark  fw-bold ">No books found !</h3>
-                    <p>Try a different search term .</p>
-                  </div>
-                )
-              }
+                })
+              ) : (
+                <div class="text-center mt-5">
+                  <h3 class="text-dark  fw-bold ">No books found !</h3>
+                  <p>Try a different search term.</p>
+                </div>
+              )}
             </table>
           </div>
         </div>
       </div>
+
+      {/* Modal for removing book */}
       {showModal && selectedBook && (
         <div class="modal d-flex justify-content-center align-items-center show removebook-box">
           <div class="modal-dialog">

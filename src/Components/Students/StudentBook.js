@@ -87,6 +87,21 @@ function StudentBook() {
                     ROMANTIC
                   </a>
                 </li>
+                <li>
+                  <a class="dropdown-item" onClick={() => handleCategoryChange('Biography')} >
+                    BIOGRAPHY
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" onClick={() => handleCategoryChange('Mystery')} >
+                    MYSTERY
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" onClick={() => handleCategoryChange('Historical')} >
+                    HISTORICAL
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
