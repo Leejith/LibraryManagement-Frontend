@@ -15,11 +15,13 @@ function StaffBook() {
       .then((response) => {
         console.log(response);
         setBooks(response.data.data);
+        setFilteredBooks(response.data.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
   const handleCategoryChange = (category) => {
     if (category === '') {
       setFilteredBooks(Books);
@@ -44,7 +46,7 @@ function StaffBook() {
   };
   return (
     <div>
-      <div class="container-fluid category-nav more-book fixed-top mb-5">
+      <div class="container-fluid category-nav more-book">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12 m-sm-auto order-1">
             <div class="dropdown ">
@@ -130,7 +132,7 @@ function StaffBook() {
 
                             <p class="card-text">{books.genre}</p>
                             <a
-                              href={`/Studentbookdetails/${books._id}`}
+                              href={`/Staffbookdetails/${books._id}`}
                               class="btn view-button fw-bold"
                             >
                               View Book
