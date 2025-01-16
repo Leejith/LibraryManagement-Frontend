@@ -47,7 +47,7 @@ function StudentBookDetails() {
 
   const reviewsToDisplay = showAllReviews ? Reviews : Reviews.slice(0, 3);
 
-  // Submit review with rating
+ 
   const handleSubmitReview = async () => {
     const studentid = localStorage.getItem("studentid");
     const role = "student";

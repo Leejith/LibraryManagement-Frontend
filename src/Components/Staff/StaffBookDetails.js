@@ -7,13 +7,16 @@ import imgurl from '../../Api/Imgurl';
 function StaffBookDetails() {
 
   const [Details, setDetails] = useState({});
-   const [showAllReviews, setShowAllReviews] = useState(false);
-   const [reviewText, setReviewText] = useState("");
-   const [rating, setRating] = useState(0);  // State for rating
-   const [Reviews, setReviews] = useState([]);
-   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-   const [isBorrowed, setIsBorrowed] = useState(false);
-   const { id } = useParams();
+  const [showAllReviews, setShowAllReviews] = useState(false);
+  const [reviewText, setReviewText] = useState("");
+  const [rating, setRating] = useState(0);
+  const [Reviews, setReviews] = useState([]);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [isBorrowed, setIsBorrowed] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [similarBooks, setSimilarBooks] = useState([]);
+  const [latestBooks, setLatestBooks] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
     axios
@@ -27,22 +30,26 @@ function StaffBookDetails() {
       });
   }, [id]);
 
-
-  const handleorder=(e)=>{
+  const calculateAverageRating = (reviews) => {
+    const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (totalRatings / reviews.length).toFixed(1);
+  };
+  const averageRating = calculateAverageRating(Reviews);
+  const handleorder = (e) => {
     const teacherid = localStorage.getItem("staffid")
     const bookid = id
-    axios.post("http://localhost:4060/order",{
-      teacherid : teacherid,
-      bookid : bookid
+    axios.post("http://localhost:4060/order", {
+      teacherid: teacherid,
+      bookid: bookid
     })
-    .then((response) => {
-      console.log(response);
-      setIsBorrowed(true);
-      handleCancel()
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((response) => {
+        console.log(response);
+        setIsBorrowed(true);
+        handleCancel()
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   const handleconfirmborrow = () => {
@@ -89,15 +96,76 @@ function StaffBookDetails() {
       alert("Failed to submit the review. Please try again.");
     }
   };
-  
+
   const handleReviewTextChange = (e) => {
     setReviewText(e.target.value);
   };
   const handleRatingChange = (newRating) => {
     setRating(newRating);
   };
+  useEffect(() => {
+    console.log("Book ID in frontend:", id);
+    axios
+      .get(`http://localhost:4060/reviewlist/${id}`)
+      .then((response) => {
+        console.log("Reviews fetched:", response.data.data);
+        setReviews(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error.response ? error.response.data : error.message);
+      });
+  }, [id]);
 
+  const handleFavoriteToggle = () => {
+    const Studentid = localStorage.getItem("studentid");
+    const bookid = id;
+
+    setIsFavorite((prevState) => !prevState);
+
+
+    axios
+      .post(`http://localhost:4060/addlike/${Studentid}/${bookid}`)
+      .then((response) => {
+        // If the like is added successfully
+        console.log("Like status updated successfully:", response.data);
+      })
+      .catch((error) => {
+        // If an error occurs (like already exists)
+        console.error("Error adding/removing like:", error);
+
+        // If the book has already been liked, revert the UI state
+        if (error.response && error.response.data.msg === "You have already liked this book.") {
+          alert("You have already liked this book.");
+        } else {
+          setIsFavorite((prevState) => !prevState); // Revert UI on any other error
+        }
+      });
+  };
+  useEffect(() => {
+    if (Details?.genre) {
+      axios
+        .get(`http://localhost:4060/similarbook/${Details.genre}`)
+        .then((response) => {
+          setSimilarBooks(response.data.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching similar books:", error);
+        });
+    }
+  }, [Details?.genre]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:4060/latestbook')
+      .then((response) => {
+        setLatestBooks(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching latest books:", error);
+      });
+  }, []);
   return (
+    <div class="view">
     <section class="view mt-5">
       <div class="container my-5">
         <div class=" cardbook shadow-lg">
@@ -106,10 +174,10 @@ function StaffBookDetails() {
               <img
                 src={`${imgurl}${Details?.image?.originalname}`}
                 alt="Book Cover"
-                className="img-fluid rounded shadow-sm"
+                className="img-fluid rounded details-img shadow-sm"
               />
               <div class="mt-5">
-              {!isBorrowed ? (
+                {!isBorrowed ? (
                   <button class="btn borrow fw-bold w-100 mb-4" onClick={handleconfirmborrow}>
                     Borrow Book
                   </button>
@@ -123,19 +191,28 @@ function StaffBookDetails() {
             </div>
             ;
             <div class="col-md-8 p-4">
-              <h2 class="fw-bold d-flex align-items-center">
-                {Details.booktitle}
-              </h2>
-              <p>
-                <strong>Author:</strong> {Details.authorname}
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="fw-bold mb-0 title">{Details?.booktitle} <span class=" rating-size"> {averageRating} ★</span></h2>
+                
+                <div> <i
+                  class={`ri-heart-${isFavorite ? "fill" : "line"} fs-3 bg-dark-round`}
+                  style={{
+                    color: isFavorite ? "red" : "black",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleFavoriteToggle}
+                ></i></div>
+              </div>
+              <p class="fw-semibold">
+                <strong>AUTHOR:</strong> {Details.authorname}
               </p>
-              <p>
-                <strong>Category:</strong> {Details.genre}
+              <p class="fw-semibold">
+                <strong>CATEGORY:</strong> {Details.genre}
               </p>
-              <p>
-                <strong>Description:</strong> {Details.description}
+              <p class="fw-semibold">
+                <strong>DESCRIPTION:</strong> {Details.description}
               </p>
-              <p><strong>Status:</strong> {isBorrowed ? "Unavailable" : "Available"}</p>
+              <p class="fw-semibold"><strong>STATUS:</strong> {isBorrowed ? "Unavailable" : "Available"}</p>
 
               <div class="review-section">
                 <hr />
@@ -188,7 +265,7 @@ function StaffBookDetails() {
 
                 {Reviews.length > 3 && (
                   <button
-                    class="btn btn-link p-0 text-decoration-none"
+                    class="btn btn-link p-0 text-decoration-none show-more"
                     onClick={() => setShowAllReviews(!showAllReviews)}
                   >
                     {showAllReviews ? "Show Less" : "Show More"}
@@ -199,31 +276,81 @@ function StaffBookDetails() {
           </div>
         </div>
         <div class={`modal fade ${showConfirmationModal ? 'show' : ''}`} id="borrowConfirmationModal" style={{ display: showConfirmationModal ? 'block' : 'none' }} aria-labelledby="borrowConfirmationModalLabel" aria-hidden={!showConfirmationModal}>
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="borrowConfirmationModalLabel">Confirm Borrowing</h5>
-              <button type="button" class="btn-close" onClick={handleCancel} aria-label="Close"></button>
-            </div>
-            <div className="modal-body text-center">
-              <p>You are about to borrow the book:</p>
-              <h4>{Details.booktitle}</h4>
-              <img
-                src={`${imgurl}${Details?.image?.originalname}`}
-                alt="Book Cover"
-                class="img-fluid rounded shadow-sm"
-                width="100"
-              />
-              <div class="mt-3">
-                <button class="btn btn-success" onClick={handleorder}>Confirm</button>
-                <button class="btn btn-danger ms-3" onClick={handleCancel}>Cancel</button>
+          <div class="modal-dialog mt-5">
+            <div class="modal-content book-confirm">
+              <div class="modal-header confirm-header">
+                <h5 class="modal-title" id="borrowConfirmationModalLabel">Confirm Borrowing</h5>
+                <button type="button" class="btn-close" onClick={handleCancel} aria-label="Close"></button>
+              </div>
+              <div class="modal-body text-center">
+                <p class="fw-semibold">You are about to borrow the book:</p>
+                <h4 class="fw-bold">{Details.booktitle}</h4>
+                <img
+                  src={`${imgurl}${Details?.image?.originalname}`}
+                  alt="Book Cover"
+                  class="img-fluid rounded confirmbuy-img shadow-sm mt-3 mb-4"
+                
+                />
+                <div class="mt-3">
+                  <button class="btn btn-success" onClick={handleorder}>Confirm</button>
+                  <button class="btn btn-danger ms-3" onClick={handleCancel}>Cancel</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
       </div>
     </section>
+
+    {similarBooks.length > 0 && (
+        <div class="container ">
+          <h3 class="fw-bold text-center">Books You Might Like</h3>
+          <div class="row mt-3">
+            {similarBooks.map((book, index) => (
+              <div class="col-md-3 mb-4" key={index}>
+                <div class="card similarbook-card">
+                  <img
+                    src={`${imgurl}${book.image?.originalname}`}
+                    alt={book.booktitle}
+                    class=" img-fluid"
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">{book.booktitle}</h5>
+                    <p class="card-text">{book.authorname}</p>
+                    <a href={`/Staffbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Latest Books Section */}
+      {latestBooks.length > 0 && (
+        <div class="container mt-3">
+          <h3 class="fw-bold text-center">Latest Books</h3>
+          <div class="row mt-3">
+            {latestBooks.map((book, index) => (
+              <div class="col-md-3 mb-4" key={index}>
+                <div class="card similarbook-card">
+                  <img
+                    src={`${imgurl}${book.image?.originalname}`}
+                    alt={book.booktitle}
+                    class="card-img-top"
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">{book.booktitle}</h5>
+                    <p class="card-text">{book.authorname}</p>
+                    <a href={`/Staffbookdetails/${book._id}`} class="btn view-button ">View Details</a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      </div>
   )
 }
 
