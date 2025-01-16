@@ -1,9 +1,66 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import "../../Assets/Styles/Favorites.css"
+import {motion} from 'framer-motion'
+import axios from 'axios'
 
 function MyFavorites() {
+  const [Favorite,setFavorite]=useState()
+  const {id} = localStorage.getItem("studentid")
+  console.log(id,"ii")
+  useEffect(()=>{
+    axios.get(`http://localhost:4060/getlike/${id}`)
+    .then((response)=>{
+      console.log(response)
+      setFavorite(response.data.data)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  },[])
+
   return (
     <div>
-      <h1 class="fw-bold">Favorites</h1>
+      <h2>Favorites</h2>
+
+      <section>
+        <div class="container-fluid  Morebooks-con ">
+          <h1 class="text-center py-3">BOOKS</h1>
+          <div class="container ">
+            <div class="row">
+              {Favorite.map((fav,index) => {
+                return (
+                  
+                    <div class=" col-lg-4 col-md-6 col-sm-12">
+                      <motion.div
+                       key={index}
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 ,delay: index * 0.1}}
+                  >
+                      <div class="card book-card">
+                        <img src={""} alt=''class="card-img-top" />
+                        <div class="card-body text-center">
+                          <h5 class="card-title fw-bold">Title</h5>
+                        
+                          <p class="card-text">Genre</p>
+                          <a
+                            // href={`/Staffbookdetails/${fav._id}`}
+                            class="btn view-button fw-bold"
+                          >
+                            View Book
+                          </a>
+                        </div>
+                      </div>
+                      </motion.div>
+                    </div>
+                  
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   )
 }
