@@ -6,6 +6,7 @@ import AddBook from "./AddBook";
 import StaffList from "./StaffList";
 import StudentList from "./StudentList";
 import RequestList from "./RequestList";
+import BorrowedList from "./BorrowedList";
 
 function AdminHome() {
   
@@ -43,8 +44,8 @@ function AdminHome() {
               <div class="offcanvas-body ">
                 <div class="nav d-flex justify-content-center flex-grow-1 pe-2">
                   <li class="nav-item ">
-                    <Link class="nav-link active fw-bold" to="requestlist">
-                      REQUEST LIST
+                    <Link class="nav-link active fw-bold" to="borrowlist">
+                      BORROWED LIST
                     </Link>
                   </li>
 
@@ -108,9 +109,9 @@ function AdminHome() {
             <Route path="addbook" element={<AddBook />} />
             <Route path="stafflist" element={<StaffList />} />
             <Route path="studentlist" element={<StudentList />} />
-            <Route path="requestlist" element={<RequestList />} />
+            <Route path="borrowlist" element={<BorrowedList />} />
             {/* Redirect the default /admin route */}
-            <Route path="/" element={<Navigate to="requestlist" />} />
+            <Route path="/" element={<Navigate to="borrowlist" />} />
           </Routes>
       </div>
     </div>

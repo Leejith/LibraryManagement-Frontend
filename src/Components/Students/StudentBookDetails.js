@@ -90,7 +90,11 @@ function StudentBookDetails() {
     setRating(newRating);
   };
 
-
+  const calculateAverageRating = (reviews) => {
+    const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (totalRatings / reviews.length).toFixed(1);
+  };
+  const averageRating = calculateAverageRating(Reviews);
   useEffect(() => {
     console.log("Book ID:", id)
     axios
@@ -109,7 +113,7 @@ function StudentBookDetails() {
       .get(`http://localhost:4060/reviewlist/${id}`)
       .then((response) => {
         console.log("Reviews fetched:", response.data.data);
-        setReviews(response.msg.data);
+        setReviews(response.data.data);
       })
       .catch((error) => {
         console.error("Error fetching reviews:", error.response ? error.response.data : error.message);
@@ -195,7 +199,7 @@ function StudentBookDetails() {
               </div>
               <div class="col-md-8 p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h2 class="fw-bold mb-0">{Details?.booktitle}</h2>
+                  <h2 class="fw-bold mb-0">{Details?.booktitle}<p>{averageRating}★</p></h2>
                   <div> <i
                     class={`ri-heart-${isFavorite ? "fill" : "line"} fs-3 bg-dark-round`}
                     style={{
@@ -204,6 +208,9 @@ function StudentBookDetails() {
                     }}
                     onClick={handleFavoriteToggle}
                   ></i></div>
+                </div>
+                <div>
+
                 </div>
                 <p><strong>Author:</strong> {Details.authorname}</p>
                 <p><strong>Category:</strong> {Details.genre}</p>
