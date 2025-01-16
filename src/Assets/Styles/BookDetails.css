@@ -53,6 +53,16 @@
     color: black;
 }
 
+.show-more{
+  color: white;
+}
+
+.show-more:hover{
+  color: white;
+}
+.show-more{
+  color: white;
+}
 .details-img{
    max-height: 400px;
    overflow: hidden;
@@ -66,6 +76,17 @@
 
 .star-rating .star.filled {
   color: gold;
+}
+
+.rating-size{
+  font-size: 14px;
+  background-color: white;
+  border-radius:5px;
+ 
+  
+}
+.title{
+  text-transform: uppercase;
 }
 
 .similarbook-card{

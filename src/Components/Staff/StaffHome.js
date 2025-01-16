@@ -2,20 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import home from '../../Assets/Images/home.png'
 import axios from 'axios'
+import imgurl from '../../Api/Imgurl'
+import { motion } from "framer-motion";
 
 function StaffHome() {
-  const[Book,setBook]=useState([])
-  useEffect(()=>{
-    axios.get("https://api.itbook.store/1.0/new")
-    .then((response)=>{
-      console.log(response)
-      setBook(response.data.books)
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-  },[])
-  const displayBook = Book.slice(0, 3);
+  const [Book, setBook] = useState([])
+  useEffect(() => {
+    axios.get("http://localhost:4060/booklist")
+      .then((response) => {
+        console.log(response)
+        setBook(response.data.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+  const displayBook = Book.slice(0, 12);
   return (
     <><section class="home mt-5 mt-lg-2">
       <div class="container-fluid">
@@ -41,23 +43,39 @@ function StaffHome() {
         <h1 class="text-center py-3">BOOKS</h1>
         <div class="container ">
           <div class="row ">
-            {displayBook.map((Book) => {
-
-              return (
-                <div class=" col-lg-4 col-md-6 col-sm-12">
-                  <div class="card books-card">
-                    <img src={Book.image} alt=""class="card-img-top" />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">{Book.title}</h5>
-                      <p class="card-text b-3">{Book.price}</p>
-                      <a href="/home"  class=" fw-bold views-button ">View Book</a>
+            <motion.div
+              class="book-row"
+              animate={{
+                x: ["0%", "-100%"],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 40,
+                ease: "linear",
+              }}
+            >
+              {displayBook.map((Book) => {
+                return (
+                  <div class=" col-lg-3 col-md-6 col-sm-12">
+                    <div>
+                      <div class="card land-card">
+                        <img src={`${imgurl}${Book?.image?.originalname}`} class="card-img-top" />
+                        <div class="card-body text-center">
+                          <h5 class="card-title fw-bold">{Book.booktitle}</h5>
+                          <p class="card-text">{Book.price}</p>
+                          <a
+                              href={`/Staffbookdetails/${Book._id}`}
+                              class="btn view-button fw-bold"
+                            >
+                              View Book
+                            </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-
-
-              )
-            })}
+                );
+              })}
+            </motion.div>
           </div>
         </div>
         <Link to={'/staffbook'}><button type="button" class="btn more-books p-3">EXPLORE MORE</button></Link>

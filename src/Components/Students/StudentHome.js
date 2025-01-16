@@ -67,8 +67,8 @@ function StudentHome() {
                             <h5 class="card-title fw-bold">{Book.booktitle}</h5>
                             <p class="card-text">{Book.price}</p>
                             <a
+                              href={`/Studentbookdetails/${Book._id}`}
                               class="btn view-button fw-bold"
-
                             >
                               View Book
                             </a>
