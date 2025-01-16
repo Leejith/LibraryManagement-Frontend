@@ -14,7 +14,7 @@ function BookList() {
   const [selectedCategory, setSelectedCategory] = useState("All Books");
   const [categoryBookCount, setCategoryBookCount] = useState(0);
 
-  // Fetch the book statistics from the backend
+
   useEffect(() => {
     axios
       .get("http://localhost:4060/bookcount")
@@ -28,7 +28,6 @@ function BookList() {
       });
   }, []);
 
-  // Fetch the book list from the backend
   const booklist = () => {
     axios
       .get("http://localhost:4060/booklist")
@@ -45,7 +44,7 @@ function BookList() {
     booklist();
   }, []);
 
-  // Handle category change
+
   const handleCategoryChange = (e) => {
     const selected = e.target.value;
     setSelectedCategory(selected);
@@ -62,18 +61,15 @@ function BookList() {
     }
   };
 
-  // Handle search functionality
+
   const handleSearch = (e) => {
     const search = e.target.value.toLowerCase();
     setSearchTerm(search);
 
-    // Filter books based on both search term and selected category
     let filtered = Book;
-
     if (selectedCategory !== "All Books") {
       filtered = filtered.filter((book) => book.genre === selectedCategory);
     }
-
     if (search) {
       filtered = filtered.filter(
         (book) =>
@@ -86,19 +82,16 @@ function BookList() {
     setFilteredBooks(filtered);
   };
 
-  // Open modal to remove book
   const openModal = (book) => {
     setSelectedBook(book);
     setShowModal(true);
   };
 
-  // Close modal
   const closeModal = () => {
     setShowModal(false);
     setSelectedBook(null);
   };
 
-  // Remove book from the list
   const removebook = () => {
     if (selectedBook) {
       axios
