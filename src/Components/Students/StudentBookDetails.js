@@ -28,12 +28,21 @@ function StudentBookDetails() {
     })
       .then((response) => {
         console.log(response);
-        setIsBorrowed(true);
+        // setIsBorrowed(true);
+        
         handleCancel()
       })
       .catch((err) => {
         console.log(err);
       });
+
+      await axios.put(`http://localhost:4060/bookstatus/${id}`)
+      .then((response)=>{
+        console.log(response)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   };
 
   const handleconfirmborrow = () => {
@@ -102,6 +111,7 @@ function StudentBookDetails() {
       .then((response) => {
         console.log(response);
         setDetails(response.data.data);
+        setIsBorrowed(response.data.data.bookstatus)
       })
       .catch((error) => {
         console.log(error);
@@ -185,7 +195,7 @@ function StudentBookDetails() {
 
 
                 <div class="mt-4">
-                  {!isBorrowed ? (
+                  {isBorrowed=="pending" ? (
                     <button class="btn borrow fw-bold w-100 mb-4" onClick={handleconfirmborrow}>
                       Borrow Book
                     </button>

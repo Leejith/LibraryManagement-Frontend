@@ -4,24 +4,24 @@ import {motion} from 'framer-motion'
 import axios from 'axios'
 
 function Favorites() {
-  // const [Favorite,setFavorite]=useState()
+  const [Favorite,setFavorite]=useState()
 
-  // useEffect(()=>{
-  //   axios.get("")
-  //   .then((response)=>{
-  //     console.log(response)
-  //     setFavorite(response.data.data)
-  //   })
-  //   .catch((err)=>{
-  //     console.log(err)
-  //   })
-  // },[])
+  useEffect(()=>{
+    axios.get("")
+    .then((response)=>{
+      console.log(response)
+      setFavorite(response.data.data)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  },[])
 
   return (
     <div>
       <h2>Favorites</h2>
 
-      {/* <section>
+      <section>
         <div class="container-fluid  Morebooks-con ">
           <h1 class="text-center py-3">BOOKS</h1>
           <div class="container ">
@@ -58,7 +58,7 @@ function Favorites() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
     </div>
   )
