@@ -66,12 +66,9 @@ function StudentHome() {
                           <div class="card-body text-center">
                             <h5 class="card-title fw-bold">{Book.booktitle}</h5>
                             <p class="card-text">{Book.price}</p>
-                            <a
-                              href={`/Studentbookdetails/${Book._id}`}
-                              class="btn view-button fw-bold"
-                            >
-                              View Book
-                            </a>
+                            <a href={`/Studentbookdetails/${Book._id}`} class="btn view-button fw-bold">
+                      View Book
+                    </a>
                           </div>
                         </div>
                       </div>
@@ -82,7 +79,11 @@ function StudentHome() {
             </div>
           </div>
         </div>
-        <Link to={'/studentbook'}><button type="button" class="btn more-books p-3">EXPLORE MORE</button></Link>
+        <div class="text-center d-flex justify-content-center mt-4">
+            <Link to="/studentbook">
+              <button type="button" class="btn more-books p-3">EXPLORE MORE</button>
+            </Link>
+          </div>
       </div></>
   )
 }

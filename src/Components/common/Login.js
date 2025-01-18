@@ -9,16 +9,16 @@ import admin from "../../Assets/Images/admin.png";
 function Login() {
   return (
     <section class="Login-main">
-      <div class="container login-con">
+      <div class="container login-con p-0 ">
         <div class="row">
-          <div class="col-lg-5 col-md-6 col-sm-12  m-auto">
+          <div class="col-lg-5 col-md-6 d-none d-lg-block  m-auto">
             <img src={mainlogin} alt="" class="img-fluid p-5" />
           </div>
-          <div class="col-lg-7 col-md-6 col-sm-12 p-0 ">
-            <div class="container text-center loginus-con">
+          <div class="col-lg-7 col-md-6 col-sm-12  p-0  ">
+            <div class="container text-center  loginus-con">
               <div class="row">
                 <h1 class="mt-lg-3 mt-sm-1">LOGIN US</h1>
-                <div class="col-lg-6 col-12 ad-card">
+                <div class="col-lg-6 col-12  ad-card">
                   <Link to="/studentlogin">
                     <div class="card card-mainlogin ">
                       <img

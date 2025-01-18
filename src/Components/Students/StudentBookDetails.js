@@ -15,6 +15,7 @@ function StudentBookDetails() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [similarBooks, setSimilarBooks] = useState([]);  // State for similar genre books
   const [latestBooks, setLatestBooks] = useState([]);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { id } = useParams();
 
   const handleOrder = async () => {
@@ -29,15 +30,15 @@ function StudentBookDetails() {
       .then((response) => {
         console.log(response);
         // setIsBorrowed(true);
-        
+
         handleCancel()
       })
       .catch((err) => {
         console.log(err);
       });
 
-      await axios.put(`http://localhost:4060/bookstatus/${id}`)
-      .then((response)=>{
+    await axios.put(`http://localhost:4060/bookstatus/${id}`)
+      .then((response) => {
         console.log(response)
       })
       .catch((err) => {
@@ -56,7 +57,7 @@ function StudentBookDetails() {
 
   const reviewsToDisplay = showAllReviews ? Reviews : Reviews.slice(0, 3);
 
- 
+
   const handleSubmitReview = async () => {
     const studentid = localStorage.getItem("studentid");
     const role = "student";
@@ -154,6 +155,21 @@ function StudentBookDetails() {
       });
   }, []);
 
+
+  useEffect(() => {
+    const studentid = localStorage.getItem("studentid");
+
+    axios
+      .get(`http://localhost:4060/getlike/${studentid}`)
+      .then((response) => {
+        const likeItems = response.data.data;
+        const isFavorite = likeItems.some((item) => item.bookid._id === id);
+        setIsFavorite(isFavorite);
+      })
+      .catch((error) => {
+        console.error("Error checking cart status:", error);
+      });
+  }, [id]);
   const handleFavoriteToggle = () => {
     const Studentid = localStorage.getItem("studentid");
     const bookid = id;
@@ -164,21 +180,84 @@ function StudentBookDetails() {
     axios
       .post(`http://localhost:4060/addlike/${Studentid}/${bookid}`)
       .then((response) => {
-        // If the like is added successfully
         console.log("Like status updated successfully:", response.data);
       })
       .catch((error) => {
-        // If an error occurs (like already exists)
         console.error("Error adding/removing like:", error);
-
-        // If the book has already been liked, revert the UI state
         if (error.response && error.response.data.msg === "You have already liked this book.") {
           alert("You have already liked this book.");
         } else {
-          setIsFavorite((prevState) => !prevState); // Revert UI on any other error
+          setIsFavorite((prevState) => !prevState);
         }
       });
   };
+  const handleRemoveLike = () => {
+    const studentid = localStorage.getItem("studentid");
+
+    axios
+      .post(`http://localhost:4060/removelike/${studentid}/${id}`)
+      .then((response) => {
+        setIsFavorite(false);
+        console.log("Removed from like:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error removing from like:", error);
+      });
+  };
+
+  const handlelike=()=>{
+    if (isFavorite) {
+      handleRemoveLike();
+
+    } else {
+      handleFavoriteToggle();
+    }
+  }
+  useEffect(() => {
+    const studentid = localStorage.getItem("studentid");
+
+    axios
+      .get(`http://localhost:4060/getcart/${studentid}`)
+      .then((response) => {
+        const cartItems = response.data.data;
+        const isBookInCart = cartItems.some((item) => item.bookid._id === id);
+        setIsAddedToCart(isBookInCart);
+      })
+      .catch((error) => {
+        console.error("Error checking cart status:", error);
+      });
+  }, [id]);
+  const handleAddToCart = () => {
+    const studentid = localStorage.getItem("studentid");
+
+    axios
+      .post(`http://localhost:4060/addcart/${studentid}/${id}`)
+      .then((response) => {
+        setIsAddedToCart(true);
+        console.log("Added to cart:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error adding to cart:", error);
+        if (error.response && error.response.data.msg === "Book already added to cart") {
+          alert("Book already added to cart");
+        }
+      });
+  };
+
+  const handleRemoveFromCart = () => {
+    const studentid = localStorage.getItem("studentid");
+
+    axios
+      .post(`http://localhost:4060/removecart/${studentid}/${id}`)
+      .then((response) => {
+        setIsAddedToCart(false);
+        console.log("Removed from cart:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error removing from cart:", error);
+      });
+  };
+
 
   return (
     <div class="view">
@@ -195,7 +274,7 @@ function StudentBookDetails() {
 
 
                 <div class="mt-4">
-                  {isBorrowed=="pending" ? (
+                  {isBorrowed === "pending" ? (
                     <button class="btn borrow fw-bold w-100 mb-4" onClick={handleconfirmborrow}>
                       Borrow Book
                     </button>
@@ -204,28 +283,45 @@ function StudentBookDetails() {
                       Unavailable
                     </button>
                   )}
-                  <button class="btn borrow fw-bold w-100">Add to Cart</button>
+                  
+                </div>
+                <div className="mt-4">
+                  {isAddedToCart ? (
+                    <button className="btn borrow fw-bold w-100 mb-4" onClick={handleRemoveFromCart}>
+                      Remove from Cart
+                    </button>
+                  ) : (
+                    <button className="btn borrow fw-bold w-100 mb-4" onClick={handleAddToCart}>
+                      Add to Cart
+                    </button>
+                  )}
                 </div>
               </div>
               <div class="col-md-8 p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h2 class="fw-bold mb-0">{Details?.booktitle}<p>{averageRating}★</p></h2>
+                  <h2 class="fw-bold mb-0 title">{Details?.booktitle} <span class=" rating-size"> {averageRating} ★</span></h2>
                   <div> <i
                     class={`ri-heart-${isFavorite ? "fill" : "line"} fs-3 bg-dark-round`}
                     style={{
                       color: isFavorite ? "red" : "black",
                       cursor: "pointer",
                     }}
-                    onClick={handleFavoriteToggle}
+                    onClick={handlelike}
                   ></i></div>
                 </div>
                 <div>
 
                 </div>
-                <p><strong>Author:</strong> {Details.authorname}</p>
-                <p><strong>Category:</strong> {Details.genre}</p>
-                <p><strong>Description:</strong> {Details.description}</p>
-                <p><strong>Status:</strong> {isBorrowed ? "Unavailable" : "Available"}</p>
+                <p class="fw-semibold">
+                  <strong>AUTHOR:</strong> {Details.authorname}
+                </p>
+                <p class="fw-semibold">
+                  <strong>CATEGORY:</strong> {Details.genre}
+                </p>
+                <p class="fw-semibold">
+                  <strong>DESCRIPTION:</strong> {Details.description}
+                </p>
+                <p class="fw-semibold"><strong>STATUS:</strong> {isBorrowed ? "Unavailable" : "Available"}</p>
 
                 <div class="review-section">
                   <hr />
@@ -273,7 +369,7 @@ function StudentBookDetails() {
 
                   {Reviews.length > 3 && (
                     <button
-                      class="btn btn-link p-0 text-decoration-none"
+                      class="btn btn-link p-0 text-decoration-none show-more"
                       onClick={() => setShowAllReviews(!showAllReviews)}
                     >
                       {showAllReviews ? "Show Less" : "Show More"}
@@ -313,17 +409,43 @@ function StudentBookDetails() {
 
       </section>
 
+
+
+
       {similarBooks.length > 0 && (
-        <div class="container ">
+        <div class="container">
           <h3 class="fw-bold text-center">Books You Might Like</h3>
-          <div class="row mt-3">
+
+          <div class="row d-block d-sm-none">
+            <div class="col-12">
+              <div class="card-wrapper d-flex overflow-auto">
+                {similarBooks.map((book, index) => (
+                  <div class="card similarbook-card flex-shrink-0" key={index}>
+                    <img
+                      src={`${imgurl}${book.image?.originalname}`}
+                      alt={book.booktitle}
+                      class="card-img-top img-fluid"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">{book.booktitle}</h5>
+                      <p class="card-text">{book.authorname}</p>
+                      <a href={`/Studentbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row d-none d-sm-flex">
             {similarBooks.map((book, index) => (
               <div class="col-md-3 mb-4" key={index}>
                 <div class="card similarbook-card">
                   <img
                     src={`${imgurl}${book.image?.originalname}`}
                     alt={book.booktitle}
-                    class=" img-fluid"
+                    class="card-img-top img-fluid"
                   />
                   <div class="card-body text-center">
                     <h5 class="card-title">{book.booktitle}</h5>
@@ -341,19 +463,41 @@ function StudentBookDetails() {
       {latestBooks.length > 0 && (
         <div class="container mt-3">
           <h3 class="fw-bold text-center">Latest Books</h3>
-          <div class="row mt-3">
+
+          <div class="row d-block d-sm-none">
+            <div class="col-12">
+              <div class="card-wrapper d-flex overflow-auto">
+                {latestBooks.map((book, index) => (
+                  <div class="card similarbook-card flex-shrink-0" key={index}>
+                    <img
+                      src={`${imgurl}${book.image?.originalname}`}
+                      alt={book.booktitle}
+                      class="card-img-top img-fluid"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">{book.booktitle}</h5>
+                      <p class="card-text">{book.authorname}</p>
+                      <a href={`/Studentbookdetails/${book._id}`} class="btn view-button">View Details</a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div class="row d-none d-sm-flex">
             {latestBooks.map((book, index) => (
               <div class="col-md-3 mb-4" key={index}>
                 <div class="card similarbook-card">
                   <img
                     src={`${imgurl}${book.image?.originalname}`}
                     alt={book.booktitle}
-                    class="card-img-top"
+                    class="card-img-top img-fluid"
                   />
                   <div class="card-body text-center">
                     <h5 class="card-title">{book.booktitle}</h5>
                     <p class="card-text">{book.authorname}</p>
-                    <a href={`/Studentbookdetails/${book._id}`} class="btn view-button ">View Details</a>
+                    <a href={`/Studentbookdetails/${book._id}`} class="btn view-button">View Details</a>
                   </div>
                 </div>
               </div>
@@ -361,6 +505,8 @@ function StudentBookDetails() {
           </div>
         </div>
       )}
+
+
     </div>
   );
 }

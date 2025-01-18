@@ -125,7 +125,7 @@ function StudentBook() {
 
       <section>
         <div class="container-fluid  Morebooks-con ">
-          <h1 class="text-center mb-4 mt-3">BOOKS</h1>
+          <h1 class="text-center mb-4 mt-3 ">BOOKS</h1>
           <div class="container ">
             <div class="row">
               {filteredBooks.length > 0 ?

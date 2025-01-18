@@ -21,7 +21,7 @@ function Landing() {
   const [Book, setBook] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const [loginVisible, setloginVisible] = useState(false);
-  const [Index, setIndex] = useState(0); 
+  const [Index, setIndex] = useState(0);
 
   useEffect(() => {
     axios
@@ -124,7 +124,7 @@ function Landing() {
     }, 5000);
 
     return () => clearInterval(interval);
-  },[]);
+  }, []);
 
   const handleGenreClick = (index) => {
     setIndex(index);
@@ -356,16 +356,15 @@ function Landing() {
                 key={genre.name}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="m-2"
+                className="m-2 "
                 style={{ cursor: "pointer" }}
                 onClick={() => handleGenreClick(index)}
               >
                 <img
                   src={genre.image}
                   alt={genre.name}
-                  class={`rounded-circle border ${
-                    Index === index ? "border-dark" : "border-light"
-                  }`}
+                  class={`rounded-circle img-fluid border ${Index === index ? "border-dark" : "border-light"
+                    }`}
                   style={{
                     width: "100px",
                     height: "100px",
@@ -425,13 +424,10 @@ function Landing() {
           </motion.div>
         </div>
 
-        <button
-          type="button"
-          class="btn land-more p-3 mb-4 mt-4 fw-bold"
-          onClick={handleShowMessage}
-        >
-          EXPLORE MORE
-        </button>
+        <div class="text-center d-flex justify-content-center  mb-5">
+
+          <button type="button" class="btn land-more p-3" onClick={handleShowMessage}>EXPLORE MORE</button>
+        </div>
       </div>
 
       {/* alert */}

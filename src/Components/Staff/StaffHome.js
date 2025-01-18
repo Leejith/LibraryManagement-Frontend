@@ -39,47 +39,54 @@ function StaffHome() {
       </div>
 
 
-    </section><div class="container-fluid book-con ">
-        <h1 class="text-center py-3">BOOKS</h1>
-        <div class="container ">
-          <div class="row ">
-            <motion.div
-              class="book-row"
-              animate={{
-                x: ["0%", "-100%"],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 40,
-                ease: "linear",
-              }}
-            >
-              {displayBook.map((Book) => {
-                return (
-                  <div class=" col-lg-3 col-md-6 col-sm-12">
-                    <div>
-                      <div class="card land-card">
-                        <img src={`${imgurl}${Book?.image?.originalname}`} class="card-img-top" />
-                        <div class="card-body text-center">
-                          <h5 class="card-title fw-bold">{Book.booktitle}</h5>
-                          <p class="card-text">{Book.price}</p>
-                          <a
-                              href={`/Staffbookdetails/${Book._id}`}
-                              class="btn view-button fw-bold"
-                            >
-                              View Book
-                            </a>
-                        </div>
-                      </div>
-                    </div>
+    </section>
+    <div class="container-fluid book-con">
+  <h1 class="text-center d-flex justify-content-center py-3">BOOKS</h1>
+  <div class="container">
+    <div class="row">
+      <motion.div
+        class="book-row"
+        animate={{
+          x: ["0%", "-100%"],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 40,
+          ease: "linear",
+        }}
+      >
+        {displayBook.map((Book) => {
+          return (
+            <div class="col-lg-3 col-md-6  mb-4">
+              <div>
+                <div class="card land-card">
+                  <img
+                    src={`${imgurl}${Book?.image?.originalname}`}
+                    class="card-img-top"
+                    alt={Book.booktitle}
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">{Book.booktitle}</h5>
+                    <p class="card-text">{Book.price}</p>
+                    <a href={`/Staffbookdetails/${Book._id}`} class="btn view-button fw-bold">
+                      View Book
+                    </a>
                   </div>
-                );
-              })}
-            </motion.div>
-          </div>
-        </div>
-        <Link to={'/staffbook'}><button type="button" class="btn more-books p-3">EXPLORE MORE</button></Link>
-      </div></>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </motion.div>
+    </div>
+  </div>
+  <div class="text-center d-flex justify-content-center  mb-5">
+    <Link to="/staffbook">
+      <button type="button" class="btn more-books p-3">EXPLORE MORE</button>
+    </Link>
+  </div>
+</div></>
+
   )
 }
 

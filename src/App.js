@@ -8,7 +8,6 @@ import StaffRegister from './Components/Staff/StaffRegister';
 import AdminLogin from './Components/Admin/AdminLogin';
 import Login from './Components/common/Login';
 import StudentReg from './Components/Students/StudentReg';
-import Footer from './Components/common/footer';
 import ForgotPassword from './Components/common/ForgotPassword';
 import Reset from './Components/common/Reset';
 import Landing from './Components/common/Landing';
@@ -28,6 +27,7 @@ import StudentNavbar from './Components/Students/StudentNavbar';
 import StudentBook from './Components/Students/StudentBook';
 import StudentBookDetails from './Components/Students/StudentBookDetails';
 import RequestList from './Components/Admin/RequestList';
+import Footer from './Components/common/Footer';
 
 
 

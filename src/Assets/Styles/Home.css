@@ -65,6 +65,7 @@ section{
 .home{
     background-color:#0b2e33;
     color: white;
+    width:100%;
    
 }
 .home h1{
@@ -129,8 +130,6 @@ section{
 .book-con{
     background-color: #4f7c82;
     height: 100%;
-    display:grid ;
-    place-items:center;
     overflow: hidden;
 }
 .book-con h1{
@@ -200,7 +199,7 @@ section{
     text-decoration: none;
     transition: .5s ;
     border:2px solid;
-    margin: 20px;
+    
 }
 .more-books:hover{
     background-color:white;
