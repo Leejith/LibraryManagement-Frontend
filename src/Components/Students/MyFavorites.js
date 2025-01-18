@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import "../../Assets/Styles/Favorites.css"
 import {motion} from 'framer-motion'
 import axios from 'axios'
+import imgurl from '../../Api/Imgurl'
 
 function MyFavorites() {
-  const [Favorite,setFavorite]=useState()
-  const {id} = localStorage.getItem("studentid")
+  const [Favorite,setFavorite]=useState([])
+  const id = localStorage.getItem("studentid")
   console.log(id,"ii")
   useEffect(()=>{
     axios.get(`http://localhost:4060/getlike/${id}`)
     .then((response)=>{
       console.log(response)
-      setFavorite(response.data.data)
+       setFavorite(response.data.data)
     })
     .catch((err)=>{
       console.log(err)
@@ -38,13 +39,13 @@ function MyFavorites() {
                     transition={{ duration: 0.8 ,delay: index * 0.1}}
                   >
                       <div class="card book-card">
-                        <img src={""} alt=''class="card-img-top" />
+                        <img src={`${imgurl}${fav?.bookid?.image?.originalname}`} alt=''class="card-img-top" />
                         <div class="card-body text-center">
-                          <h5 class="card-title fw-bold">Title</h5>
+                          <h5 class="card-title fw-bold">{fav.bookid.booktitle}</h5>
                         
-                          <p class="card-text">Genre</p>
+                          <p class="card-text">{fav.bookid.genre}</p>
                           <a
-                            // href={`/Staffbookdetails/${fav._id}`}
+                            href={`/Staffbookdetails/${fav._id}`}
                             class="btn view-button fw-bold"
                           >
                             View Book
