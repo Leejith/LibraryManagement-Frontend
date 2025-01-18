@@ -303,53 +303,98 @@ function StaffBookDetails() {
     </section>
 
     {similarBooks.length > 0 && (
-        <div class="container ">
-          <h3 class="fw-bold text-center">Books You Might Like</h3>
-          <div class="row mt-3">
-            {similarBooks.map((book, index) => (
-              <div class="col-md-3 mb-4" key={index}>
-                <div class="card similarbook-card">
-                  <img
-                    src={`${imgurl}${book.image?.originalname}`}
-                    alt={book.booktitle}
-                    class=" img-fluid"
-                  />
-                  <div class="card-body text-center">
-                    <h5 class="card-title">{book.booktitle}</h5>
-                    <p class="card-text">{book.authorname}</p>
-                    <a href={`/Staffbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+  <div class="container">
+    <h3 class="fw-bold text-center">Books You Might Like</h3>
 
-      {/* Latest Books Section */}
-      {latestBooks.length > 0 && (
-        <div class="container mt-3">
-          <h3 class="fw-bold text-center">Latest Books</h3>
-          <div class="row mt-3">
-            {latestBooks.map((book, index) => (
-              <div class="col-md-3 mb-4" key={index}>
-                <div class="card similarbook-card">
-                  <img
-                    src={`${imgurl}${book.image?.originalname}`}
-                    alt={book.booktitle}
-                    class="card-img-top"
-                  />
-                  <div class="card-body text-center">
-                    <h5 class="card-title">{book.booktitle}</h5>
-                    <p class="card-text">{book.authorname}</p>
-                    <a href={`/Staffbookdetails/${book._id}`} class="btn view-button ">View Details</a>
-                  </div>
-                </div>
+    <div class="row d-block d-sm-none">
+      <div class="col-12">
+        <div class="card-wrapper d-flex overflow-auto">
+          {similarBooks.map((book, index) => (
+            <div class="card similarbook-card flex-shrink-0" key={index}>
+              <img
+                src={`${imgurl}${book.image?.originalname}`}
+                alt={book.booktitle}
+                class="card-img-top img-fluid"
+              />
+              <div class="card-body text-center">
+                <h5 class="card-title">{book.booktitle}</h5>
+                <p class="card-text">{book.authorname}</p>
+                <a href={`/Studentbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row d-none d-sm-flex">
+      {similarBooks.map((book, index) => (
+        <div class="col-md-3 mb-4" key={index}>
+          <div class="card similarbook-card">
+            <img
+              src={`${imgurl}${book.image?.originalname}`}
+              alt={book.booktitle}
+              class="card-img-top img-fluid"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">{book.booktitle}</h5>
+              <p class="card-text">{book.authorname}</p>
+              <a href={`/Studentbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
+            </div>
           </div>
         </div>
-      )}
+      ))}
+    </div>
+  </div>
+)}
+
+{/* Latest Books Section */}
+{latestBooks.length > 0 && (
+  <div class="container mt-3">
+    <h3 class="fw-bold text-center">Latest Books</h3>
+
+    <div class="row d-block d-sm-none">
+      <div class="col-12">
+        <div class="card-wrapper d-flex overflow-auto">
+          {latestBooks.map((book, index) => (
+            <div class="card similarbook-card flex-shrink-0" key={index}>
+              <img
+                src={`${imgurl}${book.image?.originalname}`}
+                alt={book.booktitle}
+                class="card-img-top img-fluid"
+              />
+              <div class="card-body text-center">
+                <h5 class="card-title">{book.booktitle}</h5>
+                <p class="card-text">{book.authorname}</p>
+                <a href={`/Staffbookdetails/${book._id}`} class="btn view-button">View Details</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="row d-none d-sm-flex">
+      {latestBooks.map((book, index) => (
+        <div class="col-md-3 mb-4" key={index}>
+          <div class="card similarbook-card">
+            <img
+              src={`${imgurl}${book.image?.originalname}`}
+              alt={book.booktitle}
+              class="card-img-top img-fluid"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">{book.booktitle}</h5>
+              <p class="card-text">{book.authorname}</p>
+              <a href={`/Staffbookdetails/${book._id}`} class="btn view-button">View Details</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
       </div>
   )
 }

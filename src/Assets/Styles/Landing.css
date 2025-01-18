@@ -140,8 +140,6 @@ img.border-dark {
 .landing-book{
     background-color:#4f7c82;
     height: 100%;
-    display:grid ;
-    place-items:center;
     overflow: hidden;
 }
 .landing-book img{

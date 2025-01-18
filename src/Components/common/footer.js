@@ -29,13 +29,6 @@ function Footer() {
       </div>
     </div>
     
-    // <div className="bg-dark text-white text-center py-3">
-    //     <p>© 2024 E-Library Management | All Rights Reserved</p>
-    //     <div>
-    //       <a href="#" className="text-white me-3">Privacy Policy</a>
-    //       <a href="#" className="text-white">Contact Us</a>
-    //     </div>
-    //   </div>
   )
 }
 

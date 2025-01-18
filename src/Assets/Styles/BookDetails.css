@@ -130,3 +130,8 @@
   width: 100px;
   height: 150px;
 }
+
+.card-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
