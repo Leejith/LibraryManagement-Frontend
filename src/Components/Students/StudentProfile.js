@@ -14,7 +14,7 @@ function StudentProfile() {
   const [profile, setProfile] = useState({});
   const [EditPage, setEditPage] = useState(false);
   const [editData, setEditData] = useState(profile);
-  const [UserProfile,setUserProfile]=useState({})
+  const [UserProfile, setUserProfile] = useState({})
 
   const toggleSidebar = () => {
     setSlideIsOpen(!SlideisOpen);
@@ -27,8 +27,8 @@ function StudentProfile() {
         return <BorrowBooks />;
       case "Favorites":
         return <MyFavorites />;
-        case "StudentCart":
-          return <StudentCart />;
+      case "StudentCart":
+        return <StudentCart />;
       case "FineAmount":
         return <FineAmount />;
       default:
@@ -48,34 +48,62 @@ function StudentProfile() {
       reader.readAsDataURL(file);
     }
   };
-  useEffect(()=>{
-    const id=localStorage.getItem("studentid")
+  useEffect(() => {
+    const id = localStorage.getItem("studentid")
     console.log(id)
-      axios.get(`http://localhost:4060/studentprofile/${id}`)
-      .then((response)=>{
-        console.log(response,"ïi")
+    axios.get(`http://localhost:4060/studentprofile/${id}`)
+      .then((response) => {
+        console.log(response, "ïi")
         setUserProfile(response.data.data)
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err)
       })
-  },[])
+  }, [])
   const handleEditClick = () => {
     setEditData(profile);
     setEditPage(true);
   };
 
   const handleChange = (e) => {
-    setEditData({ ...editData, [e.target.name]: e.target.value });
+    setEditData({
+      ...editData, [e.target.name]:
+        e.target.name === "file" ? e.target.files[0] : e.target.value,
+    });
   };
-  
+
   const handleSave = () => {
     setProfile(editData);
     setEditPage(false);
+    handleSaveprofile()
   };
   const handleClose = () => {
     setEditPage(false);
   };
+
+  const handleSaveprofile = () => {
+    const id = localStorage.getItem('studentid');
+    const formData = new FormData();
+
+    for (const key in editData) {
+      formData.append(key, editData[key]);
+    }
+
+    axios
+      .put(`http://localhost:4060/studentupdate/${id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      .then((response) => {
+        setProfile(editData);
+        setUserProfile(response.data.data);
+        setEditPage(false);
+        console.log('Profile updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating profile:', error);
+      });
+  };
+
   return (
     <div>
       {/* navbar */}
@@ -215,7 +243,7 @@ function StudentProfile() {
             <p>{UserProfile.regno}</p>
             <p>{UserProfile.department}</p>
             <p>{UserProfile.email}</p>
-            
+
           </div>
         </div>
       </div>
@@ -236,10 +264,11 @@ function StudentProfile() {
               <div class="modal-body">
                 <form>
                   <div class="mb-2 text-center">
-                    <label for="upload-pic">
+                    <label htmlFor="upload-pic">
                       <img
                         src={profile || profileimg}
                         class="rounded-circle border-dark profile-pic"
+                        alt="Profile Preview"
                       />
                     </label>
                     <input
@@ -256,7 +285,7 @@ function StudentProfile() {
                       type="text"
                       class="form-control"
                       name="name"
-                      value={profile.name}
+                      value={editData.name || ""}
                       onChange={handleChange}
                     />
                   </div>
@@ -266,7 +295,17 @@ function StudentProfile() {
                       type="text"
                       class="form-control"
                       name="department"
-                      value={profile.department}
+                      value={editData.department || ""}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      value={editData.password || ""}
                       onChange={handleChange}
                     />
                   </div>
@@ -281,6 +320,7 @@ function StudentProfile() {
           </div>
         </div>
       )}
+
       {/* main content */}
       <div class="main-content mt-5">
         <div class="p-4">{renderActiveComponent()}</div>

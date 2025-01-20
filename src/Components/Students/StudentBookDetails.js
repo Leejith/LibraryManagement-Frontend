@@ -8,12 +8,12 @@ function StudentBookDetails() {
   const [Details, setDetails] = useState({});
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [reviewText, setReviewText] = useState("");
-  const [rating, setRating] = useState(0);  // State for rating
+  const [rating, setRating] = useState(0); 
   const [Reviews, setReviews] = useState([]);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [isBorrowed, setIsBorrowed] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [similarBooks, setSimilarBooks] = useState([]);  // State for similar genre books
+  const [similarBooks, setSimilarBooks] = useState([]); 
   const [latestBooks, setLatestBooks] = useState([]);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { id } = useParams();
@@ -29,7 +29,6 @@ function StudentBookDetails() {
     })
       .then((response) => {
         console.log(response);
-        // setIsBorrowed(true);
 
         handleCancel()
       })
@@ -58,7 +57,8 @@ function StudentBookDetails() {
   const reviewsToDisplay = showAllReviews ? Reviews : Reviews.slice(0, 3);
 
 
-  const handleSubmitReview = async () => {
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
     const studentid = localStorage.getItem("studentid");
     const role = "student";
     const postid = id;
@@ -83,8 +83,11 @@ function StudentBookDetails() {
       });
 
       alert("Review submitted successfully!");
+      bookdetails()
       setReviewText("");
       setRating(0);
+     
+
       console.log(response.data);
     } catch (error) {
       console.error("Error submitting review:", error);
@@ -105,19 +108,23 @@ function StudentBookDetails() {
     return (totalRatings / reviews.length).toFixed(1);
   };
   const averageRating = calculateAverageRating(Reviews);
+
+const bookdetails=()=>{
+  axios
+  .get(`http://localhost:4060/viewbook/${id}`)
+  .then((response) => {
+    console.log(response);
+    setDetails(response.data.data);
+    setIsBorrowed(response.data.data.bookstatus)
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
   useEffect(() => {
-    console.log("Book ID:", id)
-    axios
-      .get(`http://localhost:4060/viewbook/${id}`)
-      .then((response) => {
-        console.log(response);
-        setDetails(response.data.data);
-        setIsBorrowed(response.data.data.bookstatus)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id]);
+   
+   bookdetails()
+  }, []);
   useEffect(() => {
     console.log("Book ID in frontend:", id);
     axios
@@ -205,7 +212,7 @@ function StudentBookDetails() {
       });
   };
 
-  const handlelike=()=>{
+  const handlelike = () => {
     if (isFavorite) {
       handleRemoveLike();
 
@@ -283,7 +290,7 @@ function StudentBookDetails() {
                       Unavailable
                     </button>
                   )}
-                  
+
                 </div>
                 <div className="mt-4">
                   {isAddedToCart ? (
@@ -321,7 +328,7 @@ function StudentBookDetails() {
                 <p class="fw-semibold">
                   <strong>DESCRIPTION:</strong> {Details.description}
                 </p>
-                <p class="fw-semibold"><strong>STATUS:</strong> {isBorrowed ? "Unavailable" : "Available"}</p>
+                <p class="fw-semibold"><strong>STATUS:</strong> {isBorrowed == "pending" ? "Available" : "Unavailable"}</p>
 
                 <div class="review-section">
                   <hr />

@@ -16,11 +16,11 @@ function StudentLogin() {
     axios
       .post("http://localhost:4060/loginstudent", Student)
       .then((response) => {
-        if(response.data.msg){
+        if (response.data.msg) {
           console.log(response)
-          localStorage.setItem("studentid",response.data.data._id)
+          localStorage.setItem("studentid", response.data.data._id)
           navigate("/Studenthome")
-        }else{
+        } else {
           alert(response.data.msg)
         }
       })
@@ -41,7 +41,7 @@ function StudentLogin() {
       <div class="container text-center user-con">
         <div class="row">
           <div class="col-lg-5 col-md-6 col-sm-12 p-4 order-1 m-auto">
-            <img src={img} class="img-fluid p-3 " />
+            <img src={img} alt="" class="img-fluid p-3 " />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12  p-0 order-sm-2">
             <form class="mt-5" onSubmit={handleStudentLogin}>

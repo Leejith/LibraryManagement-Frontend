@@ -6,9 +6,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function StaffRegister() {
-
-const navigate=useNavigate()
-
   const [Register, setRegister] = useState({
     name: "",
     department: "",
@@ -17,17 +14,19 @@ const navigate=useNavigate()
     password: "",
     file:null,
   });
+  const [Profile, setProfile] = useState();
+  const navigate=useNavigate()
 
   const reg = (e) => {
     setRegister({
       ...Register,
       [e.target.name]:
-        e.target.name == "file" ? e.target.files[0] : e.target.value
+        e.target.name === "file" ? e.target.files[0] : e.target.value
     });
   };
   
 
-  const [Profile, setProfile] = useState();
+ 
 
   const profileChange = (upload) => {
     const file = upload.target.files[0];
@@ -75,7 +74,7 @@ const navigate=useNavigate()
       <div class="container text-center reg-contain">
         <div class="row">
           <div class="col-lg-5 col-md-6 col-sm-12 order-1 m-auto">
-            <img src={stfreg} class="img-fluid p-5" />
+            <img src={stfreg} alt="" class="img-fluid p-5" />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12 order-sm-2">
             <form class="reg-form" onSubmit={handleSubmit}>
@@ -85,7 +84,7 @@ const navigate=useNavigate()
               <div class="mb-2">
                 <label for="upload-pic">
                   <img
-                    src={Profile || profileimg}
+                    src={Profile || profileimg} alt=""
                     class="rounded-circle profile-pic"
                   />
                 </label>

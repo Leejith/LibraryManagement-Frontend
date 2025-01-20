@@ -5,7 +5,7 @@ import stfimg from "../../Assets/Images/stfimg.png";
 import axios from "axios";
 
 function StaffLogin() {
-  
+
   const navigate = useNavigate();
 
   const [Staff, setStaff] = useState({ email: "", password: "" });
@@ -19,15 +19,15 @@ function StaffLogin() {
     axios
       .post("http://localhost:4060/stafflogin", Staff)
       .then((response) => {
-        if(response.data.msg == "Logged In Successfully"){
-          localStorage.setItem("staffid",response.data.data._id)
+        if (response.data.msg == "Logged In Successfully") {
+          localStorage.setItem("staffid", response.data.data._id)
           alert(response.data.msg);
           navigate("/Staffhome")
         }
-        else{
+        else {
           alert(response.data.msg)
         }
-        
+
       })
       .catch((err) => {
         alert(err);
@@ -35,7 +35,7 @@ function StaffLogin() {
 
   };
   console.log(Staff);
-  
+
 
   const handleForgotPassword = () => {
     navigate("/forgot", { state: { role: "staff" } });
@@ -46,7 +46,7 @@ function StaffLogin() {
       <div class="container text-center user-con">
         <div class="row">
           <div class="col-lg-5 col-md-6 p-0 col-sm-12 order-1 m-auto">
-            <img src={stfimg} class="img-fluid p-5 " />
+            <img src={stfimg} alt="" class="img-fluid p-5 " />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12  p-0 order-sm-2">
             <form class="mt-5 p-4 " onSubmit={staffhandle}>
