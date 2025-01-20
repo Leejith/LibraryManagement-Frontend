@@ -21,11 +21,10 @@ function MyFavorites() {
 
   return (
     <div>
-      <h2>Favorites</h2>
 
-      <section>
+<section>
         <div class="container-fluid  Morebooks-con ">
-          <h1 class="text-center py-3">BOOKS</h1>
+          <h1 class="text-center py-3">Favorite</h1>
           <div class="container ">
             <div class="row">
               {Favorite.map((fav,index) => {

@@ -15,16 +15,17 @@ function StudentReg() {
     file: "",
   });
   const [Profile, setProfile] = useState();
+  const navigate = useNavigate();
 
   const reg = (e) => {
     setStudentRegister({
       ...StudentRegister,
       [e.target.name]:
-        e.target.name == "file" ? e.target.files[0] : e.target.value,
+        e.target.name === "file" ? e.target.files[0] : e.target.value,
     });
   };
 
-  const navigate = useNavigate();
+  
   const profileChange = (upload) => {
     const file = upload.target.files[0];
     if (file) {
@@ -45,7 +46,7 @@ function StudentReg() {
     for (let i in StudentRegister) {
       studentData.append(i, StudentRegister[i]);
     }
-    
+
 
     axios
       .post("http://localhost:4060/savestudent", studentData, {
@@ -67,7 +68,7 @@ function StudentReg() {
       <div class="container text-center reg-contain ">
         <div class="row">
           <div class="col-lg-5 col-md-6 col-sm-12 order-1 m-auto">
-            <img src={stdimg} class="img-fluid p-5" />
+            <img src={stdimg} alt="" class="img-fluid p-5" />
           </div>
           <div class="col-lg-7 col-md-6 col-sm-12 order-sm-2 ">
             <form class="reg-form" onSubmit={handleSubmit}>
@@ -77,7 +78,7 @@ function StudentReg() {
               <div class="mb-2">
                 <label for="upload-pic">
                   <img
-                    src={Profile || profileimg}
+                    src={Profile || profileimg} alt=""
                     class="rounded-circle profile-pic"
                   />
                 </label>
@@ -88,7 +89,7 @@ function StudentReg() {
                   class="form-control"
                   name="file"
                   onChange={handleFileChange}
-                
+
                 />
               </div>
 

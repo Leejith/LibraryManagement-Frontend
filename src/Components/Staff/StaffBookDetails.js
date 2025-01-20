@@ -16,6 +16,7 @@ function StaffBookDetails() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [similarBooks, setSimilarBooks] = useState([]);
   const [latestBooks, setLatestBooks] = useState([]);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -117,27 +118,24 @@ function StaffBookDetails() {
   }, [id]);
 
   const handleFavoriteToggle = () => {
-    const Studentid = localStorage.getItem("studentid");
+    const Staffid = localStorage.getItem("staffid");
     const bookid = id;
 
     setIsFavorite((prevState) => !prevState);
 
 
     axios
-      .post(`http://localhost:4060/addlike/${Studentid}/${bookid}`)
+      .post(`http://localhost:4060/addlike/${Staffid}/${bookid}`)
       .then((response) => {
-        // If the like is added successfully
         console.log("Like status updated successfully:", response.data);
       })
       .catch((error) => {
-        // If an error occurs (like already exists)
         console.error("Error adding/removing like:", error);
 
-        // If the book has already been liked, revert the UI state
         if (error.response && error.response.data.msg === "You have already liked this book.") {
           alert("You have already liked this book.");
         } else {
-          setIsFavorite((prevState) => !prevState); // Revert UI on any other error
+          setIsFavorite((prevState) => !prevState);
         }
       });
   };
@@ -164,238 +162,279 @@ function StaffBookDetails() {
         console.error("Error fetching latest books:", error);
       });
   }, []);
+
+  const handleAddToCart = () => {
+    const studentid = localStorage.getItem("studentid");
+
+    axios
+      .post(`http://localhost:4060/addcart/${studentid}/${id}`)
+      .then((response) => {
+        setIsAddedToCart(true);
+        console.log("Added to cart:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error adding to cart:", error);
+        if (error.response && error.response.data.msg === "Book already added to cart") {
+          alert("Book already added to cart");
+        }
+      });
+  };
+
+  const handleRemoveFromCart = () => {
+    const studentid = localStorage.getItem("studentid");
+
+    axios
+      .post(`http://localhost:4060/removecart/${studentid}/${id}`)
+      .then((response) => {
+        setIsAddedToCart(false);
+        console.log("Removed from cart:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error removing from cart:", error);
+      });
+  };
   return (
     <div class="view">
-    <section class="view mt-5">
-      <div class="container my-5">
-        <div class=" cardbook shadow-lg">
-          <div class="row g-0">
-            <div class="col-md-3 text-center p-4">
-              <img
-                src={`${imgurl}${Details?.image?.originalname}`}
-                alt="Book Cover"
-                className="img-fluid rounded details-img shadow-sm"
-              />
-              <div class="mt-5">
-                {!isBorrowed ? (
-                  <button class="btn borrow fw-bold w-100 mb-4" onClick={handleconfirmborrow}>
-                    Borrow Book
-                  </button>
-                ) : (
-                  <button class="btn borrow fw-bold w-100 mb-4" disabled>
-                    Unavailable
-                  </button>
-                )}
-                <button class="btn  borrow fw-bold w-100">Add to Cart</button>
-              </div>
-            </div>
-            ;
-            <div class="col-md-8 p-4">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2 class="fw-bold mb-0 title">{Details?.booktitle} <span class=" rating-size"> {averageRating} ★</span></h2>
-                
-                <div> <i
-                  class={`ri-heart-${isFavorite ? "fill" : "line"} fs-3 bg-dark-round`}
-                  style={{
-                    color: isFavorite ? "red" : "black",
-                    cursor: "pointer",
-                  }}
-                  onClick={handleFavoriteToggle}
-                ></i></div>
-              </div>
-              <p class="fw-semibold">
-                <strong>AUTHOR:</strong> {Details.authorname}
-              </p>
-              <p class="fw-semibold">
-                <strong>CATEGORY:</strong> {Details.genre}
-              </p>
-              <p class="fw-semibold">
-                <strong>DESCRIPTION:</strong> {Details.description}
-              </p>
-              <p class="fw-semibold"><strong>STATUS:</strong> {isBorrowed ? "Unavailable" : "Available"}</p>
-
-              <div class="review-section">
-                <hr />
-                <h4 class="fw-bold">Reviews</h4>
-
-                <div class="mb-4">
-                  <p class="mb-2">
-                    <strong>Your Rating:</strong>
-                  </p>
-                  <div class="star-rating mb-3">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <span
-                        key={star}
-                        class={`star ${rating >= star ? "filled" : ""}`}
-                        onClick={() => handleRatingChange(star)}
-                      >
-                        ★
-                      </span>
-                    ))}
-                  </div>
-                  <textarea
-                    class="form-control mb-3"
-                    placeholder="Write your review here..."
-                    rows="3"
-                    value={reviewText}
-                    onChange={handleReviewTextChange}
-                  ></textarea>
-                  <button
-                    class="btn btn-review fw-bold"
-                    onClick={handleSubmitReview}
-                  >
-                    Submit Review
-                  </button>
-                </div>
-
-                <ul class="list-unstyled">
-                  {reviewsToDisplay.map((review, index) => (
-                    <li class="mb-4" key={index}>
-                      <strong>
-                        {review.role === "student"
-                          ? review.studentid?.name
-                          : review.staffid?.name}
-                        :
-                      </strong>
-                      <p class="mb-1">{review.content}</p>
-                      <p class="text-muted">Rating: {review.rating} ★</p>
-                    </li>
-                  ))}
-                </ul>
-
-                {Reviews.length > 3 && (
-                  <button
-                    class="btn btn-link p-0 text-decoration-none show-more"
-                    onClick={() => setShowAllReviews(!showAllReviews)}
-                  >
-                    {showAllReviews ? "Show Less" : "Show More"}
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class={`modal fade ${showConfirmationModal ? 'show' : ''}`} id="borrowConfirmationModal" style={{ display: showConfirmationModal ? 'block' : 'none' }} aria-labelledby="borrowConfirmationModalLabel" aria-hidden={!showConfirmationModal}>
-          <div class="modal-dialog mt-5">
-            <div class="modal-content book-confirm">
-              <div class="modal-header confirm-header">
-                <h5 class="modal-title" id="borrowConfirmationModalLabel">Confirm Borrowing</h5>
-                <button type="button" class="btn-close" onClick={handleCancel} aria-label="Close"></button>
-              </div>
-              <div class="modal-body text-center">
-                <p class="fw-semibold">You are about to borrow the book:</p>
-                <h4 class="fw-bold">{Details.booktitle}</h4>
+      <section class="view mt-5">
+        <div class="container my-5">
+          <div class=" cardbook shadow-lg">
+            <div class="row g-0">
+              <div class="col-md-3 text-center p-4">
                 <img
                   src={`${imgurl}${Details?.image?.originalname}`}
                   alt="Book Cover"
-                  class="img-fluid rounded confirmbuy-img shadow-sm mt-3 mb-4"
-                
+                  className="img-fluid rounded details-img shadow-sm"
                 />
-                <div class="mt-3">
-                  <button class="btn btn-success" onClick={handleorder}>Confirm</button>
-                  <button class="btn btn-danger ms-3" onClick={handleCancel}>Cancel</button>
+                <div class="mt-5">
+                  {!isBorrowed ? (
+                    <button class="btn borrow fw-bold w-100 mb-4" onClick={handleconfirmborrow}>
+                      Borrow Book
+                    </button>
+                  ) : (
+                    <button class="btn borrow fw-bold w-100 mb-4" disabled>
+                      Unavailable
+                    </button>
+                  )}
+                  <div className="mt-4">
+                    {isAddedToCart ? (
+                      <button className="btn borrow fw-bold w-100 mb-4" onClick={handleRemoveFromCart}>
+                        Remove from Cart
+                      </button>
+                    ) : (
+                      <button className="btn borrow fw-bold w-100 mb-4" onClick={handleAddToCart}>
+                        Add to Cart
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+              ;
+              <div class="col-md-8 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h2 class="fw-bold mb-0 title">{Details?.booktitle} <span class=" rating-size"> {averageRating} ★</span></h2>
+
+                  <div> <i
+                    class={`ri-heart-${isFavorite ? "fill" : "line"} fs-3 bg-dark-round`}
+                    style={{
+                      color: isFavorite ? "red" : "black",
+                      cursor: "pointer",
+                    }}
+                    onClick={handleFavoriteToggle}
+                  ></i></div>
+                </div>
+                <p class="fw-semibold">
+                  <strong>AUTHOR:</strong> {Details.authorname}
+                </p>
+                <p class="fw-semibold">
+                  <strong>CATEGORY:</strong> {Details.genre}
+                </p>
+                <p class="fw-semibold">
+                  <strong>DESCRIPTION:</strong> {Details.description}
+                </p>
+                <p class="fw-semibold"><strong>STATUS:</strong> {isBorrowed ? "Unavailable" : "Available"}</p>
+
+                <div class="review-section">
+                  <hr />
+                  <h4 class="fw-bold">Reviews</h4>
+
+                  <div class="mb-4">
+                    <p class="mb-2">
+                      <strong>Your Rating:</strong>
+                    </p>
+                    <div class="star-rating mb-3">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <span
+                          key={star}
+                          class={`star ${rating >= star ? "filled" : ""}`}
+                          onClick={() => handleRatingChange(star)}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <textarea
+                      class="form-control mb-3"
+                      placeholder="Write your review here..."
+                      rows="3"
+                      value={reviewText}
+                      onChange={handleReviewTextChange}
+                    ></textarea>
+                    <button
+                      class="btn btn-review fw-bold"
+                      onClick={handleSubmitReview}
+                    >
+                      Submit Review
+                    </button>
+                  </div>
+
+                  <ul class="list-unstyled">
+                    {reviewsToDisplay.map((review, index) => (
+                      <li class="mb-4" key={index}>
+                        <strong>
+                          {review.role === "student"
+                            ? review.studentid?.name
+                            : review.staffid?.name}
+                          :
+                        </strong>
+                        <p class="mb-1">{review.content}</p>
+                        <p class="text-muted">Rating: {review.rating} ★</p>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {Reviews.length > 3 && (
+                    <button
+                      class="btn btn-link p-0 text-decoration-none show-more"
+                      onClick={() => setShowAllReviews(!showAllReviews)}
+                    >
+                      {showAllReviews ? "Show Less" : "Show More"}
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class={`modal fade ${showConfirmationModal ? 'show' : ''}`} id="borrowConfirmationModal" style={{ display: showConfirmationModal ? 'block' : 'none' }} aria-labelledby="borrowConfirmationModalLabel" aria-hidden={!showConfirmationModal}>
+            <div class="modal-dialog mt-5">
+              <div class="modal-content book-confirm">
+                <div class="modal-header confirm-header">
+                  <h5 class="modal-title" id="borrowConfirmationModalLabel">Confirm Borrowing</h5>
+                  <button type="button" class="btn-close" onClick={handleCancel} aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                  <p class="fw-semibold">You are about to borrow the book:</p>
+                  <h4 class="fw-bold">{Details.booktitle}</h4>
+                  <img
+                    src={`${imgurl}${Details?.image?.originalname}`}
+                    alt="Book Cover"
+                    class="img-fluid rounded confirmbuy-img shadow-sm mt-3 mb-4"
+
+                  />
+                  <div class="mt-3">
+                    <button class="btn btn-success" onClick={handleorder}>Confirm</button>
+                    <button class="btn btn-danger ms-3" onClick={handleCancel}>Cancel</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {similarBooks.length > 0 && (
-  <div class="container">
-    <h3 class="fw-bold text-center">Books You Might Like</h3>
+      {similarBooks.length > 0 && (
+        <div class="container">
+          <h3 class="fw-bold text-center">Books You Might Like</h3>
 
-    <div class="row d-block d-sm-none">
-      <div class="col-12">
-        <div class="card-wrapper d-flex overflow-auto">
-          {similarBooks.map((book, index) => (
-            <div class="card similarbook-card flex-shrink-0" key={index}>
-              <img
-                src={`${imgurl}${book.image?.originalname}`}
-                alt={book.booktitle}
-                class="card-img-top img-fluid"
-              />
-              <div class="card-body text-center">
-                <h5 class="card-title">{book.booktitle}</h5>
-                <p class="card-text">{book.authorname}</p>
-                <a href={`/Studentbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
+          <div class="row d-block d-sm-none">
+            <div class="col-12">
+              <div class="card-wrapper d-flex overflow-auto">
+                {similarBooks.map((book, index) => (
+                  <div class="card similarbook-card flex-shrink-0" key={index}>
+                    <img
+                      src={`${imgurl}${book.image?.originalname}`}
+                      alt={book.booktitle}
+                      class="card-img-top img-fluid"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">{book.booktitle}</h5>
+                      <p class="card-text">{book.authorname}</p>
+                      <a href={`/Studentbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
+          </div>
 
 
-    <div class="row d-none d-sm-flex">
-      {similarBooks.map((book, index) => (
-        <div class="col-md-3 mb-4" key={index}>
-          <div class="card similarbook-card">
-            <img
-              src={`${imgurl}${book.image?.originalname}`}
-              alt={book.booktitle}
-              class="card-img-top img-fluid"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title">{book.booktitle}</h5>
-              <p class="card-text">{book.authorname}</p>
-              <a href={`/Studentbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
-            </div>
+          <div class="row d-none d-sm-flex">
+            {similarBooks.map((book, index) => (
+              <div class="col-md-3 mb-4" key={index}>
+                <div class="card similarbook-card">
+                  <img
+                    src={`${imgurl}${book.image?.originalname}`}
+                    alt={book.booktitle}
+                    class="card-img-top img-fluid"
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">{book.booktitle}</h5>
+                    <p class="card-text">{book.authorname}</p>
+                    <a href={`/Studentbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-)}
+      )}
 
-{/* Latest Books Section */}
-{latestBooks.length > 0 && (
-  <div class="container mt-3">
-    <h3 class="fw-bold text-center">Latest Books</h3>
+      {/* Latest Books Section */}
+      {latestBooks.length > 0 && (
+        <div class="container mt-3">
+          <h3 class="fw-bold text-center">Latest Books</h3>
 
-    <div class="row d-block d-sm-none">
-      <div class="col-12">
-        <div class="card-wrapper d-flex overflow-auto">
-          {latestBooks.map((book, index) => (
-            <div class="card similarbook-card flex-shrink-0" key={index}>
-              <img
-                src={`${imgurl}${book.image?.originalname}`}
-                alt={book.booktitle}
-                class="card-img-top img-fluid"
-              />
-              <div class="card-body text-center">
-                <h5 class="card-title">{book.booktitle}</h5>
-                <p class="card-text">{book.authorname}</p>
-                <a href={`/Staffbookdetails/${book._id}`} class="btn view-button">View Details</a>
+          <div class="row d-block d-sm-none">
+            <div class="col-12">
+              <div class="card-wrapper d-flex overflow-auto">
+                {latestBooks.map((book, index) => (
+                  <div class="card similarbook-card flex-shrink-0" key={index}>
+                    <img
+                      src={`${imgurl}${book.image?.originalname}`}
+                      alt={book.booktitle}
+                      class="card-img-top img-fluid"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">{book.booktitle}</h5>
+                      <p class="card-text">{book.authorname}</p>
+                      <a href={`/Staffbookdetails/${book._id}`} class="btn view-button">View Details</a>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
+          </div>
 
-    <div class="row d-none d-sm-flex">
-      {latestBooks.map((book, index) => (
-        <div class="col-md-3 mb-4" key={index}>
-          <div class="card similarbook-card">
-            <img
-              src={`${imgurl}${book.image?.originalname}`}
-              alt={book.booktitle}
-              class="card-img-top img-fluid"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title">{book.booktitle}</h5>
-              <p class="card-text">{book.authorname}</p>
-              <a href={`/Staffbookdetails/${book._id}`} class="btn view-button">View Details</a>
-            </div>
+          <div class="row d-none d-sm-flex">
+            {latestBooks.map((book, index) => (
+              <div class="col-md-3 mb-4" key={index}>
+                <div class="card similarbook-card">
+                  <img
+                    src={`${imgurl}${book.image?.originalname}`}
+                    alt={book.booktitle}
+                    class="card-img-top img-fluid"
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">{book.booktitle}</h5>
+                    <p class="card-text">{book.authorname}</p>
+                    <a href={`/Staffbookdetails/${book._id}`} class="btn view-button">View Details</a>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
+      )}
     </div>
-  </div>
-)}
-      </div>
   )
 }
 

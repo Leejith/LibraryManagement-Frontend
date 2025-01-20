@@ -44,10 +44,14 @@ function Landing() {
     setShowMessage(false);
   };
 
-  const handleloginOpen = () => setloginVisible(true);
-  const handleloginClose = () => setloginVisible(false);
+  const handleloginOpen = () => {
+    setloginVisible(true)
+  };
+  const handleloginClose = () =>{ 
+    setloginVisible(false)
+  };
 
-  const isMobile = window.innerWidth <= 768;
+  
 
   const quotes = [
     {
@@ -333,7 +337,7 @@ function Landing() {
                 </motion.div>
               </AnimatePresence>
             </div>
-            <div className="col-md-6 text-center">
+            <div class="col-md-6 text-center">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={genres[Index].image}
@@ -432,11 +436,11 @@ function Landing() {
 
       {/* alert */}
       {showMessage && (
-        <div className="message-overlay">
-          <div className="message-box">
+        <div class="message-overlay">
+          <div class="message-box">
             <h4>Please Login or Register</h4>
             <p>To continue, you need to log in or register an account.</p>
-            <button className="btn btn-dark" onClick={handleCloseMessage}>
+            <button class="btn btn-dark" onClick={handleCloseMessage}>
               Close
             </button>
           </div>
@@ -446,9 +450,9 @@ function Landing() {
       {/* login */}
 
       {loginVisible && (
-        <div className="login-overlay " onClick={handleloginClose}>
-          <div className="login-content">
-            <button className="close-button" onClick={handleloginClose}>
+        <div class="login-overlay " onClick={handleloginClose}>
+          <div class="login-content">
+            <button class="close-button" onClick={handleloginClose}>
               &times;
             </button>
             <Login />
