@@ -12,7 +12,7 @@ function StudentProfile() {
   const [activeComponent, setActiveComponent] = useState("MyBook");
   const [profile, setProfile] = useState({});
   const [EditPage, setEditPage] = useState(false);
-  const [editData, setEditData] = useState(profile);
+  const [editData, setEditData] = useState();
   const [UserProfile, setUserProfile] = useState({})
 
   const toggleSidebar = () => {
@@ -44,7 +44,36 @@ function StudentProfile() {
         setProfile(reader.result);
       };
       reader.readAsDataURL(file);
+
+
+      const id = localStorage.getItem('studentid');
+    const formData = new FormData();
+
+    for (const key in editData) {
+      formData.append(key, editData[key]);
+      // formData.append("image", editData.image)
     }
+
+    axios
+      .put(`http://localhost:4060/studentupdate/${id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      .then((response) => {
+        setProfile(editData);
+        setUserProfile(response.data.data);
+        setEditPage(false);
+        console.log('Profile updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating profile:', error);
+      });
+
+    }
+
+    setEditData({
+      ...editData, [upload.target.name]:
+        upload.target.name === "file" || upload.target.name === "image" ? upload.target.files[0] : upload.target.value,
+    });
   };
   useEffect(() => {
     const id = localStorage.getItem("studentid")
@@ -66,9 +95,10 @@ function StudentProfile() {
   const handleChange = (e) => {
     setEditData({
       ...editData, [e.target.name]:
-        e.target.name === "file" ? e.target.files[0] : e.target.value,
+        e.target.name === "file" || e.target.name === "image" ? e.target.files[0] : e.target.value,
     });
   };
+  console.log(editData)
 
   const handleSave = () => {
     setProfile(editData);
@@ -85,8 +115,7 @@ function StudentProfile() {
 console.log(formData)
     for (const key in editData) {
       formData.append(key, editData[key]);
-     
-    }
+
     formData.append("file", editData.image);
   
     
@@ -251,9 +280,10 @@ console.log(formData)
                   <div class="mb-2 text-center">
                     <label htmlFor="upload-pic">
                       <img
-                        src={profile || profileimg}
+                        src={profile}
                         class="rounded-circle border-dark profile-pic"
                         alt="Profile Preview"
+                        name="file"
                       />
                     </label>
                     <input
