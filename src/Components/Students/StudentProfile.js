@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../../Assets/Styles/Profile.css";
 import BorrowBooks from "./BorrowBooks";
 import MyFavorites from "./MyFavorites";
-import FineAmount from "./FineAmount";
 import profileimg from "../../Assets/Images/profile.png";
 import axios from "axios";
 import imgurl from '../../Api/Imgurl'
@@ -29,8 +28,6 @@ function StudentProfile() {
         return <MyFavorites />;
       case "StudentCart":
         return <StudentCart />;
-      case "FineAmount":
-        return <FineAmount />;
       default:
         return <BorrowBooks />;
     }
@@ -38,6 +35,7 @@ function StudentProfile() {
 
   const profileChange = (upload) => {
     const file = upload.target.files[0];
+    handleSaveprofile()
     if (file) {
       const reader = new FileReader();
       console.log(reader);
@@ -84,13 +82,16 @@ function StudentProfile() {
   const handleSaveprofile = () => {
     const id = localStorage.getItem('studentid');
     const formData = new FormData();
-
+console.log(formData)
     for (const key in editData) {
       formData.append(key, editData[key]);
+     
     }
-
+    formData.append("file", editData.image);
+  
+    
     axios
-      .put(`http://localhost:4060/studentupdate/${id}`, formData, {
+      .post(`http://localhost:4060/studentupdate/${id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((response) => {
@@ -144,15 +145,7 @@ function StudentProfile() {
                   Cart
                 </a>
               </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="#fineAmount"
-                  onClick={() => setActiveComponent("FineAmount")}
-                >
-                  Fine Amount
-                </a>
-              </li>
+              
             </ul>
 
             {/* Dropdown for small screens */}
@@ -176,7 +169,7 @@ function StudentProfile() {
                     <a
                       class="dropdown-item"
                       href="#myBook"
-                      onClick={() => setActiveComponent("myBook")}
+                      onClick={() => setActiveComponent("MyBook")}
                     >
                       My Book
                     </a>
@@ -185,7 +178,7 @@ function StudentProfile() {
                     <a
                       class="dropdown-item "
                       href="#favorites"
-                      onClick={() => setActiveComponent("favorites")}
+                      onClick={() => setActiveComponent("Favorites")}
                     >
                       Favorites
                     </a>
@@ -194,20 +187,12 @@ function StudentProfile() {
                     <a
                       class="dropdown-item "
                       href="#cart"
-                      onClick={() => setActiveComponent("cart")}
+                      onClick={() => setActiveComponent("StudentCart")}
                     >
                       Cart
                     </a>
                   </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="#fineAmount"
-                      onClick={() => setActiveComponent("fineAmount")}
-                    >
-                      Fine Amount
-                    </a>
-                  </li>
+                
                 </ul>
               </li>
             </ul>
@@ -239,7 +224,7 @@ function StudentProfile() {
             >
               <i class="ri-edit-fill"></i>
             </button>
-            <h5 class="mt-4">{UserProfile.name}</h5>
+            <h5 class="mt-4 fw-bold ">{UserProfile.name}</h5>
             <p>{UserProfile.regno}</p>
             <p>{UserProfile.department}</p>
             <p>{UserProfile.email}</p>
@@ -275,8 +260,9 @@ function StudentProfile() {
                       type="file"
                       id="upload-pic"
                       accept="image/*"
+                      name="file"
                       class="form-control"
-                      onChange={profileChange}
+                      onChange={handleChange}
                     />
                   </div>
                   <div class="mb-3">
