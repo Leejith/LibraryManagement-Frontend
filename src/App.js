@@ -27,7 +27,7 @@ import StudentNavbar from './Components/Students/StudentNavbar';
 import StudentBook from './Components/Students/StudentBook';
 import StudentBookDetails from './Components/Students/StudentBookDetails';
 import RequestList from './Components/Admin/RequestList';
-import Footer from './Components/common/Footer';
+import Footer from './Components/common/footer';
 
 
 

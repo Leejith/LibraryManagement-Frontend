@@ -11,7 +11,7 @@ function StudentBookDetails() {
   const [rating, setRating] = useState(0); 
   const [Reviews, setReviews] = useState([]);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const [isBorrowed, setIsBorrowed] = useState(false);
+  const [isBorrowed, setIsBorrowed] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [similarBooks, setSimilarBooks] = useState([]); 
   const [latestBooks, setLatestBooks] = useState([]);
@@ -29,7 +29,7 @@ function StudentBookDetails() {
     })
       .then((response) => {
         console.log(response);
-
+        bookdetails()
         handleCancel()
       })
       .catch((err) => {
@@ -47,7 +47,7 @@ function StudentBookDetails() {
 
   const handleconfirmborrow = () => {
     setShowConfirmationModal(true);
-
+    bookdetails()
   };
 
   const handleCancel = () => {
@@ -86,6 +86,7 @@ function StudentBookDetails() {
       bookdetails()
       setReviewText("");
       setRating(0);
+      writereview()
      
 
       console.log(response.data);
@@ -125,8 +126,8 @@ const bookdetails=()=>{
    
    bookdetails()
   }, []);
-  useEffect(() => {
-    console.log("Book ID in frontend:", id);
+
+  const writereview=()=>{
     axios
       .get(`http://localhost:4060/reviewlist/${id}`)
       .then((response) => {
@@ -136,6 +137,10 @@ const bookdetails=()=>{
       .catch((error) => {
         console.error("Error fetching reviews:", error.response ? error.response.data : error.message);
       });
+  }
+  useEffect(() => {
+    console.log("Book ID in frontend:", id);
+    writereview()
   }, [id]);
 
   useEffect(() => {
@@ -281,7 +286,7 @@ const bookdetails=()=>{
 
 
                 <div class="mt-4">
-                  {isBorrowed === "pending" ? (
+                  {Details?.bookstatus == "pending" ? (
                     <button class="btn borrow fw-bold w-100 mb-4" onClick={handleconfirmborrow}>
                       Borrow Book
                     </button>
