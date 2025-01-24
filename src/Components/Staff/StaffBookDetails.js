@@ -45,7 +45,7 @@ function StaffBookDetails() {
     })
       .then((response) => {
         console.log(response);
-        setIsBorrowed(true);
+      
         handleCancel()
       })
       .catch((err) => {
@@ -116,7 +116,20 @@ function StaffBookDetails() {
         console.error("Error fetching reviews:", error.response ? error.response.data : error.message);
       });
   }, [id]);
+  useEffect(() => {
+    const staffid = localStorage.getItem("staffid");
 
+    axios
+      .get(`http://localhost:4060/staffgetlike/${staffid}`)
+      .then((response) => {
+        const likeItems = response.data.data;
+        const isFavorite = likeItems.some((item) => item.bookid._id === id);
+        setIsFavorite(isFavorite);
+      })
+      .catch((error) => {
+        console.error("Error checking cart status:", error);
+      });
+  }, [id]);
   const handleFavoriteToggle = () => {
     const Staffid = localStorage.getItem("staffid");
     const bookid = id;
@@ -125,18 +138,38 @@ function StaffBookDetails() {
 
 
     axios
-      .post(`http://localhost:4060/addlike/${Staffid}/${bookid}`)
+      .post(`http://localhost:4060/staffaddlike/${Staffid}/${bookid}`)
       .then((response) => {
         console.log("Like status updated successfully:", response.data);
       })
       .catch((error) => {
         console.error("Error adding/removing like:", error);
-
         if (error.response && error.response.data.msg === "You have already liked this book.") {
           alert("You have already liked this book.");
         } else {
           setIsFavorite((prevState) => !prevState);
         }
+      });
+  };
+  const handlelike = () => {
+    if (isFavorite) {
+      handleRemoveLike();
+
+    } else {
+      handleFavoriteToggle();
+    }
+  }
+  const handleRemoveLike = () => {
+    const staffid = localStorage.getItem("staffid");
+
+    axios
+      .post(`http://localhost:4060/staffremovelike/${staffid}/${id}`)
+      .then((response) => {
+        setIsFavorite(false);
+        console.log("Removed from like:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error removing from like:", error);
       });
   };
   useEffect(() => {
@@ -163,11 +196,26 @@ function StaffBookDetails() {
       });
   }, []);
 
-  const handleAddToCart = () => {
-    const studentid = localStorage.getItem("studentid");
+
+  useEffect(() => {
+    const staffid = localStorage.getItem("staffid");
 
     axios
-      .post(`http://localhost:4060/addcart/${studentid}/${id}`)
+      .get(`http://localhost:4060/getcart/${staffid}`)
+      .then((response) => {
+        const cartItems = response.data.data;
+        const isBookInCart = cartItems.some((item) => item.bookid._id === id);
+        setIsAddedToCart(isBookInCart);
+      })
+      .catch((error) => {
+        console.error("Error checking cart status:", error);
+      });
+  }, [id]);
+  const handleAddToCart = () => {
+    const staffid = localStorage.getItem("staffid");
+
+    axios
+      .post(`http://localhost:4060/addcart/${staffid}/${id}`)
       .then((response) => {
         setIsAddedToCart(true);
         console.log("Added to cart:", response.data);
@@ -181,10 +229,10 @@ function StaffBookDetails() {
   };
 
   const handleRemoveFromCart = () => {
-    const studentid = localStorage.getItem("studentid");
+    const staffid = localStorage.getItem("staffid");
 
     axios
-      .post(`http://localhost:4060/removecart/${studentid}/${id}`)
+      .post(`http://localhost:4060/removecart/${staffid}/${id}`)
       .then((response) => {
         setIsAddedToCart(false);
         console.log("Removed from cart:", response.data);
@@ -206,7 +254,7 @@ function StaffBookDetails() {
                   className="img-fluid rounded details-img shadow-sm"
                 />
                 <div class="mt-5">
-                  {!isBorrowed ? (
+                  {!isBorrowed ==="pending" ? (
                     <button class="btn borrow fw-bold w-100 mb-4" onClick={handleconfirmborrow}>
                       Borrow Book
                     </button>
@@ -239,7 +287,7 @@ function StaffBookDetails() {
                       color: isFavorite ? "red" : "black",
                       cursor: "pointer",
                     }}
-                    onClick={handleFavoriteToggle}
+                    onClick={handlelike}
                   ></i></div>
                 </div>
                 <p class="fw-semibold">

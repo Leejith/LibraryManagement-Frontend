@@ -33,7 +33,7 @@ function StudentLogin() {
   const navigate = useNavigate();
 
   const handleForgotPassword = () => {
-    navigate("/forgot", { state: { role: "student" } });
+    navigate("/StudentForget");
   };
 
   return (

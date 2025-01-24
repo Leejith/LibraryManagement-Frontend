@@ -8,8 +8,6 @@ import StaffRegister from './Components/Staff/StaffRegister';
 import AdminLogin from './Components/Admin/AdminLogin';
 import Login from './Components/common/Login';
 import StudentReg from './Components/Students/StudentReg';
-import ForgotPassword from './Components/common/ForgotPassword';
-import Reset from './Components/common/Reset';
 import Landing from './Components/common/Landing';
 import StudentProfile from './Components/Students/StudentProfile';
 import StaffProfile from './Components/Staff/StaffProfile';
@@ -27,7 +25,11 @@ import StudentNavbar from './Components/Students/StudentNavbar';
 import StudentBook from './Components/Students/StudentBook';
 import StudentBookDetails from './Components/Students/StudentBookDetails';
 import RequestList from './Components/Admin/RequestList';
-import Footer from './Components/common/footer';
+
+import Footer from './Components/common/Footer';
+import StudentForgetPassword from './Components/Students/StudentForgetPassword';
+import StaffForgetPassword from './Components/Staff/StaffForgetPassword';
+
 
 
 
@@ -59,8 +61,8 @@ function App() {
         <Route path='/requestlist'element={<RequestList/>}/>
         <Route path='/StaffList'element={<StaffList/>}/>
         <Route path='/StudentList'element={<StudentList/>}/>
-        <Route path='/forgot'element={<ForgotPassword/>}/>
-        <Route path='/reset-password'element={<Reset/>}/>
+        <Route path='/StudentForget'element={<StudentForgetPassword/>}/>
+        <Route path='/StaffForget'element={<StaffForgetPassword/>}/>
       </Routes>
     </BrowserRouter>
   )
