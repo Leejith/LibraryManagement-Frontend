@@ -49,17 +49,17 @@ function StudentCart() {
               <div key={item.bookid._id} class="col-md-4 mb-4">
                 <div class="card cart-card shadow-sm">
                   <img
-                    src={`${imgurl}${item.bookid.image.originalname}`}
-                    alt={item.bookid.booktitle}
+                    src={`${imgurl}${item.bookid?.image.originalname}`}
+                    alt={item.bookid?.booktitle}
                     class="card-img-top img-fluid cart-image"
                   />
                   <div class="card-body text-center">
-                    <h5 class="card-title">{item.bookid.booktitle}</h5>
+                    <h5 class="card-title">{item.bookid?.booktitle}</h5>
                     <p class="card-text">
-                      {item.bookid.authorname}
+                      {item.bookid?.authorname}
                     </p>
                     <p class="card-text">
-                    {item.bookid.genre}
+                    {item.bookid?.genre}
                     </p>
                     <button
                       class="btn cartRemove-button w-100 fw-bold"

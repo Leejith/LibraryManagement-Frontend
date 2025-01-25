@@ -115,7 +115,7 @@ function StudentProfile() {
 console.log(formData)
     for (const key in editData) {
       formData.append(key, editData[key]);
-
+    }
     formData.append("file", editData.image);
   
     

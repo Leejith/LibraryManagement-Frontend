@@ -125,7 +125,9 @@ const bookdetails=()=>{
   useEffect(() => {
    
    bookdetails()
-  }, []);
+   writereview()
+   similarbook()
+  }, );
 
   const writereview=()=>{
     axios
@@ -138,12 +140,8 @@ const bookdetails=()=>{
         console.error("Error fetching reviews:", error.response ? error.response.data : error.message);
       });
   }
-  useEffect(() => {
-    console.log("Book ID in frontend:", id);
-    writereview()
-  }, [id]);
 
-  useEffect(() => {
+  const similarbook=()=>{
     if (Details?.genre) {
       axios
         .get(`http://localhost:4060/similarbook/${Details.genre}`)
@@ -154,7 +152,7 @@ const bookdetails=()=>{
           console.error("Error fetching similar books:", error);
         });
     }
-  }, [Details?.genre]);
+  }
 
   useEffect(() => {
     axios

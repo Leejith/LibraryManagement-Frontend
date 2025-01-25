@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-
-function BorrowedList() {
-  const [Borrowed, setBorrowed] = useState([]);
+function StaffBorrowList() {
+    const [Borrowed, setBorrowed] = useState([]);
 
   const borrowbook = () => {
     axios.get("http://localhost:4060/borrowlist")
@@ -20,11 +19,11 @@ function BorrowedList() {
     borrowbook()
   }, [])
 
-  const returnbook = (studentid, bookid) => {
+  const returnbook = (staffid, bookid) => {
 
     console.log(bookid, "i")
-    console.log(studentid, "ii")
-    axios.delete(`http://localhost:4060/returnorder/${studentid}`)
+    console.log(staffid, "ii")
+    axios.delete(`http://localhost:4060/returnorder/${staffid}`)
       .then((response) => {
         console.log(response)
         borrowbook()
@@ -41,11 +40,10 @@ function BorrowedList() {
         console.log(err);
       })
   }
-
   return (
     <div>
       <div class="container my-5">
-        <h2 class="mb-4 fw-bold">Borrow Books</h2>
+        <h2 class="mb-4 fw-bold"> Staff Borrow Books</h2>
         {Borrowed.length === 0 ? (
           <div>No  borrowed books found.</div>
         ) : (
@@ -85,4 +83,4 @@ function BorrowedList() {
   )
 }
 
-export default BorrowedList
+export default StaffBorrowList

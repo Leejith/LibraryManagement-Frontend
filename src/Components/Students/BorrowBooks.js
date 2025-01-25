@@ -18,13 +18,13 @@ function BorrowBooks() {
 
   return (
     <div>
-      <h1 class="fw-bold">my book </h1>
+      <h1 class="fw-bold  m-3 text-center">MY BOOK </h1>
 
-      <section class="view mt-5">
-        <div class="container my-5">
+      
+        <div class="container  ">
           {Borrowed.map((borrow)=>{
             return(
-              <div class="cardbook shadow-lg">
+              <div class="cardbook  shadow-lg">
             <div class="row g-0">
               <div class="col-md-3 text-center p-4">
                 <img
@@ -36,7 +36,7 @@ function BorrowBooks() {
 
                 
               </div>
-              <div class="col-md-8 p-4">
+              <div class="col-md-8 p-4 mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h2 class="fw-bold mb-0 title">{borrow?.bookid?.booktitle} </h2>
                   
@@ -45,19 +45,14 @@ function BorrowBooks() {
 
                 </div>
                 <p class="fw-semibold">
-                  <strong>AUTHOR:</strong> {borrow?.bookid?.authorname}
+                  <strong>AUTHOR:</strong>    {borrow?.bookid?.authorname}
                 </p>
                 <p class="fw-semibold">
-                  <strong>CATEGORY:</strong> {borrow?.bookid?.genre}
+                  <strong>CATEGORY:</strong>  {borrow?.bookid?.genre}
                 </p>
                 <p class="fw-semibold">
                   <strong>DESCRIPTION:</strong> {borrow?.bookid?.description}
                 </p>
-                {/* <p class="fw-semibold"><strong>STATUS:</strong> {isBorrowed == "pending" ? "Available" : "Unavailable"}</p> */}
-
-                <div class="review-section">
-                  <hr />
-                </div>
               </div>
             </div>
           </div>
@@ -67,7 +62,6 @@ function BorrowBooks() {
         </div>
 
 
-      </section>
 
 
     </div>

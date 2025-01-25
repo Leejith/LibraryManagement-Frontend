@@ -26,7 +26,7 @@ function StudentNavbar() {
             aria-controls="offcanvasNavbar"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <i class="ri-menu-fill"></i>
           </button>
           <div
             class="offcanvas offcanvas-end"
@@ -58,7 +58,7 @@ function StudentNavbar() {
                   </Link>
                 </li>
                 <li class="nav-item list">
-                  <Link to={"/studentbook"} class="nav-link list active mx-lg-2">
+                  <Link to={"/studentbook"} class="nav-link list active mx-lg-2 ">
                     BOOKS
                   </Link>
                 </li>
