@@ -25,7 +25,7 @@ function StaffNavbar() {
                         aria-controls="offcanvasNavbar"
                         aria-label="Toggle navigation"
                     >
-                        <span class="navbar-toggler-icon"></span>
+                        <i class="ri-menu-fill"></i>
                     </button>
                     <div
                         class="offcanvas offcanvas-end"

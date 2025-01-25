@@ -79,3 +79,13 @@
     background-color: white;
     color: black;
 }
+
+.logout-button{
+    background-color: #0b2e33;
+    color: white;
+    padding: 7px 10px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 1s;
+    border: 2px solid
+}

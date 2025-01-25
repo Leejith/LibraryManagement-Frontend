@@ -1,15 +1,20 @@
 import React from "react";
 import "../../Assets/Styles/AdminHome.css";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import BookList from "./BookList";
 import AddBook from "./AddBook";
 import StaffList from "./StaffList";
 import StudentList from "./StudentList";
-import RequestList from "./RequestList";
 import BorrowedList from "./BorrowedList";
+import StaffBorrowList from "./StaffBorrowList";
+
 
 function AdminHome() {
-  
+  const navigate=useNavigate()
+
+  const handleAdminLogout=()=>{
+    navigate("/")
+  }
   return (
     <div>
       <div>
@@ -24,7 +29,7 @@ function AdminHome() {
               aria-controls="offcanvasNavbar"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <i class="ri-menu-fill"></i>
             </button>
             <div
               class="offcanvas offcanvas-end"
@@ -43,11 +48,28 @@ function AdminHome() {
               </div>
               <div class="offcanvas-body ">
                 <div class="nav d-flex justify-content-center flex-grow-1 pe-2">
-                  <li class="nav-item ">
-                    <Link class="nav-link active fw-bold" to="borrowlist">
-                      BORROWED LIST
-                    </Link>
-                  </li>
+                <div class="dropdown ">
+                    <button
+                      class="btn navbar-droplist  dropdown-toggle mx-lg-2 fw-bold"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Borrowed USER LIST
+                    </button>
+                    <ul class="dropdown-menu dropadmin">
+                      <li>
+                      <Link className="dropdown-item" to="staffborrow">
+                        STAFF Book list
+                      </Link>
+                      </li>
+                      <li>
+                      <Link className="dropdown-item" to="borrowlist">
+                        STUDENT Book List
+                      </Link>
+                      </li>
+                    </ul>
+                  </div>
 
                   <div class="dropdown ">
                     <button
@@ -94,7 +116,7 @@ function AdminHome() {
                     </ul>
                   </div>
                 </div>
-                <a href="#" class="btn login-button ">
+                <a href="#" class="btn logout-button fw-bold" onClick={handleAdminLogout}>
                   LOGOUT
                 </a>
               </div>
@@ -110,6 +132,7 @@ function AdminHome() {
             <Route path="stafflist" element={<StaffList />} />
             <Route path="studentlist" element={<StudentList />} />
             <Route path="borrowlist" element={<BorrowedList />} />
+            <Route path="staffborrow" element={<StaffBorrowList />} />
             {/* Redirect the default /admin route */}
             <Route path="/" element={<Navigate to="borrowlist" />} />
           </Routes>

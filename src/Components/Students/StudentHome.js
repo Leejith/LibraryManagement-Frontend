@@ -81,7 +81,7 @@ function StudentHome() {
         </div>
         <div class="text-center d-flex justify-content-center mt-4">
             <Link to="/studentbook">
-              <button type="button" class="btn more-books p-3">EXPLORE MORE</button>
+              <button type="button" class="btn more-books p-3 mb-3">EXPLORE MORE</button>
             </Link>
           </div>
       </div></>
