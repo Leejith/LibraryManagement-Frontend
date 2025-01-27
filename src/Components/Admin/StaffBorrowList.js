@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 function StaffBorrowList() {
-    const [Borrowed, setBorrowed] = useState([]);
+  const [Borrowed, setBorrowed] = useState([]);
 
   const borrowbook = () => {
     axios.get("http://localhost:4060/borrowedbook")
@@ -48,18 +48,18 @@ function StaffBorrowList() {
           <div>No  borrowed books found.</div>
         ) : (
 
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>User Name</th>
+                <th>Book Title</th>
+                <th></th>
+              </tr>
+            </thead>
+            {Borrowed.map((e) => {
+              return (
 
-          (Borrowed.map((e) => {
-            return (
 
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>User Name</th>
-                    <th>Book Title</th>
-                    <th></th>
-                  </tr>
-                </thead>
 
                 <tbody>
 
@@ -70,12 +70,12 @@ function StaffBorrowList() {
                   </tr>
 
                 </tbody>
-              </table>
-            )
 
-          }))
+              )
 
+            })}
 
+          </table>
 
         )}
       </div>
