@@ -58,9 +58,11 @@ function BorrowedList() {
                 <th></th>
               </tr>
             </thead>
+
+            <tbody>
           {Borrowed.map((e) => {
             return (
-            <tbody>
+            
 
               <tr>
                 <td class="fw-bold">{e?.studentid?.name}</td>
@@ -68,11 +70,12 @@ function BorrowedList() {
                 <td><button class="btn btn-danger" onClick={() => returnbook(e?.studentid?._id, e?.bookid?._id)}>remove</button></td>
               </tr>
 
-            </tbody>
+            
 
             )
 
           })}
+          </tbody>
 
           </table>
 
