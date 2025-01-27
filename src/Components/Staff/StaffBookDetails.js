@@ -38,7 +38,7 @@ function StaffBookDetails() {
     const bookid = id;
 
 
-    await axios.post("http://localhost:4060/orderr", {
+    await axios.post("http://localhost:4060/order", {
       staffid: staffid,
       bookid: bookid,
     })
@@ -78,7 +78,7 @@ function StaffBookDetails() {
     similarbook()
     latestbook()
     getCart()
-  })
+  },[])
 
   const calculateAverageRating = (reviews) => {
     const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);

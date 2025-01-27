@@ -130,7 +130,7 @@ function StudentBookDetails() {
    similarbook()
    getlike()
    latestbook()
-  }, );
+  },[] );
 
   const writereview=()=>{
     axios
