@@ -161,9 +161,7 @@ function StudentBookDetails() {
         console.error("Error checking cart status:", error);
       });
   }
-  useEffect(() => {
-
-  }, [id]);
+  
   const handleFavoriteToggle = () => {
     const Studentid = localStorage.getItem("studentid");
     const bookid = id;

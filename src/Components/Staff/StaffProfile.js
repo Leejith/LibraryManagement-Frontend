@@ -7,16 +7,17 @@ import StaffCart from "./StaffCart";
 import axios from "axios";
 import imgurl from '../../Api/Imgurl'
 function StaffProfile() {
- const [SlideisOpen, setSlideIsOpen] = useState(false);
-   const [activeComponent, setActiveComponent] = useState("MyBook");
-   const [profile, setProfile] = useState({});
-   const [EditPage, setEditPage] = useState(false);
-   const [editData, setEditData] = useState(profile);
-   const [UserProfile,setUserProfile]=useState({})
+  const [SlideisOpen, setSlideIsOpen] = useState(false);
+  const [activeComponent, setActiveComponent] = useState("MyBook");
+  const [profile, setProfile] = useState({});
+  const [EditPage, setEditPage] = useState(false);
+  const [editData, setEditData] = useState();
+  const [UserProfile, setUserProfile] = useState({})
 
   const toggleSidebar = () => {
     setSlideIsOpen(!SlideisOpen);
   };
+
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
@@ -24,11 +25,54 @@ function StaffProfile() {
         return <Mybook />;
       case "Favorites":
         return <Favorites />;
-      case "StaffCart":
+      case "StudentCart":
         return <StaffCart />;
       default:
         return <Mybook />;
     }
+  };
+
+  const profileChange = (upload) => {
+    const file = upload.target.files[0];
+    handleSaveprofile()
+    if (file) {
+      const reader = new FileReader();
+      console.log(reader);
+
+      reader.onload = () => {
+        setProfile(reader.result);
+      };
+      reader.readAsDataURL(file);
+
+
+      const id = localStorage.getItem('studentid');
+    const formData = new FormData();
+
+    for (const key in editData) {
+      formData.append(key, editData[key]);
+      // formData.append("image", editData.image)
+    }
+
+    axios
+      .put(`http://localhost:4060/staffupdate/${id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      .then((response) => {
+        setProfile(editData);
+        setUserProfile(response.data.data);
+        setEditPage(false);
+        console.log('Profile updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating profile:', error);
+      });
+
+    }
+
+    setEditData({
+      ...editData, [upload.target.name]:
+        upload.target.name === "file" || upload.target.name === "image" ? upload.target.files[0] : upload.target.value,
+    });
   };
   useEffect(() => {
     const id = localStorage.getItem("staffid")
@@ -42,36 +86,51 @@ function StaffProfile() {
         console.log(err)
       })
   }, [])
-  const profileChange = (upload) => {
-    const file = upload.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      console.log(reader);
-
-      reader.onload = () => {
-        setProfile(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-
   const handleEditClick = () => {
     setEditData(profile);
     setEditPage(true);
+  };
+
+  const handleChange = (e) => {
+    setEditData({
+      ...editData, [e.target.name]:
+        e.target.name === "file" || e.target.name === "image" ? e.target.files[0] : e.target.value,
+    });
+  };
+  console.log(editData)
+
+  const handleSave = () => {
+    setProfile(editData);
+    setEditPage(false);
+    handleSaveprofile()
   };
   const handleClose = () => {
     setEditPage(false);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProfile({ ...profile, [name]: value });
-  };
-
-  const handleSave = () => {
-    setProfile(editData);
-    setEditPage(false);
+  const handleSaveprofile = () => {
+    const id = localStorage.getItem('staffid');
+    const formData = new FormData();
+console.log(formData)
+    for (const key in editData) {
+      formData.append(key, editData[key]);
+    }
+    formData.append("file", editData.image);
+  
+    
+    axios
+      .post(`http://localhost:4060/staffupdate/${id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      .then((response) => {
+        setProfile(editData);
+        setUserProfile(response.data.data);
+        setEditPage(false);
+        console.log('Profile updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating profile:', error);
+      });
   };
   return (
     <div>
@@ -89,6 +148,15 @@ function StaffProfile() {
           <h1 class="navbar-brand  m-2 fw-bold">BOOKWORLD</h1>
           <div class="ms-auto">
             <ul class="nav profile-nav text-dark d-none d-lg-flex">
+            <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="Staffhome"
+         
+                >
+                 Home
+                </a>
+              </li>
               <li class="nav-item ">
                 <a
                   class="nav-link "
@@ -135,6 +203,15 @@ function StaffProfile() {
                   class="dropdown-menu profile-menu  dropdown-menu-end "
                   aria-labelledby="menuDropdown"
                 >
+                   <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="Staffhome"
+         
+                >
+                 Home
+                </a>
+              </li>
                   <li>
                     <a
                       class="dropdown-item"
@@ -232,18 +309,21 @@ function StaffProfile() {
               <div class="modal-body">
                 <form>
                   <div class="mb-2 text-center">
-                    <label for="upload-pic">
+                    <label htmlFor="upload-pic">
                       <img
-                        src={profile || profileimg}
+                        src={profile}
                         class="rounded-circle border-dark profile-pic"
+                        alt="Profile Preview"
+                        name="file"
                       />
                     </label>
                     <input
                       type="file"
                       id="upload-pic"
                       accept="image/*"
+                      name="file"
                       class="form-control"
-                      onChange={profileChange}
+                      onChange={handleChange}
                     />
                   </div>
                   <div class="mb-3">
@@ -252,7 +332,7 @@ function StaffProfile() {
                       type="text"
                       class="form-control"
                       name="name"
-                      value={profile.name}
+                      value={editData.name || ""}
                       onChange={handleChange}
                     />
                   </div>
@@ -262,7 +342,17 @@ function StaffProfile() {
                       type="text"
                       class="form-control"
                       name="department"
-                      value={profile.department}
+                      value={editData.department || ""}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      value={editData.password || ""}
                       onChange={handleChange}
                     />
                   </div>
