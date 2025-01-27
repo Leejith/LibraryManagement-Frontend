@@ -24,9 +24,10 @@ import StudentHome from './Components/Students/StudentHome';
 import StudentNavbar from './Components/Students/StudentNavbar';
 import StudentBook from './Components/Students/StudentBook';
 import StudentBookDetails from './Components/Students/StudentBookDetails';
-import RequestList from './Components/Admin/RequestList';
 
-import Footer from './Components/common/footer';
+
+import Footer from './Components/common/Footer';
+
 import StudentForgetPassword from './Components/Students/StudentForgetPassword';
 import StaffForgetPassword from './Components/Staff/StaffForgetPassword';
 
@@ -58,7 +59,6 @@ function App() {
         <Route path='/Adminhome/*'element={<AdminHome/>}/>
         <Route path='/Addbook'element={<AddBook/>}/>
         <Route path='/BookList'element={<BookList/>}/>
-        <Route path='/requestlist'element={<RequestList/>}/>
         <Route path='/StaffList'element={<StaffList/>}/>
         <Route path='/StudentList'element={<StudentList/>}/>
         <Route path='/StudentForget'element={<StudentForgetPassword/>}/>
