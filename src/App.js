@@ -48,7 +48,7 @@ function App() {
         <Route path='/StaffLogin'element={<StaffLogin/>}/>
         <Route path='/StaffRegister'element={<StaffRegister/>}/>
         <Route path='/Staffpf'element={<StaffProfile/>}/>
-        <Route path='/Staffhome'element={[<StaffNavbar/>,<StaffHome/>,]}/>
+        <Route path='/Staffhome'element={[<StaffNavbar/>,<StaffHome/>,<Footer/>]}/>
         <Route path='/Staffnavbar'element={<StaffNavbar/>}/>
         <Route path='/Staffbook'element={[<StaffNavbar/>,<StaffBook/>,<Footer/>]}/>
         <Route path='/Staffbookdetails/:id'element={[<StaffNavbar/>,<StaffBookDetails/>,<Footer/>]}/>

@@ -106,18 +106,6 @@
 }
 
 
-/* fineamount */
-
-.table th,
-table td {
-  text-align: left;
-  padding: 10px;
-}
-
-.table th {
-  background-color: #2d4649;
-  color: white;
-}
 
 /* overlay */
 .show {
@@ -146,28 +134,28 @@ table td {
   overflow: hidden;
 }
 
-.cart-card{
-  width: 230px;
-  max-height: 300px;
-  background-color: #4f7c82;
-  border: none;
-  box-shadow: 15px 20px 20px rgba(0, 0, 0, .3),
-    inset 4px 4px 10px #4f7c82;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 60px;
-  transition: .2s;
+.cart-cards{
+  width: 250px;
+    min-height:350px;
+    background-color: #4f7c82;
+    border: none;
+    box-shadow: 15px 20px 20px rgba(0,0,0,.3),
+                inset 4px 4px 10px #4f7c82;
+    border-radius: 10px;  
+    overflow: hidden;
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+    margin: 20px 60px;  
+    transition: .2s; 
 
 
 }
 
-.cart-card:hover {
-  box-shadow: inset 4px 4px 10px rgba(0, 0, 0, .3),
-    -4px -4px 10px rgb(114, 152, 140);
-  transition: .2s;
+.cart-cards:hover {
+  box-shadow:inset 4px 4px 10px rgba(0,0,0,.3),
+         -4px -4px 10px #4f7c82;
+    transition: .2s;
 }
 
 .cartRemove-button {
