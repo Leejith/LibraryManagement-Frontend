@@ -5,7 +5,7 @@ function StaffBorrowList() {
     const [Borrowed, setBorrowed] = useState([]);
 
   const borrowbook = () => {
-    axios.get("http://localhost:4060/borrowlist")
+    axios.get("http://localhost:4060/borrowedbook")
       .then((response) => {
         console.log(response)
         setBorrowed(response.data.data)
@@ -23,7 +23,7 @@ function StaffBorrowList() {
 
     console.log(bookid, "i")
     console.log(staffid, "ii")
-    axios.delete(`http://localhost:4060/returnorder/${staffid}`)
+    axios.delete(`http://localhost:4060/returnbook/${staffid}`)
       .then((response) => {
         console.log(response)
         borrowbook()
@@ -64,7 +64,7 @@ function StaffBorrowList() {
                 <tbody>
 
                   <tr>
-                    <td class="fw-bold">{e?.studentid?.name}</td>
+                    <td class="fw-bold">{e?.staffid?.name}</td>
                     <td>{e?.bookid?.booktitle}</td>
                     <td><button class="btn btn-danger" onClick={() => returnbook(e?.studentid?._id, e?.bookid?._id)}>remove</button></td>
                   </tr>
