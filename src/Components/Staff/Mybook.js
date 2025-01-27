@@ -9,7 +9,7 @@ function Mybook() {
   const id = localStorage.getItem("staffid")
 
   useEffect(()=>{
-    axios.get(`http://localhost:4060/vieworderr/${id}`)
+    axios.get(`http://localhost:4060/vieworder/${id}`)
     .then((response)=>{
       console.log(response)
       setBorrowed(response.data.data)
