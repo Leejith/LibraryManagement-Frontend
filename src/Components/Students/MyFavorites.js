@@ -43,8 +43,9 @@ function MyFavorites() {
                           <h5 class="card-title fw-bold">{fav.bookid.booktitle}</h5>
                         
                           <p class="card-text">{fav.bookid.genre}</p>
+                          
                           <a
-                            href={`/Studentbookdetails/${fav._id}`}
+                            href={`/Studentbookdetails/${fav.bookid._id}`}
                             class="btn view-button fw-bold"
                           >
                             View Book

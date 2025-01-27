@@ -18,6 +18,18 @@ function StudentBookDetails() {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { id } = useParams();
 
+  const bookdetails=()=>{
+    axios
+    .get(`http://localhost:4060/viewbook/${id}`)
+    .then((response) => {
+      console.log(response);
+      setDetails(response.data.data);
+      setIsBorrowed(response.data.data.bookstatus)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
   const handleOrder = async () => {
     const studentid = localStorage.getItem("studentid");
     const bookid = id;
@@ -53,7 +65,11 @@ function StudentBookDetails() {
   const handleCancel = () => {
     setShowConfirmationModal(false);
   };
-
+  const calculateAverageRating = (reviews) => {
+    const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (totalRatings / reviews.length).toFixed(1);
+  };
+  const averageRating = calculateAverageRating(Reviews);
   const reviewsToDisplay = showAllReviews ? Reviews : Reviews.slice(0, 3);
 
 
@@ -104,29 +120,16 @@ function StudentBookDetails() {
     setRating(newRating);
   };
 
-  const calculateAverageRating = (reviews) => {
-    const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
-    return (totalRatings / reviews.length).toFixed(1);
-  };
-  const averageRating = calculateAverageRating(Reviews);
+ 
 
-const bookdetails=()=>{
-  axios
-  .get(`http://localhost:4060/viewbook/${id}`)
-  .then((response) => {
-    console.log(response);
-    setDetails(response.data.data);
-    setIsBorrowed(response.data.data.bookstatus)
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+
   useEffect(() => {
-   
+  getCart()
    bookdetails()
    writereview()
    similarbook()
+   getlike()
+   latestbook()
   }, );
 
   const writereview=()=>{
@@ -141,33 +144,11 @@ const bookdetails=()=>{
       });
   }
 
-  const similarbook=()=>{
-    if (Details?.genre) {
-      axios
-        .get(`http://localhost:4060/similarbook/${Details.genre}`)
-        .then((response) => {
-          setSimilarBooks(response.data.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching similar books:", error);
-        });
-    }
-  }
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:4060/latestbook')
-      .then((response) => {
-        setLatestBooks(response.data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching latest books:", error);
-      });
-  }, []);
+  
 
 
-  useEffect(() => {
-    const studentid = localStorage.getItem("studentid");
+const getlike=()=>{
+  const studentid = localStorage.getItem("studentid");
 
     axios
       .get(`http://localhost:4060/getlike/${studentid}`)
@@ -179,6 +160,9 @@ const bookdetails=()=>{
       .catch((error) => {
         console.error("Error checking cart status:", error);
       });
+}
+  useEffect(() => {
+    
   }, [id]);
   const handleFavoriteToggle = () => {
     const Studentid = localStorage.getItem("studentid");
@@ -223,20 +207,9 @@ const bookdetails=()=>{
       handleFavoriteToggle();
     }
   }
-  useEffect(() => {
-    const studentid = localStorage.getItem("studentid");
 
-    axios
-      .get(`http://localhost:4060/getcart/${studentid}`)
-      .then((response) => {
-        const cartItems = response.data.data;
-        const isBookInCart = cartItems.some((item) => item.bookid._id === id);
-        setIsAddedToCart(isBookInCart);
-      })
-      .catch((error) => {
-        console.error("Error checking cart status:", error);
-      });
-  }, [id]);
+ 
+  
   const handleAddToCart = () => {
     const studentid = localStorage.getItem("studentid");
 
@@ -253,7 +226,20 @@ const bookdetails=()=>{
         }
       });
   };
+  const getCart=()=>{
+    const studentid = localStorage.getItem("studentid");
 
+    axios
+      .get(`http://localhost:4060/getcart/${studentid}`)
+      .then((response) => {
+        const cartItems = response.data.data;
+        const isBookInCart = cartItems.some((item) => item.bookid._id === id);
+        setIsAddedToCart(isBookInCart);
+      })
+      .catch((error) => {
+        console.error("Error checking cart status:", error);
+      });
+  }
   const handleRemoveFromCart = () => {
     const studentid = localStorage.getItem("studentid");
 
@@ -267,6 +253,30 @@ const bookdetails=()=>{
         console.error("Error removing from cart:", error);
       });
   };
+
+  const similarbook=()=>{
+    if (Details?.genre) {
+      axios
+        .get(`http://localhost:4060/similarbook/${Details.genre}`)
+        .then((response) => {
+          setSimilarBooks(response.data.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching similar books:", error);
+        });
+    }
+  }
+
+  const latestbook=()=>{
+    axios
+    .get('http://localhost:4060/latestbook')
+    .then((response) => {
+      setLatestBooks(response.data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching latest books:", error);
+    });
+  }
 
 
   return (

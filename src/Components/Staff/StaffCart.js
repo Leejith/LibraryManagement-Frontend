@@ -45,7 +45,7 @@ function StaffCart() {
         <div class="row">
           {cartItems.map((item) => (
             <div key={item.bookid._id} class="col-md-4 mb-4">
-              <div class="card cart-card shadow-sm">
+              <div class="card cart-cards">
                 <img
                   src={`${imgurl}${item.bookid.image.originalname}`}
                   alt={item.bookid.booktitle}

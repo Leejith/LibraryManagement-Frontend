@@ -19,42 +19,50 @@ function StaffBookDetails() {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { id } = useParams();
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4060/viewbook/${id}`)
-      .then((response) => {
-        console.log(response);
-        setDetails(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id]);
 
-  const calculateAverageRating = (reviews) => {
-    const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
-    return (totalRatings / reviews.length).toFixed(1);
-  };
-  const averageRating = calculateAverageRating(Reviews);
-  const handleorder = (e) => {
-    const teacherid = localStorage.getItem("staffid")
-    const bookid = id
-    axios.post("http://localhost:4060/order", {
-      teacherid: teacherid,
-      bookid: bookid
+  const bookdetails=()=>{
+    axios
+    .get(`http://localhost:4060/viewbook/${id}`)
+    .then((response) => {
+      console.log(response);
+      setDetails(response.data.data);
+      setIsBorrowed(response.data.data.bookstatus)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  const handleOrder = async () => {
+    const staffid = localStorage.getItem("staffid");
+    const bookid = id;
+
+
+    await axios.post("http://localhost:4060/orderr", {
+      staffid: staffid,
+      bookid: bookid,
     })
       .then((response) => {
         console.log(response);
-      
+        bookdetails()
         handleCancel()
       })
       .catch((err) => {
         console.log(err);
       });
-  }
 
+    await axios.put(`http://localhost:4060/bookstatus/${id}`)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  };
+  
   const handleconfirmborrow = () => {
     setShowConfirmationModal(true);
+    bookdetails()
 
   };
 
@@ -62,7 +70,22 @@ function StaffBookDetails() {
     setShowConfirmationModal(false);
   };
 
-  const reviewsToDisplay = showAllReviews ? Reviews : Reviews.slice(0, 3);
+ 
+  useEffect(()=>{
+    bookdetails()
+    writereview()
+    staffLike()
+    similarbook()
+    latestbook()
+    getCart()
+  })
+
+  const calculateAverageRating = (reviews) => {
+    const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (totalRatings / reviews.length).toFixed(1);
+  };
+  const averageRating = calculateAverageRating(Reviews);
+ 
 
   const handleSubmitReview = async () => {
     const staffid = localStorage.getItem("staffid");
@@ -98,38 +121,29 @@ function StaffBookDetails() {
     }
   };
 
+  const reviewsToDisplay = showAllReviews ? Reviews : Reviews.slice(0, 3);
+
+  
+
   const handleReviewTextChange = (e) => {
     setReviewText(e.target.value);
   };
   const handleRatingChange = (newRating) => {
     setRating(newRating);
   };
-  useEffect(() => {
-    console.log("Book ID in frontend:", id);
-    axios
-      .get(`http://localhost:4060/reviewlist/${id}`)
-      .then((response) => {
-        console.log("Reviews fetched:", response.data.data);
-        setReviews(response.data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching reviews:", error.response ? error.response.data : error.message);
-      });
-  }, [id]);
-  useEffect(() => {
-    const staffid = localStorage.getItem("staffid");
 
+  const writereview=()=>{
     axios
-      .get(`http://localhost:4060/staffgetlike/${staffid}`)
-      .then((response) => {
-        const likeItems = response.data.data;
-        const isFavorite = likeItems.some((item) => item.bookid._id === id);
-        setIsFavorite(isFavorite);
-      })
-      .catch((error) => {
-        console.error("Error checking cart status:", error);
-      });
-  }, [id]);
+    .get(`http://localhost:4060/reviewlist/${id}`)
+    .then((response) => {
+      console.log("Reviews fetched:", response.data.data);
+      setReviews(response.data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching reviews:", error.response ? error.response.data : error.message);
+    });
+  }
+
   const handleFavoriteToggle = () => {
     const Staffid = localStorage.getItem("staffid");
     const bookid = id;
@@ -159,6 +173,20 @@ function StaffBookDetails() {
       handleFavoriteToggle();
     }
   }
+  const staffLike=()=>{
+    const staffid = localStorage.getItem("staffid");
+
+    axios
+      .get(`http://localhost:4060/staffgetlike/${staffid}`)
+      .then((response) => {
+        const likeItems = response.data.data;
+        const isFavorite = likeItems.some((item) => item.bookid._id === id);
+        setIsFavorite(isFavorite);
+      })
+      .catch((error) => {
+        console.error("Error checking cart status:", error);
+      });
+  }
   const handleRemoveLike = () => {
     const staffid = localStorage.getItem("staffid");
 
@@ -172,45 +200,8 @@ function StaffBookDetails() {
         console.error("Error removing from like:", error);
       });
   };
-  useEffect(() => {
-    if (Details?.genre) {
-      axios
-        .get(`http://localhost:4060/similarbook/${Details.genre}`)
-        .then((response) => {
-          setSimilarBooks(response.data.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching similar books:", error);
-        });
-    }
-  }, [Details?.genre]);
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:4060/latestbook')
-      .then((response) => {
-        setLatestBooks(response.data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching latest books:", error);
-      });
-  }, []);
 
 
-  useEffect(() => {
-    const staffid = localStorage.getItem("staffid");
-
-    axios
-      .get(`http://localhost:4060/getcart/${staffid}`)
-      .then((response) => {
-        const cartItems = response.data.data;
-        const isBookInCart = cartItems.some((item) => item.bookid._id === id);
-        setIsAddedToCart(isBookInCart);
-      })
-      .catch((error) => {
-        console.error("Error checking cart status:", error);
-      });
-  }, [id]);
   const handleAddToCart = () => {
     const staffid = localStorage.getItem("staffid");
 
@@ -227,8 +218,22 @@ function StaffBookDetails() {
         }
       });
   };
+  
+const getCart=()=>{
+  const staffid = localStorage.getItem("staffid");
 
-  const handleRemoveFromCart = () => {
+  axios
+    .get(`http://localhost:4060/getcart/${staffid}`)
+    .then((response) => {
+      const cartItems = response.data.data;
+      const isBookInCart = cartItems.some((item) => item.bookid._id === id);
+      setIsAddedToCart(isBookInCart);
+    })
+    .catch((error) => {
+      console.error("Error checking cart status:", error);
+    });
+}
+const handleRemoveFromCart = () => {
     const staffid = localStorage.getItem("staffid");
 
     axios
@@ -241,6 +246,29 @@ function StaffBookDetails() {
         console.error("Error removing from cart:", error);
       });
   };
+
+  const similarbook=()=>{
+    if (Details?.genre) {
+      axios
+        .get(`http://localhost:4060/similarbook/${Details.genre}`)
+        .then((response) => {
+          setSimilarBooks(response.data.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching similar books:", error);
+        });
+    }
+  }
+  const  latestbook=()=>{
+    axios
+    .get('http://localhost:4060/latestbook')
+    .then((response) => {
+      setLatestBooks(response.data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching latest books:", error);
+    });
+  }
   return (
     <div class="view">
       <section class="view mt-5">
@@ -254,7 +282,7 @@ function StaffBookDetails() {
                   className="img-fluid rounded details-img shadow-sm"
                 />
                 <div class="mt-5">
-                  {!isBorrowed ==="pending" ? (
+                  {Details?.bookstatus ==="pending" ? (
                     <button class="btn borrow fw-bold w-100 mb-4" onClick={handleconfirmborrow}>
                       Borrow Book
                     </button>
@@ -299,7 +327,7 @@ function StaffBookDetails() {
                 <p class="fw-semibold">
                   <strong>DESCRIPTION:</strong> {Details.description}
                 </p>
-                <p class="fw-semibold"><strong>STATUS:</strong> {isBorrowed ? "Unavailable" : "Available"}</p>
+                <p class="fw-semibold"><strong>STATUS:</strong> {isBorrowed == "pending" ? "Available" : "unavailable"}</p>
 
                 <div class="review-section">
                   <hr />
@@ -379,7 +407,7 @@ function StaffBookDetails() {
 
                   />
                   <div class="mt-3">
-                    <button class="btn btn-success" onClick={handleorder}>Confirm</button>
+                    <button class="btn btn-success" onClick={handleOrder}>Confirm</button>
                     <button class="btn btn-danger ms-3" onClick={handleCancel}>Cancel</button>
                   </div>
                 </div>

@@ -45,22 +45,26 @@ function StudentCart() {
           <p>Your cart is empty.</p>
         ) : (
           <div class="row">
-            {cartItems.map((item) => (
-              <div key={item.bookid._id} class="col-md-4 mb-4">
-                <div class="card cart-card shadow-sm">
+            {cartItems.map((item) => {
+              return(
+              <div key={item.bookid._id} class="col-md-4 mb-4  ">
+                <div class="card cart-cards ">
                   <img
                     src={`${imgurl}${item.bookid?.image.originalname}`}
                     alt={item.bookid?.booktitle}
-                    class="card-img-top img-fluid cart-image"
+                    class="card-img-top mt-1 img-fluid cart-image"
                   />
                   <div class="card-body text-center">
-                    <h5 class="card-title">{item.bookid?.booktitle}</h5>
-                    <p class="card-text">
-                      {item.bookid?.authorname}
+                    <h5 class="card-title fw-bold">{item.bookid?.booktitle}</h5>
+                    <p class="card-text fw-semibold text-muted">
+                      {item.bookid?.genre}
                     </p>
-                    <p class="card-text">
-                    {item.bookid?.genre}
-                    </p>
+                    <a
+                      href={`/Studentbookdetails/${item.bookid._id}`}
+                      class="btn  cartRemove-button w-100 fw-bold mb-1"
+                    >
+                      View Book
+                    </a>
                     <button
                       class="btn cartRemove-button w-100 fw-bold"
                       onClick={() => handleRemoveFromCart(item.bookid._id)}
@@ -70,7 +74,8 @@ function StudentCart() {
                   </div>
                 </div>
               </div>
-            ))}
+              )
+})}
           </div>
         )}
       </div>
