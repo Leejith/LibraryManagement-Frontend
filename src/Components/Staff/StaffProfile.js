@@ -119,7 +119,7 @@ console.log(formData)
   
     
     axios
-      .post(`http://localhost:4060/staffupdate/${id}`, formData, {
+      .post(`http://localhost:4060/staffUpdate/${id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((response) => {
