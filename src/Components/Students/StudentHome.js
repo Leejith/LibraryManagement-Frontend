@@ -1,15 +1,19 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import home from '../../Assets/Images/home.png'
 import '../../Assets/Styles/Home.css'
 import imgurl from '../../Api/Imgurl'
 import { motion } from "framer-motion";
 function StudentHome() {
   const [Book, setBook] = useState([])
-
+const navigate=useNavigate()
 
   useEffect(() => {
+    const studentid=localStorage.getItem("studentid")
+    if(studentid==null){
+      navigate("/")
+    }
     axios.get("http://localhost:4060/booklist")
       .then((response) => {
         console.log(response)

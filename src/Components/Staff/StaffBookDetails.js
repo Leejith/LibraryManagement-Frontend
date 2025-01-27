@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import "../../Assets/Styles/BookDetails.css"
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import imgurl from '../../Api/Imgurl';
 
 function StaffBookDetails() {
@@ -19,8 +19,12 @@ function StaffBookDetails() {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { id } = useParams();
 
-
+const navigate=useNavigate()
   const bookdetails=()=>{
+    const staffid=localStorage.getItem("staffid")
+    if(staffid==null){
+      navigate("/")
+    }
     axios
     .get(`http://localhost:4060/viewbook/${id}`)
     .then((response) => {
@@ -435,7 +439,7 @@ const handleRemoveFromCart = () => {
                     <div class="card-body text-center">
                       <h5 class="card-title">{book.booktitle}</h5>
                       <p class="card-text">{book.authorname}</p>
-                      <a href={`/Studentbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
+                      <a href={`/Staffbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
                     </div>
                   </div>
                 ))}
@@ -456,7 +460,7 @@ const handleRemoveFromCart = () => {
                   <div class="card-body text-center">
                     <h5 class="card-title">{book.booktitle}</h5>
                     <p class="card-text">{book.authorname}</p>
-                    <a href={`/Studentbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
+                    <a href={`/Staffbookdetails/${book._id}`} class="btn view-button fw-bold">View Details</a>
                   </div>
                 </div>
               </div>

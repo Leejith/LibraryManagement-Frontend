@@ -6,6 +6,7 @@ import profileimg from "../../Assets/Images/profile.png";
 import axios from "axios";
 import imgurl from '../../Api/Imgurl'
 import StudentCart from "./StudentCart";
+import { useNavigate } from "react-router-dom";
 
 function StudentProfile() {
   const [SlideisOpen, setSlideIsOpen] = useState(false);
@@ -19,7 +20,7 @@ function StudentProfile() {
     setSlideIsOpen(!SlideisOpen);
   };
 
-
+const navigate=useNavigate()
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case "MyBook":
@@ -76,6 +77,10 @@ function StudentProfile() {
     });
   };
   useEffect(() => {
+    const studentid=localStorage.getItem("studentid")
+    if(studentid==null){
+      navigate("/")
+    }
     const id = localStorage.getItem("studentid")
     console.log(id)
     axios.get(`http://localhost:4060/studentprofile/${id}`)
