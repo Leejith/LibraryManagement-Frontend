@@ -111,8 +111,10 @@ function StaffBookDetails() {
       });
 
       alert("Review submitted successfully!");
+      bookdetails()
       setReviewText("");
       setRating(0);
+      writereview()
       console.log(response.data);
     } catch (error) {
       console.error("Error submitting review:", error);

@@ -150,6 +150,15 @@ console.log(formData)
               <li class="nav-item">
                 <a
                   class="nav-link"
+                  href="Studenthome"
+         
+                >
+                 Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
                   href="#myBook"
                   onClick={() => setActiveComponent("MyBook")}
                 >
@@ -194,6 +203,15 @@ console.log(formData)
                   class="dropdown-menu profile-menu  dropdown-menu-end drop-color text-dark"
                   aria-labelledby="menuDropdown"
                 >
+                  <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="Studenthome"
+         
+                >
+                 Home
+                </a>
+              </li>
                   <li>
                     <a
                       class="dropdown-item"
