@@ -66,7 +66,7 @@ function StaffBorrowList() {
                   <tr>
                     <td class="fw-bold">{e?.staffid?.name}</td>
                     <td>{e?.bookid?.booktitle}</td>
-                    <td><button class="btn btn-danger" onClick={() => returnbook(e?.studentid?._id, e?.bookid?._id)}>remove</button></td>
+                    <td><button class="btn btn-danger" onClick={() => returnbook(e?.staffid?._id, e?.bookid?._id)}>remove</button></td>
                   </tr>
 
                 </tbody>
