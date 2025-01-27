@@ -8,27 +8,27 @@ function StudentBookDetails() {
   const [Details, setDetails] = useState({});
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [reviewText, setReviewText] = useState("");
-  const [rating, setRating] = useState(0); 
+  const [rating, setRating] = useState(0);
   const [Reviews, setReviews] = useState([]);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [isBorrowed, setIsBorrowed] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [similarBooks, setSimilarBooks] = useState([]); 
+  const [similarBooks, setSimilarBooks] = useState([]);
   const [latestBooks, setLatestBooks] = useState([]);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { id } = useParams();
 
-  const bookdetails=()=>{
+  const bookdetails = () => {
     axios
-    .get(`http://localhost:4060/viewbook/${id}`)
-    .then((response) => {
-      console.log(response);
-      setDetails(response.data.data);
-      setIsBorrowed(response.data.data.bookstatus)
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .get(`http://localhost:4060/viewbook/${id}`)
+      .then((response) => {
+        console.log(response);
+        setDetails(response.data.data);
+        setIsBorrowed(response.data.data.bookstatus)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   const handleOrder = async () => {
     const studentid = localStorage.getItem("studentid");
@@ -103,7 +103,7 @@ function StudentBookDetails() {
       setReviewText("");
       setRating(0);
       writereview()
-     
+
 
       console.log(response.data);
     } catch (error) {
@@ -120,19 +120,19 @@ function StudentBookDetails() {
     setRating(newRating);
   };
 
- 
+
 
 
   useEffect(() => {
-  getCart()
-   bookdetails()
-   writereview()
-   similarbook()
-   getlike()
-   latestbook()
-  },[] );
 
-  const writereview=()=>{
+    bookdetails()
+    writereview()
+    getlike()
+   
+    getCart()
+  }, [id]);
+
+  const writereview = () => {
     axios
       .get(`http://localhost:4060/reviewlist/${id}`)
       .then((response) => {
@@ -144,11 +144,11 @@ function StudentBookDetails() {
       });
   }
 
-  
 
 
-const getlike=()=>{
-  const studentid = localStorage.getItem("studentid");
+
+  const getlike = () => {
+    const studentid = localStorage.getItem("studentid");
 
     axios
       .get(`http://localhost:4060/getlike/${studentid}`)
@@ -160,9 +160,9 @@ const getlike=()=>{
       .catch((error) => {
         console.error("Error checking cart status:", error);
       });
-}
+  }
   useEffect(() => {
-    
+
   }, [id]);
   const handleFavoriteToggle = () => {
     const Studentid = localStorage.getItem("studentid");
@@ -208,8 +208,8 @@ const getlike=()=>{
     }
   }
 
- 
-  
+
+
   const handleAddToCart = () => {
     const studentid = localStorage.getItem("studentid");
 
@@ -226,7 +226,7 @@ const getlike=()=>{
         }
       });
   };
-  const getCart=()=>{
+  const getCart = () => {
     const studentid = localStorage.getItem("studentid");
 
     axios
@@ -254,7 +254,7 @@ const getlike=()=>{
       });
   };
 
-  const similarbook=()=>{
+  useEffect(() => {
     if (Details?.genre) {
       axios
         .get(`http://localhost:4060/similarbook/${Details.genre}`)
@@ -265,18 +265,17 @@ const getlike=()=>{
           console.error("Error fetching similar books:", error);
         });
     }
-  }
-
-  const latestbook=()=>{
+  }, [Details?.genre]);
+  useEffect(() => {
     axios
-    .get('http://localhost:4060/latestbook')
-    .then((response) => {
-      setLatestBooks(response.data.data);
-    })
-    .catch((error) => {
-      console.error("Error fetching latest books:", error);
-    });
-  }
+      .get('http://localhost:4060/latestbook')
+      .then((response) => {
+        setLatestBooks(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching latest books:", error);
+      });
+  }, []);
 
 
   return (

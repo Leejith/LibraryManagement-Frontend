@@ -75,10 +75,9 @@ function StaffBookDetails() {
     bookdetails()
     writereview()
     staffLike()
-    similarbook()
-    latestbook()
     getCart()
-  },[])
+  },[id])
+ 
 
   const calculateAverageRating = (reviews) => {
     const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
@@ -247,7 +246,7 @@ const handleRemoveFromCart = () => {
       });
   };
 
-  const similarbook=()=>{
+  useEffect(() => {
     if (Details?.genre) {
       axios
         .get(`http://localhost:4060/similarbook/${Details.genre}`)
@@ -258,17 +257,17 @@ const handleRemoveFromCart = () => {
           console.error("Error fetching similar books:", error);
         });
     }
-  }
-  const  latestbook=()=>{
+  }, [Details?.genre]);
+  useEffect(() => {
     axios
-    .get('http://localhost:4060/latestbook')
-    .then((response) => {
-      setLatestBooks(response.data.data);
-    })
-    .catch((error) => {
-      console.error("Error fetching latest books:", error);
-    });
-  }
+      .get('http://localhost:4060/latestbook')
+      .then((response) => {
+        setLatestBooks(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching latest books:", error);
+      });
+  }, []);
   return (
     <div class="view">
       <section class="view mt-5">

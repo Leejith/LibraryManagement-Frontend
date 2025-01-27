@@ -89,3 +89,12 @@
     transition: 1s;
     border: 2px solid
 }
+
+.table thead th{
+    background-color: #0b2e33;
+    color: white;
+}
+.table tbody th[scope="row"]{
+    background-color: #0b2e33;
+    color: white;
+}

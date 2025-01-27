@@ -26,7 +26,7 @@ import StudentBook from './Components/Students/StudentBook';
 import StudentBookDetails from './Components/Students/StudentBookDetails';
 
 
-import Footer from './Components/common/footer';
+import Footer from './Components/common/Footer';
 
 import StudentForgetPassword from './Components/Students/StudentForgetPassword';
 import StaffForgetPassword from './Components/Staff/StaffForgetPassword';

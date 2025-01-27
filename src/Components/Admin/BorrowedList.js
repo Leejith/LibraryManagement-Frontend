@@ -50,34 +50,31 @@ function BorrowedList() {
           <div>No  borrowed books found.</div>
         ) : (
 
-
-          (Borrowed.map((e) => {
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>User Name</th>
+                <th>Book Title</th>
+                <th></th>
+              </tr>
+            </thead>
+          {Borrowed.map((e) => {
             return (
+            <tbody>
 
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>User Name</th>
-                    <th>Book Title</th>
-                    <th></th>
-                  </tr>
-                </thead>
+              <tr>
+                <td class="fw-bold">{e?.studentid?.name}</td>
+                <td>{e?.bookid?.booktitle}</td>
+                <td><button class="btn btn-danger" onClick={() => returnbook(e?.studentid?._id, e?.bookid?._id)}>remove</button></td>
+              </tr>
 
-                <tbody>
+            </tbody>
 
-                  <tr>
-                    <td class="fw-bold">{e?.studentid?.name}</td>
-                    <td>{e?.bookid?.booktitle}</td>
-                    <td><button class="btn btn-danger" onClick={() => returnbook(e?.studentid?._id, e?.bookid?._id)}>remove</button></td>
-                  </tr>
-
-                </tbody>
-              </table>
             )
 
-          }))
+          })}
 
-
+          </table>
 
         )}
       </div>
