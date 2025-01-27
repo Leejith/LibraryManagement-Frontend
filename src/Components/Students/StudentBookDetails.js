@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import "../../Assets/Styles/BookDetails.css";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import imgurl from '../../Api/Imgurl';
 
 function StudentBookDetails() {
@@ -18,7 +18,12 @@ function StudentBookDetails() {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { id } = useParams();
 
+  const navigate=useNavigate()
   const bookdetails = () => {
+    const studentid=localStorage.getItem("studentid")
+    if(studentid==null){
+      navigate("/")
+    }
     axios
       .get(`http://localhost:4060/viewbook/${id}`)
       .then((response) => {

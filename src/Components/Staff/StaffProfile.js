@@ -6,6 +6,7 @@ import profileimg from "../../Assets/Images/profile.png";
 import StaffCart from "./StaffCart";
 import axios from "axios";
 import imgurl from '../../Api/Imgurl'
+import { useNavigate } from "react-router-dom";
 function StaffProfile() {
   const [SlideisOpen, setSlideIsOpen] = useState(false);
   const [activeComponent, setActiveComponent] = useState("MyBook");
@@ -13,6 +14,8 @@ function StaffProfile() {
   const [EditPage, setEditPage] = useState(false);
   const [editData, setEditData] = useState();
   const [UserProfile, setUserProfile] = useState({})
+
+  const navigate=useNavigate()
 
   const toggleSidebar = () => {
     setSlideIsOpen(!SlideisOpen);
@@ -25,7 +28,7 @@ function StaffProfile() {
         return <Mybook />;
       case "Favorites":
         return <Favorites />;
-      case "StudentCart":
+      case "StaffCart":
         return <StaffCart />;
       default:
         return <Mybook />;
@@ -75,7 +78,13 @@ function StaffProfile() {
     });
   };
   useEffect(() => {
+    const staffid=localStorage.getItem("staffid")
+    if(staffid==null){
+      navigate("/")
+    }
+  
     const id = localStorage.getItem("staffid")
+   
     console.log(id)
     axios.get(`http://localhost:4060/staffprofile/${id}`)
       .then((response) => {
@@ -234,18 +243,9 @@ console.log(formData)
                     <a
                       class="dropdown-item "
                       href="#cart"
-                      onClick={() => setActiveComponent("cart")}
+                      onClick={() => setActiveComponent("StaffCart")}
                     >
                       Cart
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="#fineAmount"
-                      onClick={() => setActiveComponent("fineAmount")}
-                    >
-                      Fine Amount
                     </a>
                   </li>
                 </ul>

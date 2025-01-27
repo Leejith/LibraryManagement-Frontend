@@ -3,12 +3,18 @@ import { motion } from 'framer-motion';
 import imgurl from '../../Api/Imgurl'
 import axios from 'axios';
 import '../../Assets/Styles/BookMore.css'
+import { useNavigate } from 'react-router-dom';
 
 function StudentBook() {
   const [Books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate=useNavigate()
   useEffect(() => {
+    const studentid=localStorage.getItem("studentid")
+    if(studentid==null){
+      navigate("/")
+    }
     axios
       .get("http://localhost:4060/booklist")
       .then((response) => {
