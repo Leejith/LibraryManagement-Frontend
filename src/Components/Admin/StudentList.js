@@ -5,16 +5,21 @@ import imgurl from '../../Api/Imgurl'
 function StudentList() {
   const [StudentsList, setStudentsList] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
+
+const studentlist=()=>{
+  axios
+  .get("http://localhost:4060/studentlist")
+  .then((response) => {
+    console.log(response);
+    setStudentsList(response.data.data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
   useEffect(() => {
-    axios
-      .get("http://localhost:4060/studentlist")
-      .then((response) => {
-        console.log(response);
-        setStudentsList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    studentlist()
+    handleViewDetails()
   }, []);
 
   const handleViewDetails = (student) => {
@@ -24,6 +29,19 @@ function StudentList() {
   const handleCloseModal = () => {
     setSelectedStudent(null);
   };
+
+  const handlestatus = (studentid) => {
+    axios.put(`http://localhost:4060/deactive/${studentid}`)
+        .then((response) => {
+            console.log(response)
+            studentlist()
+            handleViewDetails()
+            
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
   return (
     <div>
       <div class="container text-center mt-5">
@@ -97,7 +115,10 @@ function StudentList() {
                 <p>
                   <strong>Email:</strong> {selectedStudent.email}
                 </p>
+                <button class="btn btn-success mb-4 fw-bold active-btn" onClick={() => handlestatus(selectedStudent._id)} >{selectedStudent.isactive ? "Active" : "Disactive"}</button>
+
               </div>
+
             </div>
           </div>
         </div>
