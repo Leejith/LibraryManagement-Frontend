@@ -10,11 +10,7 @@ import StudentReg from './Components/Students/StudentReg';
 import Landing from './Components/common/Landing';
 import StudentProfile from './Components/Students/StudentProfile';
 import StaffProfile from './Components/Staff/StaffProfile';
-import AddBook from './Components/Admin/AddBook';
 import AdminHome from './Components/Admin/AdminHome';
-import BookList from './Components/Admin/BookList';
-import StaffList from './Components/Admin/StaffList';
-import StudentList from './Components/Admin/StudentList';
 import StaffHome from './Components/Staff/StaffHome';
 import StaffNavbar from './Components/Staff/StaffNavbar';
 import StaffBook from './Components/Staff/StaffBook';
@@ -23,7 +19,7 @@ import StudentHome from './Components/Students/StudentHome';
 import StudentNavbar from './Components/Students/StudentNavbar';
 import StudentBook from './Components/Students/StudentBook';
 import StudentBookDetails from './Components/Students/StudentBookDetails';
-import Footer from './Components/common/Footer';
+import Footer from './Components/common/footer';
 import StudentForgetPassword from './Components/Students/StudentForgetPassword';
 import StaffForgetPassword from './Components/Staff/StaffForgetPassword';
 
@@ -36,7 +32,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={[<Landing />, <Footer />]} />
-        <Route path='/footer' element={<Footer />} />
         <Route path='/StudentLogin' element={<StudentLogin />}/>
         <Route path='/Studentreg' element={<StudentReg />} />
         <Route path='/Studenthome' element={[<StudentNavbar />, <StudentHome />, <Footer />]} />
@@ -47,15 +42,10 @@ function App() {
         <Route path='/StaffRegister' element={<StaffRegister />} />
         <Route path='/Staffpf' element={<StaffProfile />} />
         <Route path='/Staffhome' element={[<StaffNavbar />, <StaffHome />, <Footer />]} />
-        <Route path='/Staffnavbar' element={<StaffNavbar />} />
         <Route path='/Staffbook' element={[<StaffNavbar />, <StaffBook />, <Footer />]} />
         <Route path='/Staffbookdetails/:id' element={[<StaffNavbar />, <StaffBookDetails />, <Footer />]} />
         <Route path='/Adminlogin' element={<AdminLogin />} />
         <Route path='/Adminhome/*' element={<AdminHome />} />
-        <Route path='/Addbook' element={<AddBook />} />
-        <Route path='/BookList' element={<BookList />} />
-        <Route path='/StaffList' element={<StaffList />} />
-        <Route path='/StudentList' element={<StudentList />} />
         <Route path='/StudentForget' element={<StudentForgetPassword />} />
         <Route path='/StaffForget' element={<StaffForgetPassword />} />
       </Routes>
