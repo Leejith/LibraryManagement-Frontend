@@ -5,16 +5,21 @@ import imgurl from '../../Api/Imgurl'
 function StaffList() {
   const [StaffList, setStaffList] = useState([]);
    const [selectedStaff, setSelectedStaff] = useState(null);
-  useEffect(() => {
+
+   const Stafflist=()=>{
     axios
-      .get("http://localhost:4060/stafflist")
-      .then((response) => {
-        console.log(response);
-        setStaffList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .get("http://localhost:4060/stafflist")
+    .then((response) => {
+      console.log(response);
+      setStaffList(response.data.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+   }
+  useEffect(() => {
+    Stafflist()
+    handleViewDetails()
   }, []);
 
   const handleViewDetails = (staff) => {
@@ -24,6 +29,19 @@ function StaffList() {
   const handleCloseModal = () => {
     setSelectedStaff(null);
   };
+
+  const handlestatus = (staffid) => {
+    axios.put(`http://localhost:4060/staffdeactive/${staffid}`)
+        .then((response) => {
+            console.log(response)
+            Stafflist()
+            handleViewDetails()
+            
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
   return (
     <div>
       <div class="container text-center mt-5">
@@ -97,6 +115,8 @@ function StaffList() {
                 <p>
                   <strong>Email:</strong> {selectedStaff.email}
                 </p>
+                <button class="btn btn-success fw-bold mb-4 text-center active-btn" onClick={() => handlestatus(selectedStaff._id)} >{selectedStaff.isactive ? "Active" : "Disactive"}</button>
+
               </div>
             </div>
           </div>

@@ -63,7 +63,7 @@ function AdminHome() {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Borrowed USER LIST
+                      BORROWED USER LIST
                     </button>
                     <ul class="dropdown-menu dropadmin">
                       <li>

@@ -128,3 +128,13 @@
     background-color: rgb(105, 16, 16);
     color: white;
 }
+
+.active-btn{
+    background-color: #4f7c82;
+    width: 20vw;
+    color: black;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 1s;
+    border: 2px solid
+}
