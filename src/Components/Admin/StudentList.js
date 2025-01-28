@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import imgurl from '../../Api/Imgurl'
 
 function StudentList() {
   const [StudentsList, setStudentsList] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState(null);
   useEffect(() => {
     axios
       .get("http://localhost:4060/studentlist")
@@ -14,6 +16,14 @@ function StudentList() {
         console.log(error);
       });
   }, []);
+
+  const handleViewDetails = (student) => {
+    setSelectedStudent(student);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedStudent(null);
+  };
   return (
     <div>
       <div class="container text-center mt-5">
@@ -27,7 +37,7 @@ function StudentList() {
                   <th scope="col">NAME</th>
                   <th scope="col">department</th>
                   <th scope="col">reg.no</th>
-                  <th scope="col">Email</th>
+                  <th scope="col">info</th>
                 </tr>
               </thead>
               {StudentsList.map((data, index) => {
@@ -38,7 +48,9 @@ function StudentList() {
                       <td class="fw-bold">{data.name}</td>
                       <td class="fw-semibold">{data.department}</td>
                       <td class="fw-semibold">{data.regno}</td>
-                      <td class="fw-semibold">{data.email}</td>
+                      <td>
+                      <div onClick={() => handleViewDetails(data)} ><i class="ri-information-2-fill"></i></div>
+                    </td>
                     </tr>
                   </tbody>
                 );
@@ -47,6 +59,49 @@ function StudentList() {
           </div>
         </div>
       </div>
+      {selectedStudent && (
+        <div
+          class="modal fade show d-block "
+          tabIndex="-1"
+          role="dialog"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+        >
+          <div class="modal-dialog " role="document">
+            <div class="modal-content profiledetails-popup">
+              <div class="modal-header profileheader-popup ">
+                <h5 class="modal-title" id="studentDetailsModal">
+                  Student Details
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close close"
+                  aria-label="Close"
+                  onClick={handleCloseModal}
+                ></button>
+              </div>
+              <div className="modal-body text-center fw-semibold">
+              <img
+              src={`${imgurl}${selectedStudent?.image?.originalname}`}
+              alt="Profile"
+              class="rounded-circle profile-img img-fluid mb-4 "
+            />
+                <p>
+                  <strong>Name:</strong> {selectedStudent.name}
+                </p>
+                <p>
+                  <strong>Department:</strong> {selectedStudent.department}
+                </p>
+                <p>
+                  <strong>Reg. No:</strong> {selectedStudent.regno}
+                </p>
+                <p>
+                  <strong>Email:</strong> {selectedStudent.email}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
