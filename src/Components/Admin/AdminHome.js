@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../Assets/Styles/AdminHome.css";
 import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import BookList from "./BookList";
@@ -12,7 +12,15 @@ import StaffBorrowList from "./StaffBorrowList";
 function AdminHome() {
   const navigate=useNavigate()
 
+  useEffect(() => {
+      const adminid=localStorage.getItem("adminid")
+      if(adminid==null){
+        navigate("/")
+      }
+    },[])
+
   const handleAdminLogout=()=>{
+    localStorage.removeItem("adminid")
     navigate("/")
   }
   return (

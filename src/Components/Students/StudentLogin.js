@@ -16,16 +16,22 @@ function StudentLogin() {
     axios
       .post("http://localhost:4060/loginstudent", Student)
       .then((response) => {
-        if (response.data.msg) {
+        if (response.data.msg == "login successfully" && response.data.data.isactive == true) {
           console.log(response)
           localStorage.setItem("studentid", response.data.data._id)
           navigate("/Studenthome")
         } else {
-          alert(response.data.msg)
+          
+          if(response.data.msg == "login successfully"){
+          alert("your account is deactivated by admin please contact admin")
+          }
+          else{
+            alert(response.data.msg)
+          }
         }
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.msg);
       });
     console.log(Student);
   };

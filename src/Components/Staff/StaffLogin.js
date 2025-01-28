@@ -19,7 +19,7 @@ function StaffLogin() {
     axios
       .post("http://localhost:4060/stafflogin", Staff)
       .then((response) => {
-        if (response.data.msg === "Logged In Successfully") {
+        if (response.data.msg === "Logged In Successfully" && response.data.data.isactive == true) {
           localStorage.setItem("staffid", response.data.data._id)
           alert(response.data.msg);
           navigate("/Staffhome")
@@ -30,7 +30,7 @@ function StaffLogin() {
 
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.msg);
       });
 
   };

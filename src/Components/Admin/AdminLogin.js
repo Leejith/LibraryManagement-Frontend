@@ -16,7 +16,7 @@ function AdminLogin() {
     e.preventDefault()
       if(email==Admin.email && pass==Admin.password)
       {
-        
+        localStorage.setItem("adminid",email)
       navigate("/adminhome")
       }
       else{
