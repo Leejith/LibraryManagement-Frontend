@@ -67,7 +67,7 @@ function StaffList() {
                       <td>{staff.idno}</td>
                       <td>{staff.department}</td>
                       <td>
-                      <div onClick={() => handleViewDetails(staff)} ><i class="ri-information-2-fill"></i></div>
+                      <div onClick={() => handleViewDetails(staff)} ><i class="ri-information-2-fill ic"></i></div>
                     </td>
                     </tr>
                   </tbody>
@@ -115,7 +115,7 @@ function StaffList() {
                 <p>
                   <strong>Email:</strong> {selectedStaff.email}
                 </p>
-                <button class="btn btn-success fw-bold mb-4 text-center active-btn" onClick={() => handlestatus(selectedStaff._id)} >{selectedStaff.isactive ? "Active" : "Disactive"}</button>
+                <button class="btn btn-success fw-bold mb-4 text-center active-btn" onClick={() => handlestatus(selectedStaff._id)} >{selectedStaff.isactive ? "DisActive" : "Active"}</button>
 
               </div>
             </div>

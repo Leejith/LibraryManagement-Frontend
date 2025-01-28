@@ -80,8 +80,8 @@ function BorrowedList() {
 
               <tr>
                 <td class="fw-bold"  onClick={() => handleViewStudent(e?.studentid)}>{e?.studentid?.name}</td>
-                <td onClick={() => handleViewBook(e?.bookid)}>{e?.bookid?.booktitle}</td>
-                <td><button class="btn btn-danger" onClick={() => returnbook(e?.studentid?._id, e?.bookid?._id)}>remove</button></td>
+                <td class="fw-bold" onClick={() => handleViewBook(e?.bookid)}>{e?.bookid?.booktitle}</td>
+                <td><button class="btn retrn-removebtn text-center fw-bold" onClick={() => returnbook(e?.studentid?._id, e?.bookid?._id)}>remove</button></td>
               </tr>
 
             
