@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import imgurl from '../../Api/Imgurl'
 
 function StaffList() {
   const [StaffList, setStaffList] = useState([]);
+   const [selectedStaff, setSelectedStaff] = useState(null);
   useEffect(() => {
     axios
       .get("http://localhost:4060/stafflist")
@@ -14,6 +16,14 @@ function StaffList() {
         console.log(error);
       });
   }, []);
+
+  const handleViewDetails = (staff) => {
+    setSelectedStaff(staff);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedStaff(null);
+  };
   return (
     <div>
       <div class="container text-center mt-5">
@@ -27,7 +37,7 @@ function StaffList() {
                   <th scope="col">NAME</th>
                   <th scope="col">ID.NO</th>
                   <th scope="col">Department</th>
-                  <th scope="col">Email</th>
+                  <th scope="col">info</th>
                 </tr>
               </thead>
               {StaffList.map((staff, index) => {
@@ -38,7 +48,9 @@ function StaffList() {
                       <td>{staff.name}</td>
                       <td>{staff.idno}</td>
                       <td>{staff.department}</td>
-                      <td>{staff.email}</td>
+                      <td>
+                      <div onClick={() => handleViewDetails(staff)} ><i class="ri-information-2-fill"></i></div>
+                    </td>
                     </tr>
                   </tbody>
                 );
@@ -47,6 +59,49 @@ function StaffList() {
           </div>
         </div>
       </div>
+      {selectedStaff && (
+        <div
+          class="modal fade show d-block "
+          tabIndex="-1"
+          role="dialog"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+        >
+          <div class="modal-dialog " role="document">
+            <div class="modal-content profiledetails-popup">
+              <div class="modal-header profileheader-popup ">
+                <h5 class="modal-title" id="studentDetailsModal">
+                  Staff Details
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close close"
+                  aria-label="Close"
+                  onClick={handleCloseModal}
+                ></button>
+              </div>
+              <div className="modal-body text-center fw-semibold">
+              <img
+              src={`${imgurl}${selectedStaff?.image?.originalname}`}
+              alt="Profile"
+              class="rounded-circle profile-img img-fluid mb-4 "
+            />
+                <p>
+                  <strong>Name:</strong> {selectedStaff.name}
+                </p>
+                <p>
+                  <strong>Department:</strong> {selectedStaff.department}
+                </p>
+                <p>
+                  <strong>ID. No:</strong> {selectedStaff.idno}
+                </p>
+                <p>
+                  <strong>Email:</strong> {selectedStaff.email}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

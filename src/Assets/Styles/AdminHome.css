@@ -100,3 +100,31 @@
 }
 
 
+/* studentlist */
+
+.profiledetails-popup{
+    background-color: #4f7c82;
+    cursor: pointer;
+}
+.profileheader-popup{
+    background-color: #0b2e33;
+    color: white;
+}
+.close{
+    color: white !important;
+}
+
+/* borrowbook */
+.retrn-removebtn{
+    background-color: #4f7c82;
+    color: black;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 1s;
+    border: 2px solid
+}
+
+.retrn-removebtn:hover {
+    background-color: rgb(105, 16, 16);
+    color: white;
+}
